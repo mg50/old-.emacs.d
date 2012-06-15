@@ -1,0 +1,115 @@
+require 'client/client_dbadapter'
+require 'client/memory/client'
+require 'spec_helper'
+
+describe DBAdapter::Client do
+
+  before do
+    @db_adapter = DBAdapter::Client.new
+  end
+
+  describe "#create" do
+
+    it "creates a new active record model" do
+      @db_adapter.create({}).class.should == AR::Client
+    end
+
+    it "creates a new active record model with attributes" do
+      @db_adapter.create(:name=>"Test").name.should == "Test"
+    end
+
+    it "creates a new memory model" do
+      @db_adapter.create({},:Memory).class.should == ClientPersistor::Client
+    end
+
+    it "creates a new memory model with attributes" do
+      @db_adapter.create({:name=>"Test"},:Memory).name.should == "Test"
+    end
+
+    it "throws an exception if not found" do
+      lambda{ @db_adapter.create(:foo) }.should raise_exception
+    end
+
+  end
+
+  describe "#find" do
+
+    it "finds an active record model by id" do
+      client = @db_adapter.create :name => "my name"
+      client.save!
+      @db_adapter.find(client.id).should == client
+    end
+
+    it "throws an exception if not found" do
+      lambda{ @db_adapter.find(:fizz,:foo) }.should raise_exception
+    end
+
+  end
+
+ describe "#find_all" do
+
+    it "finds all active record models" do
+      clients = [ClientPersistor::Client.new, ClientPersistor::Client.new, ClientPersistor::Client.new]
+      AR::Client.stub(:all).and_return(clients)
+      @db_adapter.find_all.should == clients
+    end
+
+    it "throws an exception if not found" do
+      lambda{ @db_adapter.find_all(:foo) }.should raise_exception
+    end
+
+  end
+
+  describe "#update" do
+
+    it "it updates a record" do
+      client = @db_adapter.create({:name=>"abc123"})
+      client.save!
+
+      retrieved = @db_adapter.find(client.id)
+      retrieved.name.should eq("abc123")
+
+      client.name = "abc456"
+      client.save!
+
+      retrieved = @db_adapter.find(client.id)
+      retrieved.name.should eq("abc456")
+    end
+
+  end
+
+  describe "#find_with_project" do
+    it "finds with projects" do
+      client = @db_adapter.create :name => "test"
+      client.save!
+
+      project_db_adapter = DBAdapter::Project.new
+      project1 = project_db_adapter.create :name => "p1",
+        :client_id => client.id
+      project2 = project_db_adapter.create :name => "p2",
+        :client_id => client.id
+
+      project1.save
+      project2.save
+
+      @db_adapter.find_with_projects(client.id).projects.should ==
+        [project1, project2]
+    end
+  end
+
+  describe "#find_with_contacts" do
+    it "finds with contacts" do
+      client = @db_adapter.create :name => "test"
+      client.save!
+
+      contact_db_adapter = DBAdapter::Contact.new
+      contact1 = contact_db_adapter.create :name => "contact 1", :client_id => client.id
+      contact2 = contact_db_adapter.create :name => "contact 2", :client_id => client.id
+
+      contact1.save
+      contact2.save
+
+      @db_adapter.find_with_contacts(client.id).contacts.should == [contact1, contact2]
+    end
+  end
+end

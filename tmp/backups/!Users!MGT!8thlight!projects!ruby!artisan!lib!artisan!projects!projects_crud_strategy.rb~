@@ -1,0 +1,35 @@
+require "artisan/crud_strategy"
+require "artisan/activity/project_auditor"
+
+module Artisan
+  module Projects
+    module ProjectsCrudStrategy
+      include CrudStrategy
+      
+      def after_delete(project_id, user)
+        Artisan::Activity::ProjectAuditor.deleted(project_id, user.id)
+      end
+
+      def model_class
+        return Project
+      end
+
+      def update_saved(project, original_attributes, project_attributes, user)
+        Artisan::Activity::ProjectAuditor.updated(project.id, user.id, original_attributes, project_attributes)
+      end
+      
+      def create_saved(project, user, attributes)
+        Team.new(project, user).add_team_owner(user)
+        project.create_project_configuration
+        Artisan::Activity::ProjectAuditor.created(project.id, user.id, attributes)
+      end
+      
+      def check_permissions(project, user)
+        return if Team.new(project, user).user?(user)
+        raise "You are not authorized to view this project."
+      end
+      
+    end
+  end
+end
+

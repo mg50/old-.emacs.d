@@ -1,0 +1,9 @@
+require 'spec_helper'
+
+describe UsersController do
+
+  it "displays the users list based on the current Rails environment" do
+
+  end
+
+end

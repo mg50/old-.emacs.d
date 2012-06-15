@@ -1,0 +1,13 @@
+
+<script type="text/x-mustache-template" name="client_collection">
+  <div class="l_view_main l_center">
+
+  <h2><img src="./images/users.png" alt="Clients" /> Clients</h2>
+
+  <div id="clients">
+    <ul class="list"></ul>
+    <a class="m_action_button button_add add" href="#">Add</a>
+    <a class="delete">X</a>
+  </div>
+  </div>
+</script>

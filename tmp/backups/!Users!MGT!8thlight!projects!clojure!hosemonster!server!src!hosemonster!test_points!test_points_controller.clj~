@@ -1,0 +1,26 @@
+(ns hosemonster.work-orders.work-orders-controller
+  (:use
+    [compojure.core :only [defroutes context GET POST routes]]
+    [hosemonster.server-setup :only [crud-interactor report-interactor]]
+    [hosemonster.crud.crud-interactor]
+    [hosemonster.report.report-interactor]
+    [hosemonster.sessions.util :only [with-user-required]]
+    [hosemonster.work-orders.work-order :only [work-order]]
+    [hosemonster.web-ui :only [render-edit-model]]))
+
+(defn save-work-order [params]
+  (let [work-order (work-order (merge (:work-order params) {:key (:key params)}))]
+    (save-model crud-interactor work-order)))
+
+(defroutes work-orders-controller
+  (with-user-required
+    (context "/work-orders" []
+      (routes
+        (GET "/new" {params :params} (render-edit-model {:kind "work-order" :fire-pump-key (:fire-pump-key params)}))
+        (GET "/:key" [key] (view-model crud-interactor key))
+        (POST "/" {params :params} (save-work-order params))
+        (GET "/:key/edit" [key] (edit-model-requested crud-interactor key))
+        (GET "/:key/delete" [key] (delete-model crud-interactor key))
+        (POST "/:key" {params :params} (save-work-order params))
+        (GET "/:key/customer-report" [key] (generate-customer-report report-interactor key))
+        (GET "/:key/print" [key] (generate-work-order report-interactor key))))))

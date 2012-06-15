@@ -1,0 +1,75 @@
+(ns hosemonster.util.controller
+  (:use
+    [joodo.middleware.request :only (*request*)]
+    [joodo.datetime :only (after? now minutes-from-now)]
+    [joodo.views :only (render-template)]
+    [hyperion.core :only (find-by-key)]
+    [ring.util.response :only (redirect)])
+  (:import
+    [java.net URLEncoder]))
+
+(defn session-expired? [session]
+  (if-let [expiration-time (:expires session)]
+    (after? (now) expiration-time)
+    true))
+
+(defn valid-signin? []
+  (let [session (:session *request*)]
+    (and
+      (not (session-expired? session))
+      (not (nil? (:viewer-key session))))))
+
+(defn active-viewer []
+  (if-let [viewer-key (:viewer-key (:session *request*))]
+    (find-by-key viewer-key)))
+
+(defmacro require-valid-signin [& action]
+  `(if (valid-signin?)
+     (do ~@action)
+     (assoc
+       (redirect "/viewer/signin")
+       :flash {:infos ["For your security, please sign in first."]
+               :destination {:uri (:uri *request*)
+                             :request-method (:request-method *request*)
+                             :params (:params *request*)}})))
+
+(defn not-found []
+  {:body (render-template "util/not_found") :status 404})
+
+(defn url-encode [value]
+  (if value
+    (URLEncoder/encode (str value))
+    nil))
+
+(defn destination-or-redirect-response [location]
+  (let [destination (:destination (:flash *request*))]
+    (if destination
+      {:status 200 :body (render-template "redirect" :destination destination)}
+      (redirect location))))
+
+(defn with-destination [response]
+  (if-let [destination (:destination (:flash *request*))]
+    (let [response (if (map? response) response {:body response :status 200})]
+      (update-in response [:flash] assoc :destination destination))
+    response))
+
+(defn errors->sentences [errors]
+  (flatten
+    (map
+      (fn [[key vals]] (map #(str (name key) " " %) vals))
+      errors)))
+
+; Used for testing ---------------------------
+
+(defn log [& contents]
+  (let [logger (java.util.logging.Logger/getLogger "testing-log")]
+    (doseq [message contents]
+      (.warning logger message))))
+
+(defn valid-signin [viewer]
+  (let [viewer-key (if (string? viewer) viewer (:key viewer))]
+    {:expires (minutes-from-now 1) :viewer-key viewer-key}))
+
+(defn add-valid-signin [request viewer-key]
+  (update-in request [:session] merge (valid-signin viewer-key)))
+;---------------------------------------------

@@ -1,0 +1,67 @@
+(let [work-order (:work-order *view-context*)]
+  (list
+    [:table.columns [:tr
+    (render-partial "util/dashboard" (:dashboard-data *view-context*))
+    [:td.main [:div.major-column
+     (render-partial "util/flash_banners" :template-root "hosemonster")
+     (list
+       [:table.form
+        [:h1.form (:date work-order)]
+        [:a.button {:href (format "/work-orders/%s/edit" (:key work-order))} "Edit"]
+        [:a.button {:href (format "/work-orders/%s/print" (:key work-order))} "Print"]
+        [:a.button {:href (format "/work-orders/%s/customer-report" (:key work-order))} "Customer Report"]
+        [:a.button {:href (format "/work-orders/%s/delete" (:key work-order))} "Delete"]
+        [:tr
+         [:td [:label {:for "date-field"} "Date:"]]
+         [:td [:span (:date work-order)]]]
+        [:tr
+         [:td [:label {:for "type-field"} "Type:"]]
+         [:td [:span (:type work-order)]]]
+        [:tr
+         [:td [:label {:for "fire-department-attendee-field"} "Fire Department Attendee:"]]
+         [:td [:span (:fire-department-attendee work-order)]]]
+        [:tr
+         [:td [:label {:for "building-rep-attendee-field"} "Building Representative Attendee:"]]
+         [:td [:span (:building-rep-attendee work-order)]]]
+        [:tr
+         [:td [:label {:for "sprinkler-contractor-attendee-field"} "Sprinkler Contractor Attendee:"]]
+         [:td [:span (:sprinkler-contractor-attendee work-order)]]]
+        [:tr
+         [:td [:label {:for "pump-manufacturer-attendee-field"} "Pump Manufacturer Attendee:"]]
+         [:td [:span (:pump-manufacturer-attendee work-order)]]]
+        [:tr
+         [:td [:label {:for "notes-field"} "Notes:"]]
+<<<<<<< HEAD
+         [:td [:span (:notes work-order)]]]]
+
+       [:input {:type "hidden" :name "work-order-key" :value (:key work-order)}]
+
+
+
+       (render-partial "work_orders/flow_devices" )
+
+       [:div#test-points
+        [:ul#list]
+        [:a#add-test-point {:href "#" :onclick "return false;"}
+         [:img {:src "/images/add-button-small.png"}]
+         "Add Test Point"]]
+
+       [:script {:type "text/javascript"}
+        "var existingTestPoints="
+        (jsonify-model-data (:test-points work-order))]
+
+       [:link {:rel "stylesheet" :href "/stylesheets/jquery-ui.css" :type "text/css"}]
+
+       (render-partial "work_orders/js_includes")
+
+       [:table.form
+        [:tr
+         [:td
+          [:a {:class "button" :href (format "/work-orders/%s/edit" (:key work-order))} "Edit"]
+          [:a {:class "button" :href (format "/work-orders/%s/print" (:key work-order))} "Print"]
+          [:a {:class "button" :href (format "/work-orders/%s/customer-report" (:key work-order))} "Customer Report"]
+          [:a {:class "button" :href (format "/work-orders/%s/delete" (:key work-order))} "Delete"]
+          ]]])]))
+=======
+         [:td [:span (:notes work-order)]]]])]]]]))
+>>>>>>> 2ae19c0e3eab12f6271971e3952812dbec575df1

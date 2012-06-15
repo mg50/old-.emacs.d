@@ -1,0 +1,2 @@
+(ns console-chat.parse-test
+    (:use clojure.test console-chat.parse))

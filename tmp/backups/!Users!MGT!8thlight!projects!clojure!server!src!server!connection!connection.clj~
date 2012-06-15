@@ -1,0 +1,4 @@
+(ns server.connection.connection)
+
+(defprotocol Connection
+  (close []))

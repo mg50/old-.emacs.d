@@ -1,0 +1,44 @@
+
+
+(defmacro condd [& the-list]
+  (let [pairs (vec (partition 2 the-list)),
+        conditions (count pairs)]
+    (loop [ifs '(println "Fail"), i (dec conditions)]
+      (if (>= i 0)
+        (let [condition (first (pairs i)),
+              consequent (second (pairs i))]
+          (recur `(if ~condition ~consequent ~ifs) (dec i)))
+        ifs))))
+
+
+(defn juxtt [& fs]
+  (fn [x]
+    (map #(% x) fs)))
+
+
+
+
+
+(defmacro defcontract [name & forms]
+  (let [params  (seq (first forms)),
+        clauses (rest forms),
+        requires (filter #(= :require (first %)) clauses),
+        all-requires (-> clauses (filter seq?) concat)
+        ensures (filter #(= :ensure (first %)) clauses),
+        all-ensures (-> ensures (filter seq?) concat)]
+     `(defn ~name [f# ~@params]
+       {:pre [~@all-requires],
+        :post [~@all-ensures]}
+       (apply f# ~@params))))
+
+(defcontract doubler
+  [x]
+  (:require
+   (pos? x))
+  (:ensure
+   (= (* 2 x) %)))
+
+(defn my-double [x]
+  (doubler #(* x 2))
+
+;(println (my-double 4))

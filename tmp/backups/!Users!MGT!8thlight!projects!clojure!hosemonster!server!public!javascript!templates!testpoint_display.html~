@@ -1,0 +1,36 @@
+<script type="text/x-mustache-template" name="testpoint_display">
+    <input class="key" value="{{key}}" type="hidden" />
+    <input class="cid" value="{{cid}}" type="hidden" />
+    <tr>
+      <td>
+        <div name="speed">{{speed}}</div>
+      </td>
+      <td>
+        <div name="discharge-pressure">{{discharge-pressure}}</div>
+      </td>
+      <td>
+        <div name="suction-pressure">{{suction-pressure}}</div>
+      </td>
+      <td>
+        <div name="volts1">{{volts1}}</div>
+        <div name="volts2">{{volts2}}</div>
+        <div name="volts3">{{volts3}}</div>
+      </td>
+      <td>
+        <div name="amps1">{{amps1}}</div>
+        <div name="amps2">{{amps2}}</div>
+        <div name="amps3">{{amps3}}</div>
+      </td>
+
+      <td>
+        <ul class="streams-container"></ul>
+      </td>
+
+      <td>
+        <a href="#" class="edit"><div></div></a>
+      </td>
+      <td>
+        <a href="#" class="delete"><div></div></a>
+      </td>
+    <tr>
+</script>

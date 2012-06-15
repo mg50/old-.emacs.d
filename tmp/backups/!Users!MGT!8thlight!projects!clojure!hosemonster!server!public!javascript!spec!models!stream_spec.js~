@@ -1,0 +1,23 @@
+
+describe("Hosemonster.Models.Stream", function() {
+    beforeEach(function() {
+        this.model = new Hosemonster.Models.Stream();
+    });
+
+    it('is a stream-kind by default', function() {
+        expect(this.model.get('kind')).toBe('stream');
+    });
+
+    describe('flowDeviceLabel', function() {
+        it('labels itself with its name when present', function() {
+            this.model.set('flow-device-name', 'test name');
+            var label = this.model.attributes.flowDeviceLabel();
+            expect(label).toBe('test name');
+        })
+
+        it('uses the default label when name not present', function() {
+            var label = this.model.attributes.flowDeviceLabel();
+            expect(label).toBe('-select flow device-');
+        });
+    })
+})

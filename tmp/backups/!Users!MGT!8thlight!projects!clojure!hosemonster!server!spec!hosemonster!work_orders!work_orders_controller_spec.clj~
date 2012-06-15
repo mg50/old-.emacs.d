@@ -1,0 +1,78 @@
+(ns hosemonster.work-orders.work-orders-controller-spec
+  (:use
+    [speclj.core]
+    [joodo.spec-helpers.controller]
+    [hyperion.gae.spec-helper :only [with-local-datastore]]
+    [hosemonster.spec-helpers]
+    [hyperion.core :only [save find-by-key find-by-kind]]
+    [hosemonster.work-orders.work-orders-controller])
+  (:import
+    [com.google.appengine.api.datastore KeyFactory]
+    [java.io File]))
+
+(describe "work orders controller"
+  (with-mock-rendering)
+  (with-local-datastore)
+  (with-routes work-orders-controller)
+  (with usr (save (valid-user nil)))
+  (with fire-pump (save (get-valid-fire-pump (KeyFactory/createKey "fire-pump" "thing"))))
+  (with work-order (save (get-valid-work-order (:key @fire-pump))))
+
+  (it "can view a work-order"
+    (let [response (logged-in-get @usr (format "/work-orders/%s" (:key @work-order)))]
+      (should= "work_orders/view" @rendered-template)
+      (should= @work-order (dissoc (:work-order @rendered-context) :test-points))))
+
+  (it "can edit a work-order"
+    (let [response (logged-in-get @usr (format "/work-orders/%s/edit" (:key @work-order)))]
+      (should= "work_orders/form" @rendered-template)
+      (should= @work-order (dissoc (:work-order @rendered-context) :test-points))))
+
+  (it "can display a new work-order form"
+    (let [fire-pump-key "alsdfjdslkjf"
+          response (logged-in-get @usr "/work-orders/new" :params {:fire-pump-key fire-pump-key})]
+      (should= "work_orders/form" @rendered-template)
+      (should= {:kind "work-order" :fire-pump-key fire-pump-key} (:work-order @rendered-context))))
+
+  (it "renders not found when the work-order does not exist"
+    (let [response (logged-in-get @usr (str "/work-orders/unknown"))]
+      (should-render-not-found response @rendered-context @rendered-template)))
+
+  (it "displays errors on invalid submission"
+    (let [response (logged-in-post @usr (str "/work-orders"))]
+      (should= "work_orders/form" @rendered-template)
+      (should-not= nil (:errors (:work-order @rendered-context)))))
+
+  (it "can update a work-order"
+    (let [new-work-order (assoc @work-order :notes "my new model")
+          url (format "/work-orders/%s" (:key @work-order))
+          response (logged-in-post @usr url :params {:work-order new-work-order})
+          saved-work-order (find-by-key (:key @work-order))]
+      (should= (:key @work-order) (:key saved-work-order))
+      (should= "The Work Order was successfully saved." (first (:successes (:flash response))))
+      (should-redirect-to-after-post response url)))
+
+  (it "can create a work-order"
+    (let [new-name "my other new model"
+          new-work-order (dissoc (assoc @work-order :notes new-name) :key)
+          response (logged-in-post @usr "/work-orders" :params {:work-order new-work-order})
+          saved-work-order (second (find-by-kind :work-order))
+          url (format "/work-orders/%s" (:key saved-work-order))]
+      (should= new-name (:notes saved-work-order))
+      (should= (:fire-pump-key @work-order) (:fire-pump-key saved-work-order))
+      (should-not= (:key @work-order) (:key saved-work-order))
+      (should= "The Work Order was successfully saved." (first (:successes (:flash response))))
+      (should-redirect-to-after-post response url)))
+
+  (it "can delete a work-order"
+    (let [response (logged-in-get @usr (format "/work-orders/%s/delete" (:key @work-order)))]
+      (should= nil (find-by-key (:key @work-order)))
+      (should= "fire_pumps/view" @rendered-template)))
+
+  (it "can show customer reports"
+    (let [response (logged-in-get @usr (format "/work-orders/%s/customer-report" (:key @work-order)))]
+      (should= File (class (:body response)))))
+
+  (it "can print work orders"
+    (let [response (logged-in-get @usr (format "/work-orders/%s/print" (:key @work-order)))]
+      (should= File (class (:body response))))))

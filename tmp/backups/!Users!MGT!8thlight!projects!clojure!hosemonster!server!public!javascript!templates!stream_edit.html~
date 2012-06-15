@@ -1,0 +1,8 @@
+
+
+<script type="text/x-mustache-template" name="stream_edit">
+    <input type="hidden" name="key" value="{{key}}" />
+    <input type="hidden" name="flow-device-key" value="{{flow-device.key}}" href="#" class="delete">X</a>
+    <input name="nozzle-pressure" value="{{nozzle-pressure}}" />
+    <a href="#" class="flow-device-label">{{flow-device.name}}</a>
+</script>

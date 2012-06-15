@@ -1,0 +1,27 @@
+development:
+  - cymen@8thlight.com
+  - ben@8thlight.com
+  - sue@8thlight.com
+  - cpeak@8thlight.com
+  - mark@8thlight.com
+  - paul@8thlight.com
+  - micah@8thlight.com
+  - angelique@8thlight.com
+  - margaret@8thlight.com
+
+staging:
+  - cymen@8thlight.com
+  - ben@8thlight.com
+  - sue@8thlight.com
+  - cpeak@8thlight.com
+  - mark@8thlight.com
+  - paul@8thlight.com
+  - micah@8thlight.com
+  - angelique@8thlight.com
+  - margaret@8thlight.com
+
+production:
+  - paul@8thlight.com
+  - micah@8thlight.com
+  - angelique@8thlight.com
+  - margaret@8thlight.com

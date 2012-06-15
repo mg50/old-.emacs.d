@@ -1,0 +1,98 @@
+Artisan::Application.routes.draw do
+
+  devise_for :users
+
+  resources :users, :only => [:show, :edit, :update]
+
+  resources :projects do
+    member do
+      post 'add_user'
+      get 'remove_user'
+      get 'sync'
+      get 'completed_stories'
+      get 'backlog'
+    end
+
+    collection do
+      get 'dashboard'
+    end
+
+    resources :pages
+
+    resources :iterations, :except => [:new, :edit] do
+      member do
+        get "export"
+        put 'complete'
+        put 'resume'
+      end
+    end
+
+    resources :stories, :except => [:new] do
+      member do
+        get 'split'
+        post 'do_split'
+        post 'assign_user'
+      end
+    end
+  end
+
+  match 'invites/new' => 'invites#new', :via => :get , :as => :new_invite
+  match 'invites/send' => 'invites#create', :via => :post, :as => :send_invite
+
+  match 'activity/activity/:project_id' => 'activity#activity', :via => :get, :as => :activity
+
+  match 'archive/archive' => 'archive#archive', :via => :get
+  match 'archive/unarchive' => 'archive#unarchive', :via => :get
+
+  match 'teams/user_administration' => 'teams#user_administration', :via => :get, :as => :team_user_administration
+  match 'teams/add_user' => 'teams#add_user', :via => :post
+  match 'teams/remove_user' => 'teams#remove_user', :via => :get
+
+  match 'settings', :to => 'settings#edit', :as => :settings
+
+  match 'projects/:project_id/board/backlog/:story_id'   => 'board#backlog'
+  match 'projects/:project_id/board/ready/:story_id'     => 'board#ready'
+  match 'projects/:project_id/board/working/:story_id'   => 'board#working'
+  match 'projects/:project_id/board/completed/:story_id' => 'board#completed'
+  match 'projects/:project_id/board/accepted/:story_id'  => 'board#accepted'
+
+  match 'reports/' => 'reports#index', :as => :reports
+  match 'reports/last_week' => 'reports#last_week', :as => :last_week_reports
+  match 'reports/iteration/:project_id' => 'reports#iteration', :as => :iteration_report
+  match 'reports/velocity' => 'reports#velocity', :as => :velocity_reports
+  match 'reports/by_date' => 'reports#by_date', :as => :date_reports
+  match 'reports/by_number_of_iterations' => 'reports#by_number_of_iterations', :as => :iteration_by_number_reports
+	match 'reports/sign_off' => 'reports#sign_off', :as => :sign_off_reports
+	match 'reports/burnup/:project_id' => 'reports#burnup', :as => :burnup
+
+  match 'projects/:project_id/stories/sort', :to => 'stories#sort'
+  match 'iterations/:id/sort', :to => 'iterations#sort'
+
+  match 'projects/:project_id/iterations/:id/story_to_iteration/', :to => 'iterations#story_to_iteration'
+  match 'projects/:project_id/iterations/:id/story_to_backlog/', :to => 'iterations#story_to_backlog'
+  match 'projects/:project_id/iterations/:id/story_delete/', :to => 'iterations#story_delete'
+
+
+  match 'projects/:project_id/iterations/:id/add_story/', :to => 'iterations#add_story'
+  match 'projects/:project_id/iterations/:id/update_days/', :to => 'iterations#update_days', :as => :project_iteration_update_days
+
+  match 'events_mailer/add_to_completed_list', :to => 'events_mailer#add_to_completed_list', :via => :post
+  match 'events_mailer/add_to_assigned_list', :to => 'events_mailer#add_to_assigned_list', :via => :post
+  match 'events_mailer/remove_from_completed_list', :to => 'events_mailer#remove_from_completed_list', :via => :delete
+  match 'events_mailer/remove_from_assigned_list', :to => 'events_mailer#remove_from_assigned_list', :via => :delete
+
+  ### API ###
+
+  match 'api/projects', :to => 'api/projects#index', :via => :get
+  match 'api/projects/iterations', :to => 'api/iterations#index', :via => :get
+  match 'api/projects/stories/:number/estimates', :to => 'api/estimates#update', :via => :put
+  match 'api/projects/stories', :to => 'api/stories#index', :via => :get
+  match 'api/projects/stories/backlog', :to => 'api/stories#backlog', :via => :get
+
+  root :to => "projects#index"
+
+  # For testing
+  match 'cucumber/set_estimator', :to => 'cucumber#set_estimator'
+  match 'cucumber/errors', :to => 'cucumber#errors'
+
+end

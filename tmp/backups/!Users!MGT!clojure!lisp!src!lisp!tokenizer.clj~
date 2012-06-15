@@ -1,0 +1,36 @@
+(ns lisp.tokenizer
+  (:use [clojure.string :only [trim]]))
+
+(defmacro re-cond [[subgroups-sym] s & pairs]
+  (let [pairs (partition 2 pairs)
+        modified-pairs (map
+                        (fn [[pattern result]]
+                          (if (keyword? pattern)
+                            result
+                            `(when-let [matches# (re-find ~pattern ~s)]
+                               (let [~subgroups-sym (rest matches#)]
+                                 ~result))))
+                        pairs)]
+    `(or ~@modified-pairs)))
+
+(defn split-off-token [s]
+  (re-cond [subgroups] s
+           #"^\((.*)" ["(" (first subgroups)]
+           #"^\)(.*)" [")" (first subgroups)]
+           #"^(\".*?\")(.*)" [(first subgroups) (second subgroups)]
+           #"^([^\s]+)(.*)" [(first subgroups) (second subgroups)]))
+
+(split-off-token "(awef awef")
+
+(defn tokenize [s]
+  (println "hi")
+  (loop [tokens []
+         remaining s]
+    (let [s (trim s)]
+      (println s)
+      (if (empty? s)
+        tokens
+        (let [[next-token r] (split-off-token remaining)]
+          (recur (conj tokens next-token) r))))))
+
+(tokenize "(asdf)")

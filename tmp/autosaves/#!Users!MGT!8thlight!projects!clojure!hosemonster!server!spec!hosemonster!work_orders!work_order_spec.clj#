@@ -1,0 +1,46 @@
+(ns hosemonster.work-orders.work-order-spec
+  (:use
+    [speclj.core]
+    [hyperion.gae.spec-helper :only (with-local-datastore)]
+    [hyperion.core :only (save find-by-key)]
+    [hosemonster.spec-helpers]
+    [hosemonster.work-orders.work-order]
+    [hosemonster.fire-pumps.fire-pump :only (fire-pump)]))
+
+(describe "Work Order"
+  (tags :app)
+  (with-local-datastore)
+  (with pump (save (fire-pump :pump-manufacturer "Acme" :pump-model "X9000")))
+
+  (it "saves all the fields"
+    (let [order (save (get-valid-work-order (:key @pump)))
+          order (find-by-key (:key order))]
+      (should-not= nil (:created-at order))
+      (should-not= nil (:updated-at order))
+      (should= (:key @pump) (:fire-pump-key order))
+      (should= "Normal" (:type order))
+      (should= "1/1/2012" (:date order))
+      (should= "Howdy" (:notes order))
+      (should= "Fred" (:fire-department-attendee order))
+      (should= "Bill" (:building-rep-attendee order))
+      (should= "Stan" (:sprinkler-contractor-attendee order))
+      (should= "Pete" (:pump-manufacturer-attendee order))))
+
+  (context "validations"
+    (it "on fire pump"
+      (should (:fire-pump-key (validate-work-order {}))))
+
+    (it "on type"
+      (should (:type (validate-work-order {}))))
+
+    (it "on date"
+        (should (:date (validate-work-order {})))))
+
+  (context "rendering"
+    (it "renders test points form on work order edit"
+      )
+
+
+
+    
+    (it "doesn't render test points form on work order new")))

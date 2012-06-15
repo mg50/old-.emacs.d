@@ -1,0 +1,11 @@
+(ns graphiclj.bar-graph.core
+  (:import
+    (javax.swing JFrame)
+    (java.awt Graphics2D)))
+
+(defn create-jframe []
+  (JFrame.))
+
+(defn graphics [frame]
+  (.getGraphics frame))
+

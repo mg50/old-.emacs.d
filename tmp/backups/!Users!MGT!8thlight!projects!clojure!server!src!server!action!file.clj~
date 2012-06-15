@@ -1,0 +1,6 @@
+(ns server.action.file)
+
+(defn serve-file [path]
+  (try
+    [200 (slurp (str doc-root path))]
+    [404 "File not found"]))

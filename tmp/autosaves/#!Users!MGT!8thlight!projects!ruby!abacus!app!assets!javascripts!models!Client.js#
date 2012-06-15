@@ -1,0 +1,18 @@
+namespace('Abacus.Models', {
+  Client: Backbone.RelationalModel.extend({
+    urlRoot: '/clients',
+
+    relations: [{
+      type: Backbone.HasMany,
+      key: 'projects',
+      includeInJSON: false,
+      relatedModel: Abacus.Models.Project,
+      collectionType: Abacus.Collections.Projects,
+      reverseRelation: {
+        type: Backbone.HasOne,
+        key: 'client',
+        includeInJSON: false
+      }
+    }]
+  })
+});

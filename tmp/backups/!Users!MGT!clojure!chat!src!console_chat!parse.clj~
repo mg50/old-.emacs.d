@@ -1,0 +1,13 @@
+(ns console-chat.parse
+  (:use [clojure.java.io :only [reader writer]])
+  (:import java.io.ByteArrayInputStream))
+
+
+
+(defmethod parse java.io.InputStream [stream]
+  (let [rdr (reader (make-stream stream-or-string))]
+    {:command (.readLine rdr)
+     :message (.readLine rdr)}))
+
+(defmethod parse java.lang.String [s]
+  (parse (ByteArrayInputStream. (.getBytes s))))

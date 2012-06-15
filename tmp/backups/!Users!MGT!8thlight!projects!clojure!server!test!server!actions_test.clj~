@@ -1,0 +1,2 @@
+(ns server.actions-test
+  (:use server.actions))

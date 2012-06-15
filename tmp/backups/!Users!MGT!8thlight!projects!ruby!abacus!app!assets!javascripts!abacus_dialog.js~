@@ -1,0 +1,90 @@
+Abacus.Dialog = {
+  modal: function() {
+    return $('#modal');
+  },
+
+  spacer: function(pixels) {
+    return Math.round(pixels * 0.9);
+  },
+
+  height: function() {
+    return Abacus.Dialog.spacer($(window).height());
+  },
+
+  width: function() {
+    return Abacus.Dialog.spacer($(window).width());
+  },
+
+  heightAndWidth: function() {
+    return {
+      height: Abacus.Dialog.height(),
+      width: Abacus.Dialog.width()
+    };
+  },
+
+  resize: function() {
+    var modal = Abacus.Dialog.modal();
+    if (modal.dialog('isOpen')) {
+      modal
+        .dialog('option', Abacus.Dialog.heightAndWidth())
+        .dialog('option', 'position', 'center');
+    }
+  },
+
+  open: function(close) {
+    var modal = Abacus.Dialog.modal();
+    if (!modal.dialog('isOpen')) {
+      modal
+        .dialog('option', Abacus.Dialog.heightAndWidth())
+        .dialog('option', 'position', 'center')
+        .dialog('open');
+    }
+
+    Abacus.Dialog.callerClose = close;
+  },
+
+  show: function(html) { 
+    var modal = Abacus.Dialog.modal();
+    modal.html(html);
+    Abacus.Dialog.open();
+  },
+
+  callerClose: null,
+
+  close: function() {
+    debugger
+    var modal = Abacus.Dialog.modal();
+    if (modal.dialog('isOpen')) {
+      modal.dialog('close');
+    }
+  },
+
+  cleanup: function(event, ui) {
+    debugger
+    var modal = Abacus.Dialog.modal();
+    modal
+      .find('.datepicker')
+      .each(function () {
+        $(this).datepicker('hide');
+      });
+
+    if (typeof Abacus.Dialog.callerClose === 'function') {
+      Abacus.Dialog.callerClose();
+    }
+
+//    modal.children().remove();
+    modal.html('');
+    modal.unbind();
+  },
+
+  documentReady: function() {
+    $('#modal').dialog({
+      autoOpen: false,
+      close: Abacus.Dialog.cleanup,
+      modal: true,
+      resizable: false
+    });
+
+    $(window).resize(Abacus.Dialog.resize);
+  }
+};

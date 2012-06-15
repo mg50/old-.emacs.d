@@ -1,0 +1,11 @@
+#! /bin/bash
+
+powify server stop
+cd portfolio.netcredit
+rvm use ruby-1.9.3-p125
+rake db:dance
+cd ../acquisition.netcredit
+rvm use ruby-1.9.3-p125
+rake db:dance
+cd ..
+powify server start

@@ -1,0 +1,7 @@
+<script type="text/x-mustache-template" name="project_with_notes">
+  <div class="details m_show_project l_center">
+    <div id="project-container"></div>
+    <div id="project-edit-container"></div>
+    <div id="notes-container"></div>
+  </div>
+</script>

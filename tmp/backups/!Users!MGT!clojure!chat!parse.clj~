@@ -1,0 +1,5 @@
+(ns console-chat.parse
+  (:use [clojure.java.io :only [reader writer]]))
+
+(defn parse [stream]
+  (let [rdr (reader stream)]))

@@ -1,0 +1,19 @@
+(defmacro times [num & cmds]
+  `(dorun
+   (for [i# (range ~num)] (do ~@cmds))))
+
+(defmacro times [num & cmds]
+  `(loop [i 0]
+     (when (< i# ~num)
+       ~@cmds
+       (recur (inc i#)))))
+
+(defmacro bench-lazy [num & cmds]
+  `(time
+    (for [i# (range ~num)] (do ~@cmds))))
+
+(defmacro bench [num & cmds]
+  `(time (doall (for [i# (range ~num)] (do ~@cmds)))))
+
+(println (bench-lazy 40 "hi" "bye"))
+(println (bench 40 "hi" "bye"))

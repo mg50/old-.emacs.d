@@ -1,0 +1,47 @@
+require "artisan/stories/stories_interactor"
+require "artisan/memory/user"
+require "artisan/memory/story"
+require "artisan/memory/project"
+
+describe Artisan::Stories::StoriesInteractor do
+  
+  
+  describe "backlog" do
+    
+    let(:project) { Memory::Project.new }
+    let(:backlog_stories) { [mock('story')] }
+    let(:stories) {mock('stories')}
+    
+    before do
+      project.stub_chain(:stories, :backlog).and_return(backlog_stories)
+    end
+    
+    it "calls the project backlog" do
+      project.should_receive(:stories).and_return(stories)
+      stories.should_receive(:backlog).and_return(backlog_stories)
+      Backlog.should_receive(:new).with(backlog_stories)
+      Artisan::Stories::StoriesInteractor.new(project).backlog
+    end
+    
+    it "filters by tag" do
+      filtered_stories = mock('filtered')
+      backlog_stories.should_receive(:tagged_with).with('tag', :on => :tags).and_return(filtered_stories)
+      Backlog.should_receive(:new).with(filtered_stories)
+      Artisan::Stories::StoriesInteractor.new(project).backlog('tag')
+    end
+  end
+  
+  describe "completed" do
+    let(:project) { Memory::Project.new }
+    let(:stories) {mock('stories')}
+    let(:completed_stories) { [mock('story')] }
+    
+    it "gets complete" do
+      project.should_receive(:stories).and_return(stories)
+      stories.should_receive(:complete).and_return(completed_stories)
+      Artisan::Stories::StoriesInteractor.new(project).completed.should == completed_stories
+    end
+  end
+
+
+end

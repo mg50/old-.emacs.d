@@ -1,0 +1,35 @@
+require 'client/client_active_record'
+
+class MockClientInteractor
+  def initialize(clients = [])
+    @clients = clients
+  end
+
+  def create(attributes, callback)
+    callback.call AR::Client.new(attributes)
+  end
+
+  def find(id, callback)
+    client = find_by_id(id)
+    callback.call(client)
+    # what do do here when we fail find a record with that id?
+  end
+
+  def find_all(callback)
+    callback.call(@clients)
+  end
+
+  def update(id, attributes, callback)
+    client = AR::Client.new(attributes);
+    client.id = id
+    callback.call(client)
+  end
+
+  private
+
+  def find_by_id(id)
+    @clients.each { |client|
+      return client if client.id == id.to_i
+    }
+  end
+end

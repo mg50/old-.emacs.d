@@ -1,0 +1,43 @@
+(ns solution
+  (:gen-class))
+
+(defn get-suffixes [string]
+  (let [l (count string)]
+    (drop 1 (for [i (range (inc l))]
+              (drop i string)))))
+
+(defn nexst-suffix-with-same-start [string]
+  (let [suffixes (get-suffixes string)
+        first-char (first string)]
+    (first (drop-while
+             €ô¨¡œô¡Ò#(not= (first %) first-char)
+             suffixes))))
+
+(defn next-suffix-with-same-start [string]
+  (let [first-char (first string)]
+    ((drop-while €ô¨¡œô¡Ò#(not= % first-char) (rest string)))))
+
+(defn prefix-simil-count [string prefix]
+  (count (take-while €ô¨¡œô¡Ò#(= (% 0) (% 1)) 
+                     (map €ô¨¡œô¡Ò#(vector %1 %2) string prefix))))
+
+
+(defn analyze [string]
+  (loop [cur-string (rest string)
+         cur-score 4]
+    (println cur-score)
+    (let [next-string (next-suffix-with-same-start cur-string)
+          next-score (+ cur-score 
+                        (prefix-simil-count string cur-string))]
+      (if-not next-string
+        next-score
+        (recur next-string next-score)))))
+        
+
+(println next-suffix-with-same-start "hellohel")
+(comment
+(defn -main []
+  (let [num-cases (read-line)]
+    (doall
+      (for [i (range num-cases)]
+        (println (analyze (read-line))))))))

@@ -1,0 +1,46 @@
+namespace("Abacus.Views", {
+  ProjectDetails: Abacus.Views.SimpleMustacheView.extend({
+    template: 'project_details',
+
+    events: {
+      'click .edit': 'edit',
+    },
+
+    presenterData: function() {
+      var attributes = _.clone(this.model.attributes);
+      attributes.company_name = this.model.getCompanyName();
+      return attributes;
+    },
+
+    edit: function(event) {
+      event.preventDefault();
+      event.stopPropagation();
+
+      this.showEdit();
+    },
+
+    showEdit: function() {
+      var that = this;
+      if (!this.editView) {
+        this.editView = new Abacus.Views.ProjectEdit({
+          el: '#project-edit-container',
+          model: this.model
+        },
+        {
+          onClose: function() { that.renderAndShow(that); }
+        });
+      }
+      this.hide();
+      this.editView.renderAndShow();
+    },
+
+    hide: function() {
+      this.$el.hide();
+    },
+
+    renderAndShow: function() {
+      this.render();
+      this.$el.show();
+    }
+  })
+});

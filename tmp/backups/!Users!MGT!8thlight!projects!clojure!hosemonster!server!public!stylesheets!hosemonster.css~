@@ -1,0 +1,542 @@
+/************** document stuff **************/
+
+html {
+  height:100%;
+  width: 100%;
+}
+body {
+    color: #29120c;
+    background-color: #f8f4f3;
+    float: left;
+    height: 100%;
+    width: 100%;
+}
+a {
+	color: #d7d1d0;
+	text-decoration: none;
+}
+a:hover {
+	color: #29120c;
+}
+h1 {
+    font-size: 30px;
+		padding: 14px 0px 14px 20px;
+}
+h2 {
+  font-size: 18px;
+	padding: 0px 0px 0px 20px;
+}
+#content {
+    float: left;
+    width: 100%;
+    height:100%;
+    font-family: 'AsapRegular', Helvetica, sans-serif;
+		font-size: 16px;
+}
+.error {
+  color: #B73F36;
+}
+
+div#customer-wrapper {
+  margin: 20px auto 0px auto;
+  width: 500px;
+}
+
+div#admin-wrapper {
+  margin: 20px auto 0px auto;
+  width: 800px;
+}
+
+/************* header stuff ***************/
+
+#header {
+		border-bottom: 1px solid #d7d1d0;
+		padding: 0px 0px 14px 20px;
+		margin-bottom: 90px;
+		color: #d7d1d0;
+}
+
+img#top-bar {
+  width: 100%;
+  height: 50px;
+}
+
+/************* list view ****************/
+
+ul.list_view {
+    font-size: 18px;
+    border-top: 1px solid #d7d1d0;
+    margin-top: 50px;
+}
+ul.list_view li a {
+   	color: #29120c;
+		display:block;
+		padding:14px 0px 14px 20px;
+}
+ul.list_view li a:hover {
+		background-color: #d7d1d0;
+}
+ul.list_view li {
+    border-bottom: 1px solid #d7d1d0;
+		position:relative;
+}
+ul.list_view .add a {
+    font-family: 'AsapItalic', Helvetica, sans-serif;
+    color: #d7d1d0;
+		padding-left: 45px;
+}
+ul.list_view .add a:hover {
+		background-color: #d7d1d0;
+    color: #29120c;
+}
+ul.list_view .add img {
+		position: absolute;
+		top: 14px;
+		left: 20px;
+}
+
+/************** form view **************/
+
+table.form {
+		border-top: 1px solid #d7d1d0;
+		width: 100%;
+		margin-top:50px;
+}
+table.form td {
+		padding: 7px 0px 0px 20px;
+}
+table.form td label {
+		display: inline-block;
+}
+table.form td input {
+    background-color: #f8f4f3;
+    border: 1px solid #d7d1d0;
+    font-family: 'AsapRegular', Helvetica, sans-serif;
+    font-size:16px;
+}
+table.form td input:hover {
+    background-color: #d7d1d0;
+}
+
+h1.form {
+  display: inline;
+  margin-right: 30px;
+}
+.button {
+  position: relative;
+  top: -3px;
+  display:inline;
+  border: 1px solid #d7d1d0;
+  font-family: 'AsapRegular', Helvetica, sans-serif;
+  background-color: #b3a8a2;
+  color: #f8f4f3;
+  margin-right: 5px;
+  padding: 4px 10px 2px 10px;
+  font-size: 18px;
+  -moz-border-radius: 7px;
+  border-radius: 7px;
+}
+.button.special {
+  top: 10px;
+  right: -20px;
+}
+.button:hover {
+  background-color: #52453d;
+  color: #f8f4f3;
+}
+
+/*********** flow device table **********/
+
+table.flow_device {
+	font-size: 18px;
+}
+table.flow_device tr {
+	border-bottom: 1px solid #d7d1d0;
+}
+table.flow_device th {
+	padding: 10px 0px 10px 20px;
+	text-align: left;
+/*	background-color: #d7d1d0;*/
+}
+table.flow_device td {
+	padding: 10px 0px 10px 20px;
+}
+
+/************ flow device list ************/
+
+ul.flow_device {
+	font-size: 18px;
+}
+ul.list_view li.title {
+	font-family: 'AsapBold', Helvetica, sans-serif;
+	padding:14px 0px 14px 20px;
+}
+ul.flow_device li {
+	display: inline-block;
+	border: none;
+	padding-right: 10px;
+}
+ul.flow_device li.name {
+	width: 235px;
+	vertical-align: top;
+}
+ul.flow_device li.value {
+	width: 68px;
+	vertical-align: top;
+}
+ul.flow_device li.type {
+	width: 80px;
+	vertical-align: top;
+}
+
+
+
+/********** font face garbage **********/
+
+@font-face {
+    font-family: 'AsapRegular';
+    src: url('../fonts/Asap-Regular-webfont.eot');
+    src: url('../fonts/Asap-Regular-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/Asap-Regular-webfont.woff') format('woff'), url('../fonts/Asap-Regular-webfont.ttf') format('truetype'), url('../fonts/Asap-Regular-webfont.svg#AsapRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'AsapItalic';
+    src: url('../fonts/Asap-Italic-webfont.eot');
+    src: url('../fonts/Asap-Italic-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/Asap-Italic-webfont.woff') format('woff'), url('../fonts/Asap-Italic-webfont.ttf') format('truetype'), url('../fonts/Asap-Italic-webfont.svg#AsapItalic') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'AsapBold';
+    src: url('../fonts/Asap-Bold-webfont.eot');
+    src: url('../fonts/Asap-Bold-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/Asap-Bold-webfont.woff') format('woff'), url('../fonts/Asap-Bold-webfont.ttf') format('truetype'), url('../fonts/Asap-Bold-webfont.svg#AsapBold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'AsapBoldItalic';
+    src: url('Asap-BoldItalic-webfont.eot');
+    src: url('Asap-BoldItalic-webfont.eot?#iefix') format('embedded-opentype'), url('Asap-BoldItalic-webfont.woff') format('woff'), url('Asap-BoldItalic-webfont.ttf') format('truetype'), url('Asap-BoldItalic-webfont.svg#AsapBoldItalic') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/************* flash banners **************/
+
+div.flash-banner {
+    position: relative;
+		width: 570px;
+		margin: 10px auto;
+    padding: 7px 7px 7px 20px;
+    color: black;
+    font-size: 12pt;
+    display: none;
+    font-family: 'AsapRegular', Helvetica, sans-serif;
+		line-height: 20px;
+}
+div.flash-banner p {
+    margin: 0;
+    padding: 0;
+}
+div#flash-infos {
+    border: 1px solid #a67915;
+    color: #a67915;
+    background: #ffdf97 url(../images/flash_info.png) 10px center no-repeat;
+}
+div#flash-errors {
+    border: 1px solid #a62315;
+    color: #a62315;
+    background-color: #ffa197;
+/* url(../images/flash_error.png) 5px center no-repeat;*/
+}
+div#flash-successes {
+    border: 1px solid #149931;
+    color: #149931;
+    background-color: #91f587;
+/* url(../images/flash_success.png) 5px center no-repeat;*/
+}
+a.flash-banner-close {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    font-size: 16px;
+    margin: 0 5px 2px 0px;
+    color: #6d6f71;
+}
+a.flash-banner-close:hover {
+    color: white;
+}
+
+/************** two-column form view **************/
+
+div.column {
+  display: block;
+  width: 50%;
+}
+
+div.major-column {
+  padding-top: 20px;
+}
+table.columns {
+  position: relative;
+  top: -3px;
+  width: 100%;
+  height: 100%;
+}
+table.columns td.main {
+  width: 70%;
+}
+table.columns td.dashboard {
+  width: 30%;
+  background-color: black;
+}
+div.minor-column {
+  position: relative;
+  top: -30px;
+}
+#right-column {
+  float: right;
+}
+#left-column {
+  float: left;
+}
+.column-head {
+  margin-top: 30px;
+}
+
+/************** dashboard **************/
+
+div.dashboard-outer{
+  border-bottom: 1px solid #d7d1d0;
+  border-left: 1px solid #d7d1d0;
+  border-top: 1px solid #d7d1d0;
+  border-right: 1px solid #d7d1d0;
+  background-color: #282421;
+  color: #f8f4f3;
+}
+
+div.active-model{
+  background-color: #f8f4f3;
+  height: 100%;
+}
+
+div.active-model a{
+  color: black;
+}
+
+div.link-container:hover {
+  background-color: #b3a8a2;
+}
+
+div.link-container {
+  border-left: 1px solid #d7d1d0;
+}
+
+div.dashboard-job-site{
+  border-top: 1px solid #d7d1d0;
+}
+
+div.dashboard-fire-pump{
+  border-top: 1px solid #d7d1d0;
+  margin-left: 20px;
+}
+
+div.expanded-dashboard-fire-pump{
+  margin-left: 20px;
+  border-top: 1px solid #d7d1d0;
+}
+
+span.triangle {
+  margin-right:10px;
+  margin-left:5px;
+}
+
+div.dashboard-work-order{
+  border-top: 1px solid #d7d1d0;
+  margin-left: 20px;
+}
+
+div.new-job-site{
+  padding-left: 20px;
+  background-color: #76685f;
+}
+
+div.new-job-site:hover {
+  background-color: #b3a8a2;
+}
+
+div.new-work-order:hover {
+  background-color: #b3a8a2;
+}
+
+div.new-fire-pump:hover {
+  background-color: #b3a8a2;
+}
+
+div.new-fire-pump{
+  margin-left: 20px;
+  padding-left: 20px;
+  border-left: 1px solid #d7d1d0;
+}
+
+div.new-work-order {
+  border-left: 1px solid #d7d1d0;
+  margin-left: 20px;
+  padding-left: 20px;
+}
+
+div.top-padding {
+  padding-top:20px;
+}
+
+div.dashboard-header{
+  border-bottom: 1px solid #d7d1d0;
+  height: 50px;
+}
+
+div.bottom-border{
+  border-bottom: 1px solid #d7d1d0;
+}
+
+div.drawer-level-1-color {
+  background-color: #b3a8a2
+}
+
+div.drawer-level-2-color {
+  background-color: #76685f;
+}
+
+div.drawer-level-3-color {
+  background-color: #52453d;
+}
+
+div.drawer-level-4-color {
+  background-color: #282421;
+}
+
+a.model-link{
+  color: #f8f4f3;
+  display: inline-block;
+  width: 100%;
+}
+
+a.wide-link{
+  display: inline-block;
+  width: 100%;
+}
+
+div.max-height {
+  height: 100%;
+<<<<<<< HEAD
+}
+
+
+
+/********** work-order test points form ********/
+
+.testpoint_display, .testpoint_edit {
+    width: 100%;
+    text-align: center;
+    margin-top: 1em;
+    font-size: .8em;
+}
+
+.testpoint_display th, .testpoint_edit th {
+    border-bottom: 1px solid black;
+    vertical-align: middle;
+}
+
+
+.testpoint_display td, .testpoint_edit td {
+    vertical-align: middle;
+    padding: 0;
+    height: 85px;
+}
+
+.testpoint_edit input {
+    width: 43px;
+    text-align: center;
+}
+
+.testpoint_edit a.flow-device-label {
+    color: blue;
+    font-size: .9em;
+}
+
+.testpoint_edit a.add-stream, .testpoint_edit a.save, #add-test-point {
+    background-color: #baa;
+    color: #fff;
+    padding: .5em;
+    border-radius: 5px;
+    position: relative;
+    top: 1em;
+}
+
+.testpoint_edit a.add-stream img, #add-test-point img {
+    position: relative;
+    top: 3px;
+    padding-right: 3px;
+}
+
+#add-test-point {
+    font-size: .9em;
+}
+
+.testpoint_edit a.add-stream:hover {
+    background-color: #765;
+}
+
+.testpoint_display a.edit > div {
+    width: 12px;
+    height: 12px;
+    background-image: url('../images/edit_icon_12x12.png');
+}
+
+.testpoint_display a.delete > div {
+    width: 12px;
+    height: 12px;
+    background-image: url('../images/delete_icon_12x12.png');
+}
+
+.flow-devices-dialog {
+    background-color: white;
+}
+
+.flow-devices-dialog h1 {
+    font-size: 1.1em;
+    padding: 0;
+    padding-bottom: 1em;
+}
+
+.flow-devices-dialog table {
+    width: 100%;
+}
+
+.flow-devices-dialog th {
+    font-size: .7em;
+    color: #A99;
+    border-bottom: 1px solid black;
+    padding-bottom: 10px;
+}
+
+.flow-devices-dialog tr {
+    border-bottom: 1px solid black;
+}
+
+.flow-devices-dialog tr.flow-device:hover {
+    background-color: #dcc;
+    cursor: pointer;
+}
+
+.flow-devices-dialog td {
+    font-size: .7em;
+    padding: 5px 0;
+    text-align: center;
+}
+=======
+}
+>>>>>>> 2ae19c0e3eab12f6271971e3952812dbec575df1

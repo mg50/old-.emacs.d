@@ -1,0 +1,106 @@
+(ns hosemonster.crud.real-crud
+  (:use
+    [hyperion.core :only (save save* find-by-key find-by-kind delete)]
+    [hosemonster.core :only (validate)]
+    [hosemonster.crud.crud-interactor]
+    [hosemonster.ui]
+    [clojure.contrib.json :only [json-str]])
+  (:require
+    [hosemonster.log :as log]
+    [clojure.set :as set]))
+
+(defn ->numeric [n]
+  (if (number? n)
+    n
+    (try
+      (Integer/parseInt n)
+      (catch Exception e 0))))
+
+(defn with-streams [test-point]
+  (let [streams (find-by-kind "stream" :filters [:= :test-point-key (:key test-point)])
+        streams (map #(assoc % :flow-device (find-by-key (:flow-device-key %))) streams)]
+    (assoc test-point :streams streams)))
+
+(defn- save-test-point [test-point]
+  (let [result (save (dissoc test-point :streams))
+        streams (map #(assoc % :test-point-key (:key result)) (:streams test-point))
+        streams (map #(assoc % :flow-device-key (:key (:flow-device %))) streams)
+        streams (map #(dissoc % :flow-device) streams)
+        streams (map #(assoc % :nozzle-pressure (->numeric (:nozzle-pressure %))) streams)
+        existing-streams (find-by-kind "stream" :filters [:= :test-point-key (:key test-point)])
+        streams-to-delete (set/difference (set (map :key existing-streams)) (set (map :key streams)))]
+    (doseq [stream-to-delete streams-to-delete] (delete stream-to-delete))
+    (save* streams)
+    (with-streams result)))
+
+(defn- perform-save [ui model]
+  (let [errors (validate model)]
+    (if (seq errors)
+      (display-validation-errors ui (assoc model :errors errors))
+      (save-succeeded ui (if (= "test-point" (:kind model)) (save-test-point model) (save model))))))
+
+(defn- load-customers [ui]
+  (display-customers ui (find-by-kind "customer" :sorts [:company-name :asc])))
+
+(def model-specs
+  {"customer" {:parent-kind "account" :child-kind "job-site" :children-key :job-sites :sorts [:company-name :asc]}
+   "job-site" {:parent-kind "customer" :child-kind "fire-pump" :children-key :fire-pumps :sorts [:name :asc]}
+   "fire-pump" {:parent-kind "job-site" :child-kind "work-order" :children-key :work-orders :sorts [[:pump-manufacturer :asc] [:pump-model :asc]]}
+   "work-order" {:parent-kind "fire-pump" :child-kind "test-point" :children-key :test-points :sorts [:date :desc]}
+   "test-point" {:parent-kind "work-order" :sorts [:speed :asc]}})
+
+(defmulti prepare-new-model (fn [ui kind parent-key] kind))
+
+(defmethod prepare-new-model "customer" [ui customer _]
+  (let [account (first (find-by-kind "account"))]
+    (display-model ui {:kind "customer" :account-key (:key account)}))
+  (edit-model ui))
+
+(defmethod prepare-new-model :default [ui kind parent-key]
+  (let [spec (model-specs kind)]
+    (display-model ui {:kind kind (keyword (str (:parent-kind spec) "-key")) parent-key})
+    (edit-model ui)))
+
+(defn- handle-work-order [model]
+  (if (= "work-order" (:kind model))
+    (let [test-points (map with-streams (:test-points model))]
+      (assoc model :test-points test-points :flow-devices (find-by-kind :flow-device)))
+    model))
+
+(defn- load-model [ui key]
+  (if-let [model (find-by-key key)]
+    (let [spec (model-specs (:kind model))]
+      (if-let [child-spec (model-specs (:child-kind spec))]
+        (let [children (find-by-kind (:child-kind spec) :filters [:= (keyword (str (:kind model) "-key")) key] :sorts (:sorts child-spec))
+              model (assoc model (:children-key spec) children)
+              model (handle-work-order model)]
+          (display-model ui model))
+        (display-model ui model)))
+      (model-not-found ui)))
+
+(defn- perform-delete [ui key]
+  (let [model (find-by-key key)
+        spec (model-specs (:kind model))]
+    (delete (:key model))
+    (if (= "customer" (:kind model))
+      (load-customers ui)
+      (load-model ui (get model (keyword (str (:parent-kind spec) "-key")))))))
+
+(defn- load-for-edit [ui key]
+  (if-let [model (find-by-key key)]
+    (display-edit ui model)
+    (model-not-found ui)))
+
+(deftype RealCrudInteractor [ui]
+  CrudInteractor
+  (view-customers [this] (load-customers ui))
+  (new-model-requested [this kind parent-key] (prepare-new-model ui kind parent-key))
+  (save-model [this model] (perform-save ui model))
+  (view-model [this key] (load-model ui key))
+  (edit-model-requested [this key] (load-for-edit ui key))
+  (delete-model [this key] (perform-delete ui key))
+  (flow-devices [this] (find-by-kind "flow-device" :sorts [[:category :asc] [:name :asc]]))
+  )
+
+(defn new-real-crud-interactor [ui]
+  (RealCrudInteractor. ui))

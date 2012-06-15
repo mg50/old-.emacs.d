@@ -1,0 +1,47 @@
+# Add your own tasks in files placed in lib/tasks ending in .rake,
+# for example lib/tasks/capistrano.rake, and they will automatically be available to Rake.
+
+def load_rails
+  require File.expand_path('../config/application', __FILE__)
+  require 'rake'
+  Artisan::Application.load_tasks
+end
+
+if ENV['LOAD_RAILS'] == '1'
+  load_rails
+else
+  %w(about cucumber cucumber:all cucumber:ok cucumber:rerun cucumber:wip
+     cucumber:view data_migration:accept_completed_stories
+     data_migration:create_iterations db:backup db:create db:drop
+     db:fixtures:load db:migrate db:migrate:status db:rollback
+     db:schema:dump db:schema:load db:seed db:setup
+     db:structure:dump db:version doc:app jasmine jasmine:ci
+     log:clear middleware notes notes:custom rails:template
+     rails:update routes secret stats time:zones:all tmp:clear tmp:create).each do |task_name|
+    task task_name do
+      load_rails
+      Rake::Task['environment'].invoke
+    end
+  end
+
+  desc "!!! Default rails tasks are hidden, run with LOAD_RAILS=1 to reveal."
+  task :rails
+end
+
+desc "Runs all tests (should be run before any check-in)"
+task :suite => [:spec, "jasmine:ci", "cucumber:with_view"] { puts;}
+task :spec => ["spec:artisan", "spec:rails"]
+task :default => :suite
+
+namespace :spec do
+  task :artisan do
+    puts "Artisan Suite:"
+    sh 'rspec spec/artisan'
+  end
+
+  task :rails do
+    puts
+    puts "Rails Suite: (requiring 'spec_helper' -- this may take a while)"
+    sh 'rspec spec/models/ spec/controllers spec/helpers spec/mailers spec/observers'
+  end
+end

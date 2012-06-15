@@ -1,0 +1,4 @@
+(eval-after-load "ring" '(progn (require 'ring+)))
+(add-lib-path "doremi")
+(require 'doremi)
+(require 'doremi-cmd)

@@ -1,0 +1,13 @@
+(ns repl.core
+  (:gen-class))
+
+(defn run-repl []
+  (println "Starting REPL!")
+  (loop []
+    (print "> ")
+    (let [line (read-line)]
+      (println (load-string line)))
+    (recur)))
+
+(defn -main []
+  (run-repl))

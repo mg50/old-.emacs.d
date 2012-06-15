@@ -1,0 +1,7 @@
+(ns server.connection.socket-strategy)
+
+(def Request-Cycle-Runner
+  (proxy [Runnable] [sock]
+    (run []
+      (let [request (parse-request sock)]
+        (if )))))

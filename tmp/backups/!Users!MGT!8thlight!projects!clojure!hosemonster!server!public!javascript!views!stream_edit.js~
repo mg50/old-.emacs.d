@@ -1,0 +1,47 @@
+
+namespace('Hosemonster.Views', {
+    StreamEdit: Hosemonster.Views.Base.extend({
+        template: 'stream_edit',
+        tagName: 'li',
+
+        events: {
+            'click .delete': 'removeStreamEventHandler',
+            'click .flow-device-label': 'openSelectFlowDeviceDialogClickHandler'
+        },
+
+        removeStreamEventHandler: function(ev) {
+            ev.preventDefault();
+            ev.stopPropagation();
+            this.removeStream();
+        },
+
+        removeStream: function() {
+            this.model.toDestroy = true;
+            this.remove();
+        },
+
+        readAttributes: function() {
+            this.model.set('nozzle-pressure', this.$el.find('[name=nozzle-pressure]').val());
+            this.model.get('flow-device').set('key',
+                                              this.$el.find('[name=flow-device-key]').val());
+            this.model.get('flow-device').set('name',
+                                              this.$el.find('.flow-device-label').html());
+        },
+
+        openSelectFlowDeviceDialogClickHandler: function(ev) {
+            ev.preventDefault();
+            ev.stopPropagation();
+            this.openSelectFlowDeviceDialog();
+        },
+
+        openSelectFlowDeviceDialog: function(dialogView) {
+            var self = this;
+            dialogView = (dialogView || FlowDevicesDialog);
+            dialogView.callbackForDeviceSelect = function(key, name) {
+                self.$el.find('[name=flow-device-key]').val(key);
+                self.$el.find('.flow-device-label').html(name);
+            }
+            dialogView.open();
+        }
+    })
+});

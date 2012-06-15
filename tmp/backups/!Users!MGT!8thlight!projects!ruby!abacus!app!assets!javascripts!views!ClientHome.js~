@@ -1,0 +1,15 @@
+namespace('Abacus.Views', {
+  ClientHome: Abacus.Views.SimpleMustacheView.extend({
+    template: 'client_collection',
+
+    childViews: function() {
+      this.clients = new Abacus.Views.ClientCollection({
+        el: '#clients',
+        collection: this.collection,
+        modelViewContainer: '.list'
+      });
+
+      this.clients.render();
+    }
+  })
+});

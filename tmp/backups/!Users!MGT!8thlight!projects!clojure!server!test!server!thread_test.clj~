@@ -1,0 +1,32 @@
+(ns server.thread-test
+  (:use server.thread clojure.test server.core))
+
+
+(let [req1 "invalid request"])
+
+(deftest test-request-response-cycle-1
+  (let [sock (Mock-Socket. req1)
+        handler (Socket-Handler. sock)]
+    (request-response-cycle handler)
+    (is (= ("HTTP/1.1 404 Not Found")
+           (response/response-status-string
+            (stream-to-string (.getOutputStream handler)))))))
+
+(deftest test-parse-socket-request-2
+  (let [sock (MockSocket. req2)
+        handler (Socket-Handler. sock)]
+    (request-response-cycle handler)
+    (is (= ("HTTP/1.1 200 OK")
+           (response/response-status-string
+            (stream-to-string (.getOutputStream handler)))))))
+
+(deftest test-parse-socket-request-3
+  (let [sock (MockSocket.req3)
+        handler (Socket-Handler. sock)]
+    (request-response-cycle handler)
+    (is (= "HTTP/1.1 200 OK"))
+    (is (= "Hello World")
+        (response/response-body-string
+         (stream-to-string (.getOutputStream handler))))))
+
+(deftest )

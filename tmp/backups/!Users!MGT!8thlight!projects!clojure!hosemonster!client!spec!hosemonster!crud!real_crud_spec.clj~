@@ -1,0 +1,154 @@
+(ns hosemonster.crud.real-crud-spec
+  (:use
+    [speclj.core]
+    [hyperion.memory :only (new-memory-datastore)]
+    [hyperion.core :exclude (ds)]
+    [hosemonster.crud.real-crud :only (new-real-crud-interactor)]
+    [hosemonster.crud.crud-interactor]
+    [hosemonster.fake-client :only (new-fake-client)]
+    [hosemonster.fake-ui :only (new-fake-ui)]
+    [hosemonster.core :only (validate)]))
+
+(describe "Real Crud Interactor"
+
+  (with ds (new-memory-datastore))
+  (with ui (new-fake-ui))
+  (with interactor (new-real-crud-interactor @ui))
+  (around [spec] (binding [*ds* @ds] (spec)))
+
+  (it "loads customers"
+    (let [customer1 (save {:kind "customer" :company-name "Acme"})
+          customer2 (save {:kind "customer" :company-name "HakkoRyu"})]
+      (view-customers @interactor)
+      (should= "customers" (:view @(.state @ui)))
+      (should= [customer1 customer2] (:customers @(.state @ui)))))
+
+  (it "requests a new customer"
+    (let [account (save {:kind "account"})]
+      (new-model-requested @interactor "customer" nil)
+      (should= "edit-model" (:view @(.state @ui)))
+      (should= "customer" (:kind (:model @(.state @ui))))
+      (should= (:key account) (:account-key (:model @(.state @ui))))))
+
+  (it "saves a model"
+    (binding [validate (fn [_] {})]
+      (save-model @interactor {:kind "customer" :company-name "Acme"}))
+    (should= "Acme" (:company-name (first (find-by-kind "customer"))))
+    (should= "save-succeeded" (:view @(.state @ui)))
+    (should-not= nil (:key (:model @(.state @ui)))))
+
+  (it "handles validation errors when saving a model"
+    (binding [validate (fn [_] {:foo ["bar"]})]
+      (save-model @interactor {:kind "customer" :company-name "Acme"}))
+    (should= 0 (count-by-kind "customer"))
+    (should= "validation-errors" (:view @(.state @ui)))
+    (should= {:foo ["bar"]} (:errors (:invalid-model @(.state @ui)))))
+
+  (it "can view a customer"
+    (let [customer (save {:kind "customer" :company-name "Acme"})
+          jobsite1 (save {:kind "job-site" :name "Job #1" :customer-key (:key customer)})
+          jobsite2 (save {:kind "job-site" :name "Job #2" :customer-key (:key customer)})]
+      (view-model @interactor (:key customer))
+      (should= "view-model" (:view @(.state @ui)))
+      (let [viewed-model (:model @(.state @ui))]
+        (should= (:key customer) (:key viewed-model))
+        (should= [jobsite1 jobsite2] (:job-sites viewed-model)))))
+
+  (it "calls not found when edit model doesn't exist"
+    (edit-model-requested @interactor nil)
+    (should= "model-not-found" (:view @(.state @ui))))
+
+  (it "can edit a customer"
+    (let [customer (save {:kind "customer" :company-name "Acme"})]
+      (edit-model-requested @interactor (:key customer))
+      (should= "display-edit" (:view @(.state @ui)))
+      (let [edited-model (:model @(.state @ui))]
+        (should= (:key customer) (:key edited-model)))))
+
+  (it "fails to find an model"
+    (view-model @interactor "nothing")
+    (should= "model-not-found" (:view @(.state @ui))))
+
+  (it "requests a new job-site"
+    (new-model-requested @interactor "job-site" "customer-key-123")
+    (should= "edit-model" (:view @(.state @ui)))
+    (should= "job-site" (:kind (:model @(.state @ui))))
+    (should= "customer-key-123" (:customer-key (:model @(.state @ui)))))
+
+  (it "requests a new fire-pump"
+    (new-model-requested @interactor "fire-pump" "job-site-key-123")
+    (should= "edit-model" (:view @(.state @ui)))
+    (should= "fire-pump" (:kind (:model @(.state @ui))))
+    (should= "job-site-key-123" (:job-site-key (:model @(.state @ui)))))
+
+  (it "views a job-site"
+    (let [job-site (save {:kind "job-site" :name "Acme Tower"})
+          fire-pump1 (save {:kind "fire-pump" :pump-manufacturer "Pump #1" :job-site-key (:key job-site)})
+          fire-pump2 (save {:kind "fire-pump" :pump-manufacturer "Pump #2" :job-site-key (:key job-site)})]
+      (view-model @interactor (:key job-site))
+      (should= "view-model" (:view @(.state @ui)))
+      (let [viewed-model (:model @(.state @ui))]
+        (should= (:key job-site) (:key viewed-model))
+        (should= [fire-pump1 fire-pump2] (:fire-pumps viewed-model)))))
+
+  (it "views a fire pump"
+    (let [fire-pump (save {:kind "fire-pump" :pump-rated-gpm 12245})
+          work-order-1 (save {:kind "work-order" :fire-pump-key (:key fire-pump)})
+          work-order-2 (save {:kind "work-order" :fire-pump-key (:key fire-pump)})]
+      (view-model @interactor (:key fire-pump))
+      (should= "view-model" (:view @(.state @ui)))
+      (let [viewed-model (:model @(.state @ui))]
+        (should= (:key fire-pump) (:key viewed-model))
+        (should= (set [work-order-1 work-order-2]) (set (:work-orders viewed-model))))))
+
+  (it "views a work order"
+    (let [work-order (save {:kind "work-order"})
+          test-point (save {:kind "test-point" :work-order-key (:key work-order)})
+          flow-device (save {:kind "flow-device"})
+          stream (save {:kind "stream" :test-point-key (:key test-point) :flow-device-key (:key flow-device)})]
+      (view-model @interactor (:key work-order))
+      (should= "view-model" (:view @(.state @ui)))
+      (let [viewed-model (:model @(.state @ui))]
+        (should= (:key work-order) (:key viewed-model))
+        (should= [(:key test-point)] (map :key (:test-points viewed-model)))
+        (should= [(:key stream)] (map :key (:streams (first (:test-points viewed-model)))))
+        (should= flow-device (:flow-device (first (:streams (first (:test-points viewed-model)))))))))
+
+  (it "saved a test-point"
+    (binding [validate (fn [_] {})]
+      (let [work-order (save {:kind "work-order"})
+            flow-device (save {:kind "flow-device"})
+            stream1 {:kind "stream" :flow-device flow-device :nozzle-pressure "123"}
+            stream2 {:kind "stream" :flow-device flow-device :nozzle-pressure "321"}
+            test-point {:kind "test-point" :work-order-key (:key work-order) :streams [stream1 stream2]}
+            result (save-model @interactor test-point)]
+        (should= 1 (count (find-by-kind "test-point")))
+        (should= 2 (count (find-by-kind "stream" :filters [:= :test-point-key (:key result)])))
+        (should= [(:key flow-device) (:key flow-device)] (map :flow-device-key (find-by-kind "stream"))))))
+
+  (it "requests a new work-order"
+    (new-model-requested @interactor "work-order" "fire-pump-key-123")
+    (should= "edit-model" (:view @(.state @ui)))
+    (should= "work-order" (:kind (:model @(.state @ui))))
+    (should= "fire-pump-key-123" (:fire-pump-key (:model @(.state @ui)))))
+
+  (it "deletes a model"
+    (let [customer (save {:kind "customer"})
+          job-site (save {:kind "job-site" :name "Acme Tower" :customer-key (:key customer)})]
+      (delete-model @interactor (:key job-site))
+      (should= nil (find-by-key (:key job-site)))
+      (should= "view-model" (:view @(.state @ui)))
+      (should= (:key customer) (:key (:model @(.state @ui))))))
+
+  (it "deletes a customer"
+    (let [customer (save {:kind "customer"})]
+      (delete-model @interactor (:key customer))
+      (should= nil (find-by-key (:key customer)))
+      (should= "customers" (:view @(.state @ui)))))
+
+  (it "provides flow devices"
+    (let [flow-device1 (save {:kind "flow-device" :name "1"})
+          flow-device2 (save {:kind "flow-device" :name "2"})
+          result (flow-devices @interactor)]
+      (should= #{flow-device1 flow-device2} (set result))))
+  )

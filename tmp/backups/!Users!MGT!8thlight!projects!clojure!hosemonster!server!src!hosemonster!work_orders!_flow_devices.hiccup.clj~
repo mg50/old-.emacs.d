@@ -1,0 +1,21 @@
+(let [devices (:flow-devices (:work-order *view-context*))]
+    [:div#modal
+     [:div "Flow Devices"]
+
+     [:table
+      [:tr
+       [:th "category"]
+       [:th "name"]
+       [:th "k-factor"]
+       [:th "min PSI"]
+       [:th "max PSI"]]
+      (apply list
+             (map (fn [device]
+                    [:tr {:class "flow-device"}
+                     [:input {:type "hidden" :name "key" :value (:key device)}]
+                     [:td {:class "category"} (:category device)]
+                     [:td {:class "name"} (:name device)]
+                     [:td {:class "k-factor"} (:k-factor device)]
+                     [:td {:class "min-psi"} (:min-psi device)]
+                     [:td {:class "max-psi"} (:max-psi device)]])
+                  devices))]])

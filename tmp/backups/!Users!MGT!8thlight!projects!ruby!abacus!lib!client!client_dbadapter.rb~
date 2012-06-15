@@ -1,0 +1,61 @@
+require 'client/client_active_record'
+require 'contact/contact_active_record'
+require 'project/project_active_record'
+require 'project_note/project_note_active_record'
+require 'memory/in_memory_persistor'
+
+module DBAdapter
+  class Client
+
+    Singleton=Client.new
+
+    def create(attributes, type=:Persist)
+      case type
+        when :Persist
+          return AR::Client.new(attributes)
+        when :Memory
+          return ClientPersistor::Client.new(attributes)
+      end
+      raise "Client Create: Type Not Found"
+    end
+
+    def find(id, type=:Persist)
+      case type
+        when :Persist
+          return AR::Client.find(id)
+      end
+      raise "Client Find: Type Not Found"
+    end
+
+    def find_all(type=:Persist)
+      case type
+        when :Persist
+          return AR::Client.all(:include => "projects", :order => "name")
+      end
+      raise "Client Find All: Type Not Found"
+    end
+
+    def find_with_projects(id, type=:Persist)
+      case type
+      when :Persist
+        return AR::Client.find(id, :include => :projects)
+      end
+    end
+
+    def find_with_contacts(id, type=:Persist)
+      case type
+      when :Persist
+        return AR::Client.find(id, :include => :contacts)
+      end
+    end
+
+    def update(id, attributes, type=:Persist)
+      case type
+        when :Persist
+          return AR::Client.update(id, attributes)
+      end
+      raise "Client Update: Type Not Found"
+    end
+
+  end
+end

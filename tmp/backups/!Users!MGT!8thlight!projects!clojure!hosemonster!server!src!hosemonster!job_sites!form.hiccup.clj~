@@ -1,0 +1,65 @@
+(let [job-site (:job-site *view-context*)]
+  (list
+    (if (:dashboard-data *view-context*)
+      (render-partial "util/dashboard" (:dashboard-data *view-context*)))
+    [:div.major-column
+      (let [new-job-site (nil? (:key job-site))
+            action (if new-job-site "/job-sites" (format "/job-sites/%s" (:key job-site)))]
+        [:form {:method :post :action action}
+          [:input {:type :hidden :name "job-site[customer-key]" :value (:customer-key job-site)}]
+          [:h1 (if new-job-site "New Job Site" "Edit Job Site")]
+          [:div.column {:id "left-column"}
+            [:div.column-head
+              [:table.form
+                [:h2 "Address"]
+                [:tr
+                  [:td [:label {:name :building-name} "Building Name:"]]
+                  [:td [:input {:type :text :name "job-site[building-name]" :value (:building-name job-site)}]]]
+                [:tr
+                  [:td [:label {:name :building-owner} "Building Owner:"]]
+                  [:td [:input {:type :text :name "job-site[building-owner]" :value (:building-owner job-site)}]]]
+                [:tr
+                  [:td [:label {:name :addr-line-1} "Address Line 1:"]]
+                  [:td [:input {:type :text :name "job-site[addr-line-1]" :value (:addr-line-1 job-site)}]]]
+                [:tr
+                  [:td [:label {:name :addr-line-1} "Address Line 2:"]]
+                  [:td [:input {:type :text :name "job-site[addr-line-2]" :value (:addr-line-2 job-site)}]]]
+                [:tr
+                  [:td [:label {:name :city} "City:"]]
+                  [:td [:input {:type :text :name "job-site[city]" :value (:city job-site)}]]]
+                [:tr
+                  [:td [:label {:name :state} "State:"]]
+                  [:td [:input {:type :text :name "job-site[state]" :value (:state job-site)}]]]
+                [:tr
+                  [:td [:label {:name :zipcode} "Zipcode:"]]
+                  [:td [:input {:type :text :name "job-site[zipcode]" :value (:zipcode job-site)}]]]
+                [:tr
+                  [:td [:label {:name :country} "Country:"]]
+                  [:td [:input {:type :text :name "job-site[country]" :value (:country job-site)}]]]]]]
+          [:div.column {:id "right-column"}
+            [:div.column-head
+              [:table.form
+                [:h2 "Customer Information"]
+                [:tr
+                  [:td [:label {:name :first-name} "First Name:"]]
+                  [:td [:input {:type :text :name "job-site[first-name]" :value (:first-name job-site)}]]]
+                [:tr
+                  [:td [:label {:name :last-name} "Last Name:"]]
+                  [:td [:input {:type :text :name "job-site[last-name]" :value (:last-name job-site)}]]]
+                [:tr
+                  [:td [:label {:name :phone-number} "Phone Number:"]]
+                  [:td [:input {:type :text :name "job-site[phone-number]" :value (:phone-number job-site)}]]]
+                [:tr
+                  [:td [:label {:name :fax-number} "Fax Number:"]]
+                  [:td [:input {:type :text :name "job-site[fax-number]" :value (:fax-number job-site)}]]]
+                [:tr
+                  [:td [:label {:name :email} "Email:"]]
+                  [:td [:input {:type :text :name "job-site[email]" :value (:email job-site)}]]]
+                [:tr
+                  [:td [:label {:name :Notes} "Notes:"]]
+                  [:td [:input {:type :text :name "job-site[notes]" :value (:notes job-site)}]]]]]]
+          [:table.form
+            [:tr
+             [:td
+              [:input {:type "submit" :value "Save" :class "button"}]
+              [:a {:class "button" :href (format "/job-sites/%s/delete" (:key job-site))} "Delete Job Site"]]]]])]))

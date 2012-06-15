@@ -1,0 +1,10 @@
+namespace("Abacus.Views", {
+  Project: Abacus.Views.SimpleMustacheView.extend({
+    tagName: 'li',
+    template: 'project',
+
+    presenterData: function() {
+      return this.model.attributes;
+    }
+  })
+});

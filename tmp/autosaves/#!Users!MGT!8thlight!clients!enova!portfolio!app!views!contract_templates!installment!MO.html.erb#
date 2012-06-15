@@ -1,0 +1,691 @@
+<%# * -*- mode: html -*- ** %>
+
+<div class="loan-contract installment-contract">
+
+  <div class="article loan-agreement">
+
+    <h2 class="contract-title">CONSUMER INSTALLMENT LOAN AGREEMENT</h2>
+
+    <div class="section summary">
+      <div class="overview">
+        <dl class="disbursement-date"><dt>Disbursement Date<br />
+          <span>(funds may be disbursed prior to this date):</span></dt> <dd><%= disbursement_date %></dd></dl>
+        <dl class="payment-date"><dt>Payment Date:</dt> <dd><%= payment_date %></dd></dl>
+        <dl class="account-num"><dt>Account #:</dt> <dd><%= account_number %></dd></dl>
+        <dl class="loan-num"><dt>Loan #:</dt> <dd><%= loan_number %></dd></dl>
+        <dl class="contract-type"><dt>Type of Contract:</dt> <dd><%= contract_type %></dd></dl>
+      </div>
+
+      <div class="entities">
+        <div class="entity lender">
+          <h3>LICENSED LENDER'S OFFICE</h3>
+          <div class="location">
+            <div class="company"><%= lender_name %> </div>
+            <address>
+              <span class="address-1"><%= lender_address_line1 %>, </span><br />
+              <% if lender_address_line2.present? %>
+                <span class="address-2"><%= lender_address_line2 %> </span><br />
+              <% end %>
+              <span class="city"><%= lender_address_city %>, </span>
+              <span class="state"><%= lender_address_state %> </span>
+              <span class="zip"><%= lender_address_zip %> </span><br />
+            </address>
+            <div class="phone home"><%= lender_phone %> </div>
+          </div>
+        </div>
+
+        <div class="entity borrower">
+          <h3>BORROWER</h3>
+          <div class="location">
+            <div class="person"><%= borrower_full_name %> </div>
+            <address>
+              <span class="address-1"><%= borrower_address_line1 %>, </span><br />
+              <% if borrower_address_line2.present? %>
+                <span class="address-2"><%= borrower_address_line2 %> </span><br />
+              <% end %>
+              <span class="city"><%= borrower_address_city %>, </span>
+              <span class="state"><%= borrower_address_state %> </span>
+              <span class="zip"><%= borrower_address_zip %> </span><br />
+            </address>
+            <div class="phone home"><%= borrower_home_phone %> </div>
+            <div class="phone work"><%= borrower_work_phone %> </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="section terms">
+      <p> In this Consumer Installment Loan Agreement (hereinafter the "Agreement"), the words "you,"
+          "your," and I mean the borrower who has electronically signed it.
+          The words "we", "us" and "our" mean NC Financial Solutions of Utah, LLC d/b/a NetCredit ("Lender"),
+          licensed and regulated by the Utah Department of Financial Institutions who may be reached at (801) 538-8830.
+          The parties agree that this Agreement is made in accordance with and subject to the Utah Consumer Credit Code, U.C.A. 70C-1-101, et seq.
+          All matters arising under or relating to this Agreement shall be governed by and construed in accordance with the laws of the State of Utah,
+          without regarding to its conflict of law principles.  However, the <a href="#arbitration_provision">ARBITRATION PROVISION</a> set forth below
+          and any arbitration conducted according to the <a href="#arbitration_provision">ARBITRATION PROVISION</a> will be governed by the Federal Arbitration Act ("FAA").
+      </p>
+      <p><strong>This Agreement is made pursuant to Section 70C of the Utah Consumer Credit Code</strong></p>
+      <p> In order to complete your transaction with us, you must electronically sign this Agreement by clicking the "I Agree" button below.
+          We will then approve or deny the Agreement. If the Agreement is approved, we will use commercially reasonable efforts to deposit the loan proceeds
+          into Your Bank Account on or before the Disbursement Date designated above (<%= disbursement_date %>). We rely on the representations of you and other
+          parties in determining the Disbursement Date. Despite our best efforts, unavoidable delays as a result of inadvertent processing errors and/or
+          "acts of God" may extend the time for the deposit.
+      </p>
+    </div>
+
+
+    <div class="section truth-in-lending" id="truth_in_lending">
+      <h3>FEDERAL TRUTH IN LENDING DISCLOSURES</h3>
+      <table border="1">
+      <tr>
+        <td>
+          <table border="1">
+            <tr>
+              <td><strong>ANNUAL PERCENTAGE RATE</strong></td>
+              <td> <strong>FINANCE CHARGE</strong></td>
+              <td>Amount Financed</td>
+              <td>Total of Payments</td>
+          </tr>
+          <tr>
+            <td>The cost of your credit as a yearly rate.</td>
+            <td>The dollar amount the credit will cost you.</td>
+            <td>The amount of credit provided to you or on your behalf.</td>
+            <td>The amount you will have paid after you have made all payments as scheduled.</td>
+          </tr>
+          <tr>
+            <td><strong><%= apr %></strong></td>
+            <td><strong><%= loan_finance_charge %></strong></td>
+            <td><%= loan_amount %></td>
+            <td><%= total_repayment_amount %></td>
+          </tr>
+        </table>
+        <table border="1">
+          <tr>
+            <td colspan="4">Your payment schedule will be:</td>
+          </tr>
+          <tr>
+            <td colspan="4">
+              <table border="1">
+              <tr>
+                <th>Payment number</th>
+                <th>Amount of Payments</th>
+                <th>When Payments Are Due</th>
+              </tr>
+              <% loan_installments.each do |installment_number, initial_amount, due_date| %>
+                <tr>
+                  <td><%= installment_number %></td>
+                  <td><%= initial_amount %></td>
+                  <td><%= due_date %></td>
+                </tr>
+              <% end %>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </td>
+      </tr>
+      <tr>
+        <td>
+          <%# FED_DISCLOSURE_BLOCK %>
+          <div class="clause federal-disclosure" id="fed_disclosure">
+            <h3>Security</h3>
+            <p><%= security_disclosure %></p>
+            <h3>Late Charges</h3>
+            <p> If you are 10 days or more late on an installment payment, you may be charged a late fee of $30 or 5% of the unpaid installment payment, whichever amount is greater.</p>
+            <h3>Prepayment</h3>
+            <p>If you pay off early, you will not have to pay a penalty and will be entitled to a refund of a portion of the Finance Charge if you pay the Amount Financed in full on or before the Rescission Deadline as defined in the Agreement.</p>
+            <p>See your contract documents for any additional information about nonpayment, default, and any required repayment in full before the scheduled date, and prepayment refunds and lack of penalties.</p>
+          </div>
+        </td>
+      </tr>
+    </table>
+    <p>UP: <%= apr_day_counting_convention %></p>
+  </div>
+
+  <div class="amount-itemization">
+    <h3>Itemization of Amount Financed</h3>
+    <div class="item">
+      <span class="value"><%= amount_given_directly_to_account_holder %></span>
+      <span class="label">Amount given to you directly</span><br />
+    </div>
+  </div>
+
+  <h3>PROMISE TO PAY AND CALCULATION OF INTEREST</h3>
+  <p> You promise to pay us <%= amount_given_directly_to_account_holder %> (the amount of the principal) plus interest from the Disbursement Date of this
+      Agreement until the final installment due date ("Maturity Date") set forth in the payment schedule above ("Payment Schedule"), or any adjusted payment
+      schedule subsequently agreed to by the parties. Interest will accrue beginning on the Disbursement Date even if the funds from this Agreement are
+      provided to you earlier. You also promise to pay any other charges provided for under this Agreement. The Finance Charge disclosure above represents
+      the amount of interest you will pay under this Agreement assuming you pay all your scheduled installment payments when due according to the Payment Schedule.
+      You promise to pay us by <%= official_payment_type_name %> the amounts scheduled on the dates set forth in the Payment Schedule,
+      or any adjusted payment schedule agreed to by the parties. Time is of the essence. We charge interest under an adjusted daily simple interest method at
+      the annual rate of <%= loan_interest_rate_percent %> ("Contract Rate"). Interest shall not be payable in advance or compounded. We apply the Contract Rate to the
+      "Adjusted Principal Balance" from the Disbursement Date until the earlier of (i) the Maturity Date, (ii) prepayment in full, or (iii)
+      acceleration pursuant to the default provisions. The term "Adjusted Principal Balance" (hereinafter the "APB") means the loan principal balance
+      that would be outstanding assuming you make each payment timely, less any additional prepayments of principal. "Timely" means making payment in
+      accordance with the Payment Schedule or any adjusted payment schedule agreed to by the parties. The APB will equal the outstanding loan principal
+      balance if you make all payments timely and no other payments. You will never be required to pay more total interest than the amount set forth in the
+      Finance Charge above.
+  </p>
+
+  <h3>LATE CHARGE</h3>
+  <p>If you are 10 days or more late on an installment payment, you may be charged a late fee of $30 or 5% of the unpaid installment payment, whichever amount is greater.</p>
+
+  <h3>RETURNED PAYMENT CHARGE</h3>
+  <p> You agree to pay a service charge of $ 20 if any payment instrument is dishonored in accordance with Utah Code Ann. &sect; 7-15-1. If the payment instrument is
+      dishonored, we may: (i) give written or oral notice of dishonor to you; and (ii) waive all or part of the $20 service charge. If the payment instrument
+      is dishonored we will not collect and you will not be liable for the $20 service charge, if we redeposit the payment instrument and it is honored.
+  </p>
+
+
+  <h3>RESCISSION and PREPAYMENT</h3>
+  <p> You shall have the right to make payment in advance and in any amount on this Agreement at any time. You will not incur an additional charge,
+      fee or penalty for prepayment. Prepayments of principal may reduce the total amount of interest you are scheduled to pay under this Agreement.
+      To rescind future payment obligations under this Agreement and receive a refund of the finance charge, you must (i) inform us in writing via fax
+      (<%= our_fax_number %>) or email (<a href="mailto:<%= our_support_email_address %>"><%= our_support_email_address %></a>) of your intent to rescind
+      no later than 6:00 PM Eastern Time on the next business day immediately following the Disbursement Date ("Rescission Deadline"), and (ii) give us
+      written authorization to effect a debit entry to Your Bank Account, defined in the Repayment Authorization below, for the principal amount of the loan.
+      If we receive payment of the principal amount of the loan via the authorization, then we will refund the interest owing and rescind the future payment
+      obligations under this Agreement. <%= recision_and_prepayment_by_repayment_method %>
+  </p>
+
+  <h3>APPLICATION OF PAYMENTS</h3>
+  <p> Payment will be applied first to satisfy any past due amounts owing, and then to any currently scheduled installment amounts owing.
+      If you are past due, we credit all payments received first to the oldest past due amounts owing by applying such to any late charges,
+      returned payment charge, then to accumulated but unpaid interest, and then to past due principal owing. We repeat the process until
+      all past due amounts have been paid in full. If you are not past due, we credit all payments to the current or upcoming scheduled
+      installment by applying such to interest, and then to principal as of the date received. If an early payment is less than the scheduled
+      installment, then you must pay the difference on or before the upcoming installment due date. Early payments, which equal or exceed a
+      scheduled installment, will satisfy the upcoming installment. Excess payments received on a scheduled installment due date will be
+      credited to any accrued and outstanding interest, then principal, and not credited to upcoming installments. Therefore, you must pay
+      the next installment as scheduled. Payment of principal may reduce (i) total amount of interest you are scheduled to pay under this
+      Agreement, (ii) the number of payments, and/or (iii) the final payment.
+  </p>
+
+  <h2 id="ach_authorization_for_your_loan_proceeds">ACH AUTHORIZATION FOR YOUR LOAN PROCEEDS.</h2>
+  <p> You authorize us to initiate an ACH to credit the checking or savings account specified in your Application/Data Verification form ("Your Bank Account") with the proceeds of your loan.
+      In the event that we make an error in processing this ACH (or any other ACH), you further authorize us to initiate an ACH to correct the error. You authorize us to initiate credit ACH
+      entries to Your Bank Account as may be necessary to obtain an accurate balance under this Agreement.
+  </p>
+
+
+  <%# AUTHORIZATION BLOCK %>
+  <div class="section authorization" id="authorization">
+    <% if ach_payment? %>
+      <h2 id="authorization_agreement"><%= authorization_agreement_link_name %></h2>
+      <h3><%= ach_or_rcc %> Authorization for Installment Payments, Fees, and, in the Event of <%= default_or_acceleration %>, the Loan Balance.</h3>
+      <p>You authorize us to initiate an electronic fund transfer through the ACH network (or another network of our choosing) ("ACH") from Your Bank Account for the following:</p>
+
+      <ul>
+        <li>Each of the installment payments due under the Agreement (or, if you make a partial installment payment, the amount of the installment less the amount of any such payment) on or after its due date;</li>
+        <li>Any late charge [and returned payment fee] due to us as a result of late payment [or prior rejected ACH];</li>
+        <li>In the event that you default and we declare the entire outstanding balance (the "Accelerated Balance"),
+            including all accrued and unpaid interest and fees that you owe under this Agreement, due and payable, the Accelerated Balance; and
+        </li>
+        <li>The amount required to correct any error we make in processing an ACH.</li>
+      </ul>
+      <p> If any payment cannot be obtained by ACH, you remain responsible for such payment and any resulting fees under the Agreement. You agree that we may resubmit any returned ACH
+          as permitted by law and network rules. We are not responsible for any fees you incur in connection with rejected payments. You agree that we do not need to provide you with
+          advance notice of an ACH we initiate for an installment payment if the amount of the ACH is less than the installment payment (for example, due to a partial payment).
+          You acknowledge that the origination of ACH transactions to Your Bank Account must comply with the provisions of U.S. law.
+      </p>
+
+      <h3>Modified Charges.</h3>
+      <p>Instead of or in addition to any of the ACHs described above, you authorize us to process any ACHs you subsequently confirm by phone, text message or email.</p>
+
+    <% else %>
+
+      <h2 id="authorization_agreement"><%= authorization_agreement_link_name %></h2>
+      <h3><%= ach_or_rcc %> Authorization for Installment Payments, Fees, and, in the Event of <%= default_or_acceleration %>, the Loan Balance</h3>
+      <p>You authorize us to create and deposit and/or present for payment an RCC drawn on Your Bank Account for the following:</p>
+      <ul>
+        <li>Each of the installment payments due under the Agreement (or, if you make a partial installment payment, the amount of the installment less the amount of any such payment) on or after its due date;</li>
+        <li>Any late charge [and returned payment fee] due to us as a result of late payment [or prior rejected RCC];</li>
+        <li>In the event that you default and we declare the entire outstanding balance (the "Accelerated Balance"),
+            including all accrued and unpaid interest and fees that you owe under this Agreement, due and payable, the Accelerated Balance; and
+        </li>
+        <li>The amount required to correct any error we make in processing a RCC.</li>
+      </ul>
+      <p> If any payment cannot be obtained by RCC, you remain responsible for such payment and any resulting fees under the Agreement. You agree that we may resubmit any returned RCC
+          as permitted by law and applicable rules.  We are not responsible for any fees you incur in connection with any returned RCC.
+      </p>
+    <% end %>
+
+    <h3>Range of Varying Amounts.</h3>
+    <p> Please note that you have the right to receive notice of all transfers varying in amount, and that by signing this <%= ach_or_rcc %> Authorization you acknowledge that we have elected to offer you a
+        specified range of amounts for debiting (in lieu of providing the notice of transfers in varying  amounts). The amount of any <%= ach_or_rcc %>debit will range from (i) the payment amount provided
+        in the Payment Schedule (which may be less than a scheduled payment if partial prepayments have been made), to (ii) an amount equal to the total outstanding balance (which may be greater
+        than or less than a payment based upon your actual payments), plus as applicable, any returned payment charges and/or any late charges you may owe under the Agreement.
+        For any debit outside of this specified range, we will send you a notice. Therefore, by agreeing to the terms of this <%= ach_or_rcc %> Authorization you are choosing to only receive notice when a transfer
+        amount exceeds the range specified above.
+    </p>
+
+    <h3>Termination.</h3>
+    <p> You may terminate one or all of the authorizations to initiate <%= ach_or_rcc %>s from Your Bank Account set forth above by calling us at <%= our_phone_number %>, in writing by fax at <%= our_fax_number %> or e-mail at
+        <a href="mailto:<%= our_support_email_address %>"</a><%= our_support_email_address %></a>. We will discontinue initiating any <%= ach_or_rcc %>s you specify as soon as we reasonably can and, in any event, within three business days after receiving your termination request.
+    </p>
+
+    <h3>Your Bank Account Information.</h3>
+    <p> If there is any missing or erroneous information Your Bank Account or the depository that offers it, then you authorize us to verify and correct such information.
+        You have given us certain information from Your Bank Account so that we can verify the account number and routing number and you acknowledge that
+        Your Bank Account is a legitimate, open, and active account.
+    </p>
+
+    <h3>Full Force and Effect.</h3>
+    <p> This <%= ach_or_rcc %> Authorization will remain in full force and effect until (i) we have received written notification from you of its termination in such time and in such manner as to afford us and the
+        Depository a reasonable opportunity to act on it, or (ii) upon full and final payment of the amount you owe us under this Agreement.
+    </p>
+
+    <% if ach_payment? %>
+      <h3>Optional ACH Debit Authorization.</h3>
+      <p> PLEASE NOTE THAT YOU ARE NOT REQUIRED TO SIGN THIS ACH AUTHORIZATION TO ENTER INTO THIS AGREEMENT. THIS ACH AUTHORIZATION IS FOR YOUR CONVENIENCE IN PAYING AMOUNTS OWED AND RECEIVING THE LOAN PROCEEDS
+          UNDER THIS AGREEMENT. BY SIGNING THIS ACH AUTHORIZATION BY CLICKING THE "I AGREE" BUTTON BELOW, YOU ACKNOWLEDGE THAT YOU ARE VOLUNTARILY CHOOSING TO PAY AMOUNTS OWED AND RECEIVE YOUR LOAN PROCEEDS
+          ELECTRONICALLY AND THAT YOU ARE CHOOSING ONLY TO RECEIVE NOTICE OF VARYING TRANSFERS WHEN A TRANSFER EXCEEDS THE RANGE SPECIFIED ABOVE.
+      </p>
+    <% end %>
+
+    <h3>SECURITY.</h3>
+    <p> Pursuant to Comment 2(a)(25) of the Federal Reserve Board Official Staff Commentary to Regulation Z &sect;226.2, we have disclosed to you that our interest in the <%= ach_or_rcc %> Authorization is a security interest
+        for Truth-in-Lending purposes only, because federal and Utah law do not clearly address whether our interest in the <%= ach_or_rcc %> Authorization is a "security interest."
+    </p>
+  </div>
+  <%# END OF AUTHORIZAITON BLOCK %>
+
+
+  <%# WAIVER_OF_JURY_BLOCK %>
+  <div class="section jury-waiver" id="trial_waiver">
+    <h2 id="waiver_of_jury_trial">WAIVER OF JURY TRIAL</h2>
+    <p>If you sign this Agreement you waive your right to have a jury trial to resolve any dispute you may have against us or a related third party.</p>
+
+    <h3>DEFAULT and ACCELERATION.</h3>
+    <p> You will be in default under this Agreement for any of the following reasons: (i) if you do not pay in full a payment in accordance with the Payment Schedule; (ii) if you file for protection under the
+        United States Bankruptcy Code, or become subject to a proceeding which seeks relief from debt; or (iii) if you have made a false or misleading statement about an important matter in connection
+        with this Agreement, including your application for credit. If you fail to cure such default, then we may (i) declare the entire outstanding balance that you owe under this Agreement, and if applicable,
+        any other charges permitted by law immediately due and payable; and (ii) we may proceed to court to reduce our claim to a judgment in accordance with Utah law.
+    </p>
+
+    <h3>NON-WAIVER OF OUR RIGHTS.</h3>
+    <p> By choosing any one or more of these remedies, we do not give up our right to use another remedy later. By deciding not to use any remedy should you be in default, we do not give up our right to consider
+        the event a default if it happens again. We may delay or refrain from enforcing any of our rights under this Agreement without waiving such rights. You understand that any waiver of our rights will not
+        be effective unless it is in writing signed by us.
+    </p>
+
+    <div class="callout marquee">
+      <h3>CREDIT REPORTING.</h3>
+      <p><strong>We may report information about your account to credit bureaus. Late payments, missed payments, or other defaults on your account may be reflected in your credit report.</strong></p>
+    </div>
+
+    <h3>GOVERNING LAW, ASSIGNMENT and EXECUTION.</h3>
+    <p> The laws of the State of Utah will govern this Agreement. However, any dispute arising out of this Agreement will be subject to the <a href="#arbitration_provision">ARBITRATION PROVISION</a>,
+        which is governed by the Federal Arbitration Act ("FAA"). We may assign or transfer this Agreement or any of our rights hereunder. If we approve this Agreement, then you agree that this
+        Agreement will be binding and enforceable as to both parties.
+    </p>
+
+    <h3 id="arbitration_provision">ARBITRATION PROVISION</h3>
+    <p> Arbitration is a process in which persons with a dispute(s): (a) agree to submit their dispute(s) to a neutral third person (an "arbitrator") for a decision; and (b) waive their rights to file a
+        lawsuit in court to resolve their dispute(s). Each party to the dispute(s) has an opportunity to present some evidence to the arbitrator. Pre-arbitration discovery may be limited. Arbitration
+        proceedings are private and less formal than court trials. The arbitrator will issue a final and binding decision resolving the dispute(s), which may be enforced as a court judgment. A court
+        rarely overturns an arbitrator's decision. THEREFORE, YOU ACKNOWLEDGE AND AGREE AS FOLLOWS:
+    </p>
+
+
+    <h4>Scope.</h4>
+    <p> For purposes of this Arbitration Provision the words "dispute" and "disputes" are given the broadest possible meaning and include, without limitation (a) all claims, disputes, or controversies
+        arising from or relating directly or indirectly to the signing of this Arbitration Provision, the validity and scope of this Arbitration Provision and any claim or attempt to set aside this
+        Arbitration Provision; (b) all federal or state law claims, disputes or controversies, arising from or relating directly or indirectly to this Agreement (including the Arbitration Provision),
+        the information you gave us before entering into this Agreement, including your application, and/or any past agreement or agreements between you and us; (c) all counterclaims, cross-claims and
+        third-party claims; (d) all common law claims, based upon contract, tort, fraud, or other intentional torts; (e) all claims based upon a violation of any state or federal constitution, statute
+        or regulation; (f) all claims asserted by us against you, including claims for money damages to collect any sum we claim you owe us; (g) all claims asserted by you individually against us and/or
+        any of our employees, agents, directors, officers, shareholders, governors, managers, members, parent company or affiliated entities (hereinafter collectively referred to as "related third parties"),
+        including claims for money damages and/or equitable or injunctive relief; (h) all claims asserted on your behalf by another person; (i) all claims asserted by you as a private attorney general,
+        as a representative and member of a class of persons, or in any other representative capacity, against us and/or related third parties (hereinafter referred to as "Representative Claims");
+        and/or (j) all data breach or privacy claims arising from or relating directly or indirectly to the disclosure by us or related third parties of any non-public personal information about you.
+    </p>
+
+    <h4>Court and Class Action Waivers.</h4>
+    <p><strong>You acknowledge and agree that by entering into this Arbitration Provision:</strong></p>
+    <ol id="court-and-class-action-waivers">
+      <li>YOU ARE WAIVING YOUR RIGHT TO HAVE A COURT, OTHER THAN A COURT OF LIMITED JURISDICTION (e.g., small claims court), RESOLVE ANY DISPUTE ALLEGED AGAINST US OR RELATED THIRD PARTIES; and </li>
+      <li>YOU ARE WAIVING YOUR RIGHT TO SERVE AS A REPRESENTATIVE, AS A PRIVATE ATTORNEY GENERAL, OR IN ANY OTHER REPRESENTATIVE CAPACITY, AND/OR TO PARTICIPATE AS A MEMBER OF A CLASS OF CLAIMANTS,
+          IN ANY LAWSUIT FILED AGAINST US AND/OR RELATED THIRD PARTIES.</li>
+    </ol>
+
+    <h4>No Class Arbitration.</h4>
+    <p><strong>Except as provided in the Small Claim Disputes paragraph below, all disputes, including any Representative Claims against us and/or related third parties shall be resolved by binding arbitration
+        only on an individual basis with you. THEREFORE, THE ARBITRATOR SHALL NOT CONDUCT CLASS ARBITRATION. THE ARBITRATOR SHALL ALSO NOT ALLOW YOU TO SERVE AS A REPRESENTATIVE, AS A PRIVATE ATTORNEY GENERAL,
+        OR IN ANY OTHER REPRESENTATIVE CAPACITY FOR OTHERS IN THE ARBITRATION.</strong>
+    </p>
+
+    <h4>Process.</h4>
+    <p> Any party to a dispute, including related third parties, may send the other party written notice by certified mail return receipt requested of their intent to arbitrate and setting forth the subject
+        of the dispute along with the relief requested, even if a lawsuit has been filed. Regardless of who demands arbitration, you shall have the right to select either of the following arbitration
+        organizations to administer the arbitration: the American Arbitration Association (1-800-778-7879) <a href="http://www.adr.org" target="_blank">http://www.adr.org</a> or JAMS (1-800-352-5267)
+        <a href="http://www.jamsadr.com" target="_blank">http://www.jamsadr.com</a>. However, the parties may agree
+        to select a local arbitrator who is an attorney, retired judge, or arbitrator registered and in good standing with an arbitration association and arbitrate pursuant to the arbitrator's rules.
+        If you demand arbitration, you must inform us in your demand of the arbitration organization you have selected or whether you desire to select a local arbitrator. If related third parties or we
+        demand arbitration, you must notify us within 20 days in writing by certified mail return receipt requested of your decision to select an arbitration organization or your desire to select a local
+        arbitrator. If you fail to notify us, then we have the right to select an arbitration organization. The parties to the dispute will be governed by the rules and procedures of the arbitration organization
+        applicable to consumer disputes, to the extent those rules and procedures do not contradict the express terms of this Agreement, including the Arbitration Provision. You may get a copy of the rules and
+        procedures by contacting the arbitration organization listed above.
+    </p>
+
+    <h4>Fees/Awards/Appeals.</h4>
+    <p> Regardless of who demands arbitration, we will advance your portion of the expenses associated with the arbitration, including the filing, administrative, hearing and arbitrator's fees ("Arbitration Fees").
+        Throughout the arbitration, each party shall bear his or her own attorneys' fees and expenses, such as witness and expert witness fees. The arbitrator shall apply applicable substantive law consistent with
+        the FAA, and applicable statutes of limitation, and shall honor claims of privilege recognized at law. The arbitration hearing will be conducted in the county of your residence, in the county where this
+        Agreement was signed, or in such other place as ordered by the arbitrator or required by law. The arbitrator may decide, with or without a hearing, any motion that is substantially similar to a motion to
+        dismiss for failure to state a claim or a motion for summary judgment. In conducting the arbitration proceeding, the arbitrator shall not apply any federal or state rules of civil procedure or evidence.
+        If allowed by statute or applicable law, the arbitrator may award statutory damages and/or reasonable attorneys' fees and expenses. If the arbitrator renders a decision in your favor awarding monetary
+        damages and the award is less than the maximum amount allowed to be awarded in the state's court of limited jurisdiction, then your award will be automatically increased to $100 more than that maximum amount.
+        Regardless of whether the arbitrator renders a decision or an award in your favor resolving the dispute, you will not be responsible for reimbursing us for your portion of the Arbitration Fees. At the timely
+        request of any party, the arbitrator shall provide a written explanation for the award. The arbitrator's award may be filed with any court having jurisdiction. Either party may appeal the arbitrator's
+        decision within 30 days to a single arbitrator or a three-arbitrator panel from the same arbitration organization originally chosen, which shall review the award de novo (without regard to the original
+        decision). If you decide to appeal the decision to a single arbitrator, then we will pay your portion of the Arbitration Fees associated with the appeal. If you decide to appeal the decision to a
+        three-arbitrator panel, then you will be responsible for paying the difference in Arbitration Fees between a single arbitrator and a three- arbitrator panel.
+    </p>
+
+    <h4>Small Claim Disputes.</h4>
+    <p> All parties, including related third parties, shall retain the right to seek adjudication in the state's court of limited jurisdiction for disputes within the scope of that court's jurisdiction.
+        Any dispute, which cannot be adjudicated in that court, shall be resolved by binding arbitration. Any appeal of a judgment from that court shall be resolved by binding arbitration.
+    </p>
+
+    <h4>Interstate Commerce.</h4>
+    <p> This Arbitration Provision is made pursuant to a transaction involving interstate commerce and shall be governed by the FAA. If a final non-appealable judgment of a court having jurisdiction over this transaction
+        finds, for any reason, that the FAA does not apply to this transaction, then our agreement to arbitrate shall be governed by the arbitration law of the State of Utah.
+    </p>
+
+    <h4>Binding Effect.</h4>
+    <p> This Arbitration Provision is binding upon and benefits you, your respective heirs, successors and assigns. The Arbitration Provision is binding upon and benefits us, our successors and assigns, and
+        related third parties. The Arbitration Provision continues in full force and effect, even if your obligations have been prepaid, paid or discharged through bankruptcy. The Arbitration Provision survives
+        any termination, amendment, expiration or performance of any transaction between you and us and continues in full force and effect unless you and we otherwise agree in writing.
+    </p>
+
+    <h4>Severability.</h4>
+    <p> If any portion of this Arbitration Provision is deemed invalid or unenforceable, it will not invalidate the remaining portions of the Arbitration Provision, unless the provision precluding the arbitrator
+        from conducting a class arbitration as set forth in the No Class Arbitration paragraph is deemed invalid or unenforceable, in which case this entire Arbitration Provision shall be deemed void.
+    </p>
+
+    <div class="callout marquee">
+      <h3>OPT-OUT PROCESS.</h3>
+      <p> You may choose to opt out of this Arbitration Provision but only by following the process set forth below. If you do not wish to be subject to this Arbitration Provision, then you must notify
+          us in writing postmarked within sixty (60) calendar days of the date of this Agreement at the following address: <%= nc_financial_solutions_address %>.
+          Your written notice must include your name, address, social security number, the date of this Agreement, a statement that you wish to opt out of
+          the Arbitration Provision and must not be sent with any other correspondence. Indicating your desire to opt-out of this Arbitration Provision in any manner other than as provided above is
+          insufficient notice. Your decision to opt out of this Arbitration Provision will not affect your other rights or responsibilities under this Agreement, and applies only to this Arbitration
+          Provision and no prior or subsequent Arbitration Provision to which you and we have agreed.
+      </p>
+    </div>
+  </div>
+  <%# WAIVER_OF_JURY_BLOCK %>
+
+
+  <%# PRIVACY_POLICY_BLOCK %>
+  <div class="section privacy-policy" id="privacy_policy">
+    <h2>PRIVACY POLICY</h2>
+    <p><strong>
+      This policy replaces any privacy policy previously delivered to you or appearing on our website, any transaction agreement, application, loan document or any other document previously delivered to you.
+      If there are conflicts between this Policy and any other policy we have delivered to you, the terms of this Policy shall control until revised.
+    </strong></p>
+
+    <p> NC Financial Solutions, LLC ("NC Financial Solutions") is serious about protecting your privacy. This notice is provided to you on behalf of NC Financial Solutions and its parent company,
+        Cash America International, Inc., and all of their respective subsidiaries and affiliates, (hereafter collectively referred to as the "NC Financial Solutions Related Companies," "we," "our," or "us").
+        The NC Financial Solutions Related Companies include, but are not limited to: NC Financial Solutions, CashNetUSA, Cash America International, Inc., and all of their respective subsidiaries and affiliates,
+        including those that operate under the trade names NetCredit, CashNetUSA, Cash America Net, Cash America, Cash America Pawn, Cashland, SuperPawn, Cash America Payday Advance, Primary Pay Card
+        (or variations thereof), or company-owned Mr. Payroll locations. "You" or "Your" means you as a participant in or as a user of the products and/or services offered by a CashNetUSA Related Company.
+    </p>
+
+    <p> All information transmitted, printed or otherwise submitted to us shall be deemed to be our property and we shall be free to use such information for any lawful purpose described herein,
+        and for other purposes as required or permitted by law.
+    </p>
+
+    <h3>Please read this notice carefully.</h3>
+    <p> This notice provides important information about the way we collect, share, and protect your information. This privacy policy applies to anyone who applies for or uses our products or services,
+        or visits our websites, including, but not limited to, current and former customers. We must notify you about our sharing practices when you establish a customer relationship and each year while
+        you are a customer. A customer relationship begins when you obtain a financial product or service from us. A customer relationship terminates when you pay off a transaction in full.
+    </p>
+
+    <h3>Information We Collect</h3>
+    <p> We collect personally identifiable information, including, but not limited to, non-public personal information, as well as other types of personally identifiable information from you and from other
+        sources as described herein (collectively, "Your Information"). Our primary goal in collecting Your Information is to provide you with efficient, accurate, and customized financial products and services.
+        Your Information also helps us personalize and improve your customer experience with us. We collect and/or track the following types of information:
+    </p>
+
+    <ul>
+      <li>Information we receive from you on applications or other forms, such as transaction documents, sales documents, online forms, e-mails, registration forms, surveys, or other documents or submissions
+            related to the products and services we provide, including your name, address, telephone number, social security number, driver's license number, email address, employment information, demographic
+            information, bank account information, and information about your assets, debts and income;</li>
+      <li>Information about your transactions with us, our affiliates, or others, such as your account history, transaction balances, payment history, overdraft history, parties to transactions,
+            and your reasons for doing business with us;</li>
+      <li>Information we receive from third parties, such as consumer reporting agencies and other lenders, regarding your credit worthiness and credit history, and to verify your identity;</li>
+      <li>Information we obtain to verify representations made by you, such as your employment history or income;</li>
+      <li>Information obtained from specialized marketing information firms, such as household demographics;</li>
+      <li>Information obtained from Web page http headers (home server domain names, IP address, type of client computer, and type of Web browser);</li>
+      <li>Information, user specific or aggregate, we receive from our web pages recording visitor's access;</li>
+      <li>Information you provide when you contact our customer service department; and</li>
+      <li>Information you provide to us when you communicate with us via email.</li>
+    </ul>
+
+
+    <h3>How We Use Your Information</h3>
+    <p>We use Your Information to:</p>
+    <ul>
+      <li>Provide you with products and services you request;</li>
+      <li>Offer you additional products or services, from us or from others, that may be of interest to you;</li>
+      <li>Comply with all reporting and other legal requirements;</li>
+      <li>Enhance your experience at our websites;</li>
+      <li>Process payments and update account records;</li>
+      <li>Analyze customer demographics, payment histories, and preferences;</li>
+      <li>Conduct statistical analyses; and</li>
+      <li>Provide our advertisers with editorial or feedback information.</li>
+    </ul>
+
+    <h3>Sharing Your Information</h3>
+    <p><em>(Customers that reside in California, North Dakota or Vermont should refer to the state-specific notices provided at the end of this policy)</em></p>
+
+    <p> The NC Financial Solutions Related Company delivering this Privacy Policy to you (the "NC Financial Solutions Provider") may share or sell Your Information with any other NC Financial Solutions Related
+        Company (collectively, its "Affiliated Companies") and with other companies with whom any NC Financial Solutions Related Company does business ("Non-Affiliated Third Parties") as permitted by law and
+        described in this Privacy Policy. These Affiliated Companies and Non-Affiliated Third Parties may be (1) <span style="text-decoration: underline;">financial service providers</span>, such as mortgage bankers, mortgage brokers, consumer lenders, small
+        loan lenders, tax refund anticipation loan lenders, loan brokers, deferred deposit providers, check cashers, supervised lenders, delayed deposit providers, deferred presentment providers, collection agencies,
+        consumer reporting agencies, banks, credit card providers, debit card providers, store valued card providers, insurance agencies, bill payment agencies, ATM providers, pawn and title pawn providers,
+        automobile dealers, automobile financing providers, automobile leasing providers, money transfer and remittance providers, sellers and remitters of money orders, insurance services providers, and financial
+        service provider holding companies, or agents, contractors, or representatives of any of the foregoing; (2) <span style="text-decoration: underline;">non-financial companies</span>, such as retailers, tax preparers, payroll service providers, advertisers,
+        marketing companies, lead generators, advertisers on our websites, companies or individuals that do industry-related research, surveys or polls, automobile dealers, and any person who offers a non-financial
+        product or service, and holding companies, or agents, contractors, or representatives of any of the foregoing; and (3) <span style="text-decoration: underline;">other businesses</span>, such as non-profit organizations, trade associations, and industry
+        analysts or agents, contractors, or representatives of any of the foregoing.
+    </p>
+
+    <p> Affiliated Companies and Non-Affiliated Third Parties may use Your Information for any legal purpose, including, but not limited to, developing and promoting new or joint products, improving existing products
+        and services, and contacting you to offer products and services that may be of interest to you. We may also disclose Your Information, as described above, to companies who perform services on our behalf or to
+        other financial institutions with which we have joint marketing agreements.
+    </p>
+
+    <p> The NC Financial Solutions Provider may also disclose Your Information to Affiliated Companies and Non-Affiliated Third Parties that provide services to us ("Service Providers"). We contract with service
+        providers to perform certain functions on our behalf. Examples include database providers who assist in identity verification, credit scoring companies, magazine publishers, retailers, and direct marketers.
+        Service Providers' access is limited only to the personal data needed to perform their functions, and only for the purpose of performing those functions, and they are prohibited from using or disclosing
+        Your Information for other purposes.
+    </p>
+
+    <p> We also may release Your Information if it becomes necessary for compliance with the law or to protect the rights, property, or safety of our websites, our users, or third parties. We reserve the right to
+        release such personal data to law enforcement or other governmental officials as we, in our sole and absolute discretion, deem necessary to comply with the law. In addition, we reserve the right to use and
+        disclose Your Information that is not in individually identifiable form as we deem appropriate in our sole discretion.
+    </p>
+
+    <h3>Notice of Furnishing Negative Information</h3>
+    <div class="callout marquee">
+      <p><strong><u>WE MAY REPORT INFORMATION ABOUT YOUR ACCOUNT TO CREDIT BUREAUS. LATE PAYMENTS, MISSED PAYMENTS, OR OTHER DEFAULTS ON YOUR ACCOUNT MAY BE REFLECTED IN YOUR CREDIT REPORT.</u></strong></p>
+    </div>
+
+    <h3>Automatic Information and Cookies</h3>
+    <p> We may receive and store certain types of information whenever you interact with our websites. For example, like many websites, we use "cookies" to obtain certain types of information when your web browser
+        accesses our websites and when you login, such as: your name and your email address. Cookies are pieces of information that are transferred to your computer's hard drive via your web browser. They allow us
+        to provide you with a more convenient and personalized shopping experience by recording information about your preferences.
+    </p>
+
+    <p> A web browser is usually set to accept cookies automatically but can be changed to decline them. The Help section of the toolbar on most web browsers will tell you how to prevent your browser from accepting
+        new cookies, how to have the web browser notify you when you receive a new cookie or how to disable cookies altogether. In most cases, a visitor may refuse a cookie and still fully navigate our websites.
+    </p>
+
+    <h3>Your Right to Limit the Sharing of Your Information</h3>
+    <p> In some circumstances, you have the right to direct the NC Financial Solutions Provider to not share Your Information with its Affiliated Companies and/or Non-Affiliated Third Parties (i.e. "Opt-Out").
+        Please note that even if you Opt-Out, the NC Financial Solutions Provider may still share Your Information with its Affiliated Companies and Non-Affiliated Third Parties as permitted or required by law.
+        Also, the NC Financial Solutions Provider may share information it collects regarding its transactions and experiences with you with its Affiliated Companies. The NC Financial Solutions Provider may also
+        share all information it collects about you with Affiliated Companies and Non-Affiliated Third Parties: to facilitate providing our services to you, to administer our business, in order to receive services
+        from those companies, as permitted under joint marketing agreements, and as otherwise permitted or required by law.
+    </p>
+
+    <p> The NC Financial Solutions Provider is delivering this notice to you on behalf of itself and all other NC Financial Solutions Related Companies. You may limit how the NC Financial Solutions Provider's
+        Affiliated Companies use Your Information the NC Financial Solutions Provider shares with them. Federal law gives you the right to limit some but not all marketing from the NC Financial Solutions Provider's
+        Affiliated Companies. You may limit a NC Financial Solutions Provider's Affiliated Companies from marketing their products or services to you based on Your Information that they receive from the NC Financial
+        Solutions Provider. This information includes your income, your account and payment history, and your credit history, report or score.
+    </p>
+
+    <h3>Opt-Out Information and Notice</h3>
+    <p>To limit the CashNetUSA Provider's sharing of Your Information with Affiliated Companies and Non-Affiliated Third Parties, as described above, contact us:</p>
+
+    <ul>
+      <li>On the web: <a href="<%= opt_out_link %>" target="_blank"><%= opt_out_link %></a></li>
+      <li>By email: <a href="mailto:<%= opt_out_email %>"><%= opt_out_email %></a>.</li>
+    </ul>
+
+    <p> Unless we hear from you, we can begin sharing Your Information thirty (30) days from the date we first deliver this Notice to you. However, you may Opt-Out at any time by contacting us. Once we receive
+        your Opt-Out request, we will stop sharing this information as soon as reasonably practicable. Your Opt-Out request will remain in effect until you notify us otherwise in writing.
+    </p>
+
+    <h3>How We Protect Your Information</h3>
+    <p> We restrict access to Your Information to those employees who need to know that information to provide products or services to you. We maintain physical, electronic, and procedural safeguards that comply with
+        federal regulations to guard Your Information.
+    </p>
+
+    <h3>Our Right to Contact You</h3>
+    <p> We reserve the right to contact you regarding your account status and changes to subscriber agreements, our privacy policy, or any other policies or agreements relevant to you. By visiting our websites,
+        you understand and agree that we may contact you at the phone number or email address you provide to us through our websites or on your transaction agreements, applications, loan documents or any other
+        document to assist you with your product or to discuss other products and services that a NC Financial Solutions Related Company may provide for you.
+    </p>
+
+    <h3>We Do Not Collect Data from Children</h3>
+    <p> The information and services provided by us or by our affiliates, sponsors, and advertisers, are not intended to be viewed by children (under 18 years old). No information collected from children is
+        knowingly collected or used for any purpose whatsoever, including marketing and promotional purposes, either inside or outside the NC Financial Solutions Related Companies.
+    </p>
+
+    <h3>Our Right to Change This Policy</h3>
+    <p>We reserve the right to change this policy at any time by either providing you a revised copy of the policy, or notifying you of the existence and location of the new or revised privacy policy.</p>
+
+    <h3>Notice to California Residents</h3>
+    <p> Pursuant to state law, the NC Financial Solutions Provider may not share information it collects about you with its Affiliated Companies or with Non-Affiliated Third Parties, except in the limited
+        circumstances permitted under state law, or if you give us your permission.
+    </p>
+    <p>
+      <strong>
+        California Civil Code Section 1798.83, also known as S.B. 27, allows California residents to request certain information regarding our disclosures in the prior calendar year, if any, of personally
+        identifiable information to third parties for their own direct marketing purposes. To make such a request, please contact us at <a href="<%= contact_us_link %>" target="_blank"><%= contact_us_link %></a>
+        or write to us at <%= customer_service_address %>.
+      </strong>
+    </p>
+
+    <h3>Notice to North Dakota Residents</h3>
+    <p>Pursuant to state law, we will only share information with our service providers and with third parties as required or permitted by law, or if you give us your permission.</p>
+
+    <h3>Notice to Vermont Residents</h3>
+    <p>The NC Financial Solutions Provider will not disclose information about you with its Affiliated Companies or with Non-Affiliated Third Parties,
+        other than as required or permitted by law, without your express permission.
+    </p>
+    <%# PRIVACY_POLICY_BLOCK %>
+  </div>
+</div><!-- /loan-agreement -->
+
+
+
+<div class="article electronic-consent" id="contract-signature">
+  <h2>ELECTRONIC SIGNATURES AND CONSENTS</h2>
+  <p>By clicking the "I AGREE" button below and providing any additional information as may be requested below, you understand and acknowledge that you are taking the following two (2) separate actions:</p>
+
+  <div class="section ach-authorization <%= form_namespace %>-form">
+    <h3>1. <%= ach_or_rcc %> AUTHORIZATIONS</h3>
+    <div class="sig-form-copy">
+      <p> By electronically signing this Authorization by typing in the last four digits of your social security number below, you certify that you have fully read and understood the sections of this
+          Agreement captioned "<a href="#ach_authorization_for_your_loan_proceeds">ACH AUTHORIZATION FOR YOUR LOAN PROCEEDS</a>" and
+          "<a href="#authorization_agreement"><%= authorization_agreement_link_name %></a>", you agree to comply with, and be bound by, their terms
+          and you agree and understand that you are authorizing us to credit your Bank Account with the proceeds of your loan and to debit Your Bank Account for the amounts owed under this Agreement.
+      </p>
+    </div>
+
+    <div class="sig-form-data">
+      <div class="form-fieldset">
+      <div class="form-field text-field">
+        <%= signed_contract? ? '<div class="field-label">' : "<label for=\"#{form_namespace}_ssn_last4\">" %>
+          Enter the last 4 digits of your Social Security Number
+        <%= signed_contract? ? '</div>' : '</label>' %>
+        <% if signed_contract? %>
+          <div class="field-element input-text ssn last4"><%= last_4_of_ssn %></div>
+        <% else %>
+          <input type="text" class="input-text ssn last4" id="<%= form_namespace %>_ssn_last4" name="<%= form_namespace %>[ssn_last4]" size="4" maxlength="4" autocorrect='off' />
+        <% end %>
+      </div>
+      <div class="fieldset-copy">
+        <p>Please note that we separately authenticate the above electronic signature when you click the "I Agree" button below</p>
+      </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="section agreement-terms <%= form_namespace %>-form">
+    <h3>2. AGREEMENT TO TERMS AND CONDITIONS OF AGREEMENT</h3>
+    <div class="sig-form-copy">
+      <p> By electronically signing this Agreement by typing in your name and social security number below and then clicking the "I Agree" button below, (a) you acknowledge that the Agreement was filled in before you
+          did so and that you have reviewed the entire Agreement including the <a href="#truth_in_lending">FEDERAL TRUTH-IN-LENDING DISCLOSURES</a> and our <a href="#privacy_policy">PRIVACY POLICY</a>, (b) you acknowledge
+          that your right to file suit against us for any claim or dispute regarding this Agreement is limited by the <a href="#waiver_of_jury_trial">WAIVER OF JURY TRIAL</a>
+          and <a href="#arbitration_provision">ARBITRATION</a> provisions, (c) you represent that you are not a debtor under any
+          proceeding in bankruptcy and have no intention to file a petition for relief under any chapter of the United States Bankruptcy Code,
+          <% if ach_payment? %>
+            and (d) you acknowledge that you have read and understood all of the terms of
+            this Agreement including the provisions mentioned above and you agree to comply with, and be bound by, all of those terms.
+          <% else %>
+            (d) you acknowledge and understand that this Agreement is made in accordance with and subject to the Utah Consumer Credit Code, U.C.A. 70C-1-101, et seq. All matters arising under or relating to this Agreement
+            shall be governed by and construed in accordance with the laws of the State of Utah, without regarding to its conflict of law principles, except for the <a href="#arbitration_provision">ARBITRATION PROVISION</a>
+            which is governed by federal law as set forth above, and (e) you acknowledge that you have read and understood all of the terms of this Agreement including the provisions mentioned above and you agree to comply with,
+            and be bound by, all of those terms.
+          <% end %>
+      </p>
+      <p> Please note that when you click the 'I Agree' button below, we authenticate your electronic signature and we also separately authenticate your electronic signature for the <%= ach_or_rcc %>
+          Authorizations that you separately and voluntarily entered above.
+      </p>
+      <p>YOU SHOULD <span style="text-decoration: underline;">PRINT</span> AND <span style="text-decoration: underline;">RETAIN</span> A COPY OF THIS AGREEMENT FOR YOUR RECORDS. AN ELECTRONIC COPY WILL BE MAINTAINED ON THIS WEBSITE IN YOUR PASSWORD PROTECTED CUSTOMER HISTORY.</p>
+      <p><strong>
+        Any comments or questions may be directed to Customer Comment Line at the following toll-free number: <%= our_phone_number %> or via e-mail to
+        <a href="mailto:<%= our_support_email_address %>"><%= our_support_email_address %></a>.
+      </strong></p>
+    </div>
+
+    <% unless signed_contract? %>
+      <div class="sig-form-data">
+        <div class="form-fieldset">
+        <div class="form-field text-field">
+          <label for="<%= form_namespace %>_first_name"> First Name </label>
+          <input type="text" class="input-text first-name" id="<%= form_namespace %>_first_name" name="<%= form_namespace %>[first_name]" size="30" autocorrect='off' />
+        </div>
+
+        <div class="form-field text-field">
+          <label for="<%= form_namespace %>_last_name"> Last Name </label>
+          <input type="text" class="input-text last-name" id="<%= form_namespace %>_last_name" name="<%= form_namespace %>[last_name]" size="30" autocorrect='off' />
+        </div>
+
+        <div class="form-field text-field">
+          <label for="<%= form_namespace %>_ssn"> SSN </label>
+          <input type="text" class="input-text ssn" id="<%= form_namespace %>_ssn" name="<%= form_namespace %>[ssn]" size="30" autocorrect='off' />
+        </div>
+
+        <div class="form-field text-field">
+          <div class="field-label">Signature Date</div>
+          <div class="field-element input-text date-signed">
+            <%= borrower_signature_date %>
+          </div>
+        </div>
+      </div>
+      </div>
+    <% end %>
+  </div>
+</div><!-- /electronic-consent -->
+
+</div><!-- /cnu-contract -->
+

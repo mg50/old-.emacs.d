@@ -1,0 +1,50 @@
+(let [work-order (:work-order *view-context*)
+      new-work-order (nil? (:key work-order))
+      action (if new-work-order "/work-orders" (format "/work-orders/%s" (:key work-order)))
+      title (if new-work-order "New Work Order" "Edit Work Order")
+      device {}]
+  (list
+    [:h1 title]
+    (if (:active-key (:dashboard-data *view-context*))
+      (render-partial "util/dashboard" (:dashboard-data *view-context*)))
+    [:div.major-column
+      [:form {:action action :method "post"}
+       [:input {:type "hidden" :name "work-order[fire-pump-key]" :value (:fire-pump-key work-order)}]
+       [:table.form
+        [:tr
+         [:td [:label {:for "date-field"} "Date:"]]
+         [:td [:input {:type "text" :id "date-field" :name "work-order[date]" :size "55" :value (:date work-order)}]]]
+        [:tr
+         [:td [:label {:for "type-field"} "Type:"]]
+         [:td [:input {:type "text" :id "type-field" :name "work-order[type]" :size "55" :value (:type work-order)}]]]
+        [:tr
+         [:td [:label {:for "fire-department-attendee-field"} "Fire Department Attendee:"]]
+         [:td [:input {:type "text" :id "fire-department-attendee-field" :name "work-order[fire-department-attendee]" :size "55" :value (:fire-department-attendee work-order)}]]]
+        [:tr
+         [:td [:label {:for "building-rep-attendee-field"} "Building Representative Attendee:"]]
+         [:td [:input {:type "text" :id "building-rep-attendee-field" :name "work-order[building-rep-attendee]" :size "55" :value (:building-rep-attendee work-order)}]]]
+        [:tr
+         [:td [:label {:for "sprinkler-contractor-attendee-field"} "Sprinkler Contractor Attendee:"]]
+         [:td [:input {:type "text" :id "sprinkler-contractor-attendee-field" :name "work-order[sprinkler-contractor-attendee]" :size "55" :value (:sprinkler-contractor-attendee work-order)}]]]
+        [:tr
+         [:td [:label {:for "pump-manufacturer-attendee-field"} "Pump Manufacturer Attendee:"]]
+         [:td [:input {:type "text" :id "pump-manufacturer-attendee-field" :name "work-order[pump-manufacturer-attendee]" :size "55" :value (:pump-manufacturer-attendee work-order)}]]]
+        [:tr
+         [:td [:label {:for "notes-field"} "Notes:"]]
+         [:td [:input {:type "text" :id "notes-field" :name "work-order[notes]" :size "55" :value (:notes work-order)}]]]
+        [:tr
+         [:td]
+         [:td
+          [:input {:type "submit" :value "Save" :class "button"}]
+          [:a {:class "button"
+               :href (format "/work-orders/%s/print" (:key work-order))}
+               "Print"]
+          [:a {:class "button"
+               :href (format "/work-orders/%s/customer-report" (:key work-order))}
+               "Customer Report"]
+          [:a {:class "button"
+               :href (format "/work-orders/%s/delete" (:key work-order))
+               :onclick "return confirm('Are you sure you want to delete this work order?');"}
+               "Delete Work Order"]
+                   ]]]]]
+    ))

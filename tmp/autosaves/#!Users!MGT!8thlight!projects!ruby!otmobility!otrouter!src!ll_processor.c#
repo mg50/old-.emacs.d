@@ -1,0 +1,25 @@
+#include "astar.h"
+
+
+astar_result_list_node
+*astar_preserve_result_list(astar_result_list_node *first_node) {
+  return first_node;
+}
+
+astar_result_list_node
+*astar_reverse_result_list(astar_result_list_node *first_node) {
+  astar_result_list_node *current_node, *prev_node, *next_node;
+  current_node = first_node->next;
+  prev_node = first_node;
+  prev_node->next = NULL;
+
+  while(current_node) {
+    next_node = current_node->next;
+    current_node->next = prev_node;
+
+    prev_node = current_node;
+    current_node = next_node;
+  }
+
+  return prev_node;
+}

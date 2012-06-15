@@ -1,0 +1,31 @@
+<h1>Clients</h1>
+
+<div id="clients">
+  <ul id="list"></ul>
+  <a class="m_action_button button_add add" href="#">Add</a>
+</div>
+
+<div id="modal"></div>
+
+<%= render "client" %>
+<%= render "client_details" %>
+<%= render "client_edit" %>
+<%= render "projects/project" %>
+<%= render "projects/project_with_notes" %>
+<%= render "projects/project_details" %>
+<%= render "project_notes/project_note" %>
+<%= render "project_notes/project_notes" %>
+<%= render "shared/detail_edit" %>
+
+<script type="text/javascript">
+  var App = {};
+  App.clients = new Abacus.Views.ClientCollection({
+      el: '#clients',
+      collection: new Abacus.Collections.Clients(<%= all.to_json(:include => :projects).html_safe %>),
+      modelViewContainer: "#list"      
+  });
+
+  App.clients.render();
+
+  Abacus.Dialog.documentReady();
+</script>

@@ -1,0 +1,18 @@
+namespace("Abacus.Views", {
+  Client: Abacus.Views.SimpleMustacheView.extend({
+    tagName: 'li',
+    template: 'client',
+
+    presenterData: function() {
+      return this.model.attributes;
+    },
+
+    childViews: function() {
+      this.projectsView = new Abacus.Views.ProjectCollection({
+        el: this.$('.projects'),
+        collection: this.model.get('projects')
+      });
+      this.projectsView.render();
+    }
+  })
+});

@@ -1,0 +1,47 @@
+require 'project_note/project_note_dbadapter'
+require 'project_note/project_note_interactor'
+
+class ProjectNotesController < ApplicationController
+
+  before_filter :set_interactor
+  before_filter :admin_required
+
+  def index
+    project_id = params[:project_id].to_i
+
+    callback = lambda { |notes|
+      render :json => notes.to_json
+    }
+
+    @interactor.find_all_by_project_id(project_id, callback)
+  end
+
+  def create
+    attributes = params[:project_note]
+    attributes[:projects_id] = params[:project_id]
+
+    callback = lambda { |project_note|
+      render :json => project_note.to_json
+    }
+
+    @interactor.create(attributes, callback)
+  end
+
+  def update
+    id = params[:id].to_i
+    attributes = params[:project_note]
+    attributes[:projects_id] = params[:project_id]
+
+    callback = lambda { |project_note|
+      render :json => project_note.to_json
+    }
+
+    @interactor.update(id, attributes, callback)
+  end
+
+  private
+
+  def set_interactor
+    @interactor = Interactor::ProjectNote.new
+  end
+end

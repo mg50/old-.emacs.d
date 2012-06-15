@@ -1,0 +1,820 @@
+((("color-theme-blackbored" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0])
+  ("/key" .
+   [1 0 0 0])
+  ("cached-contributors" .
+   [0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0])
+  ("read-json" .
+   [1 0 0 0 0 0 0 0 0])
+  ("if" .
+   [3 0])
+  ("try" .
+   [1 0 0])
+  ("include-css" .
+   [1 0 0 0 0 0 0 0 0 0 0])
+  ("org.clojure/data.json" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("get" .
+   [1 0 0])
+  ("Query" .
+   [1 0 0 0 0])
+  ("response" .
+   [1 0 0 0 0 0 0 0])
+  ("address" .
+   [1 0 0 0 0 0 0])
+  ("iteration_number" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0])
+  ("key" .
+   [3 0 0])
+  ("get_stories_by_iteration" .
+   [0 0 0 0 0 0 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0])
+  (":div" .
+   [1 0 0 0])
+  ("Clojure" .
+   [1 0 0 0 0 0 0])
+  (":href" .
+   [6 0 0 0 0])
+  ("get-contributors" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("parsed" .
+   [4 0 0 0 0 0])
+  ("contributors" .
+   [2 0 0 0 0 0 0 0 0 0 0 0])
+  ("json" .
+   [6 0 0 0])
+  ("hello" .
+   [1 0 0 0 0])
+  ("new" .
+   [1 0 0])
+  ("ProjectCreate" .
+   [4 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("Views" .
+   [4 0 0 0 0])
+  ("spy" .
+   [2 0 0])
+  ("renderProjectCreateViewSpy" .
+   [0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("projectCreateDialogSpy" .
+   [0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("prototype" .
+   [2 0 0 0 0 0 0 0 0])
+  ("Project" .
+   [2 0 0 0 0 0 0])
+  ("Models" .
+   [2 0 0 0 0 0])
+  ("var" .
+   [2 0 0])
+  ("Abacus" .
+   [5 0 0 0 0 0])
+  ("toHaveBeenCalled" .
+   [1 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0])
+  ("projectCreateStub" .
+   [2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("expect" .
+   [3 0 0 0 0 0])
+  ("trigger" .
+   [1 0 0 0 0 0 0])
+  ("create" .
+   [2 0 0 0 0 0])
+  ("render" .
+   [4 0 0 0 0 0])
+  ("showProjectCreateDialog" .
+   [0 0 0 0 0 0 0 0 0 0 0 2 0 0 0 0 0 0 0 0 0 0 0])
+  ("view" .
+   [4 0 0 0])
+  ("stub" .
+   [1 0 0 0])
+  ("sinon" .
+   [6 0 0 0 0])
+  ("function" .
+   [5 0 0 0 0 0 0 0])
+  ("click" .
+   [3 0 0 0 0])
+  ("project" .
+   [2 0 0 0 0 0 0])
+  ("parseInt" .
+   [1 0 0 0 0 0 0 0])
+  ("param1" .
+   [1 0 0 0 0 0])
+  ("headers" .
+   [1 0 0 0 0 0 0])
+  ("run-repl" .
+   [1 0 0 0 0 0 0 0])
+  ("load-string" .
+   [0 0 0 0 0 0 1 0 0 0 0])
+  (":POST" .
+   [1 0 0 0 0])
+  (":GET" .
+   [2 0 0 0])
+  (":method" .
+   [2 0 0 0 0 0 0])
+  ("cob-server-router" .
+   [1 0 0 0 0 0 0 1 0 0 0 1 0 0 0 0 0])
+  ("shutdown-agents" .
+   [0 0 0 0 1 0 0 0 0 0 0 0 0 0 0])
+  ("out" .
+   [1 0 0])
+  ("sock" .
+   [13 0 0 0])
+  ("config" .
+   [4 0 0 0 0 0])
+  ("server-agent" .
+   [3 0 0 0 0 0 0 0 0 0 0 0])
+  ("options" .
+   [4 0 0 0 0 0 0])
+  (":body-params" .
+   [1 0 0 0 0 0 0 0 0 0 0 0])
+  ("parse-headers" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0])
+  (":headers" .
+   [1 0 0 0 0 0 0 0])
+  ("rdr" .
+   [5 0 0])
+  (".readLine" .
+   [3 0 0 0 0 0 0 0 0])
+  ("parse-request" .
+   [0 0 0 0 0 0 0 0 1 0 0 0 0])
+  ("test-get-file-2" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("file2" .
+   [1 0 0 0 0])
+  ("get-file" .
+   [1 0 0 0 0 0 0 0])
+  ("test-get-file-1" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("File." .
+   [3 0 0 0 0])
+  ("file" .
+   [11 0 0 0])
+  ("java.io.File" .
+   [1 0 0 0 0 0 0 0 0 0 0 0])
+  ("webroot-source" .
+   [3 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("webroot" .
+   [6 0 0 0 0 0 0])
+  ("isDirectory" .
+   [1 0 0 0 0 0 0 0 0 0 0])
+  ("cob-spec.core" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("ring+" .
+   [1 0 0 0 0])
+  ("progn" .
+   [1 0 0 0 0])
+  ("eval-after-load" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("add-lib-path" .
+   [1 0 0 0 0 0 0 0 0 0 0 0])
+  ("load-dotfile" .
+   [1 0 0 0 0 0 0 0 0 0 0 0])
+  ("3000" .
+   [1 0 0 0])
+  ("clojure.java.io" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  (":use" .
+   [3 0 0 0])
+  ("java.io.FileInputStream" .
+   [0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0])
+  (":import" .
+   [1 0 0 0 0 0 0])
+  ("logfile-name" .
+   [0 0 0 0 0 0 0 0 1 0 0 0])
+  ("FileInputStream." .
+   [0 0 0 0 1 1 0 0 0 0 0 0 0 0 0 0])
+  ("append-writer" .
+   [2 0 0 0 0 0 0 0 0 1 0 0 0])
+  ("send-request-to-logger-agent" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  (":only" .
+   [5 0 0 0 0])
+  ("server.logger" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0])
+  (".write" .
+   [3 0 0 0 0 0])
+  ("log-request" .
+   [3 0 0 0 0 0 0 0 0 0 0])
+  ("log-agent" .
+   [1 0 0 0 0 0 0 0 0])
+  ("log" .
+   [1 0 0])
+  ("req" .
+   [6 0 0])
+  ("logfile" .
+   [2 0 0 0 0 0 0])
+  ("writer" .
+   [2 0 0 0 0 0])
+  ("wrtr" .
+   [7 0 0 0])
+  ("echo-router" .
+   [1 0 0 0 0 0 0 0 0 0 0])
+  ("normalize" .
+   [1 0 0 0 0 0 0 0 0])
+  ("MockSocket." .
+   [1 0 0 0 0 0 0 0 0 0 0])
+  ("test-request-response-cycle-1" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0])
+  ("config-property" .
+   [1 0 0 0 0 0 0 1 1 0 0 0 0 0 0])
+  ("alias" .
+   [4 0 0 0 0])
+  ("emacs" .
+   [1 0 0 0 0])
+  ("export" .
+   [1 0 0 0 0 0])
+  ("resp2" .
+   [1 0 0 0 0])
+  ("resp1" .
+   [1 0 0 0 0])
+  ("req1" .
+   [1 0 0 0])
+  ("Content" .
+   [1 0 0 0 0 0 0])
+  ("Found" .
+   [1 0 0 0 0])
+  ("deftest" .
+   [16 0 0 0 0 0 0])
+  ("pattern" .
+   [2 0 0 0 0 0 0])
+  ("matches" .
+   [4 0 0 0 0 0 0])
+  ("resp" .
+   [3 0 0 0])
+  ("cd" .
+   [1 0])
+  ("awef" .
+   [1 0 0 0])
+  ("crlf" .
+   [18 0 0 0])
+  ("DataOutputStream" .
+   [0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0])
+  ("stream" .
+   [4 0 0 0 0 0])
+  ("OutputStreamWriter" .
+   [0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  (".getOutputStream" .
+   [0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0])
+  ("socket" .
+   [2 0 0 0 0 0])
+  ("->" .
+   [2 0])
+  ("body" .
+   [5 0 0 0])
+  ("responder" .
+   [1 0 0 0 0 0 0 0 0])
+  ("output-writer" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("response/send" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("path" .
+   [1 0 0 0])
+  (":input-reader" .
+   [0 0 0 0 1 0 0 0 0 0 0 0 0])
+  ("outputWriter" .
+   [0 0 0 0 0 0 1 0 0 0 0 0])
+  ("inputReader" .
+   [1 0 0 0 0 0 0 0 0 0 0])
+  ("parsed-request" .
+   [2 0 0 0 0 0 0 0 0 0 1 0 0 0])
+  ("conn" .
+   [4 0 0 0])
+  ("request" .
+   [15 0 0 0 0 0 0])
+  ("lines" .
+   [1 0 0 0 0])
+  ("game" .
+   [1 0 0 0])
+  ("timer-interval" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("JOptionPane" .
+   [0 0 1 0 0 0 0 0 0 0 0])
+  (".setVisible" .
+   [1 0 0 0 0 0 0 0 0 0 0])
+  (".repaint" .
+   [3 0 0 0 0 0 0 0])
+  ("exitbutton" .
+   [2 0 0 0 0 0 0 0 0 0])
+  ("scorelabel" .
+   [2 0 0 0 0 0 0 0 0 0])
+  ("nextpanel" .
+   [2 0 0 0 0 0 0 0 0])
+  ("sidepanel" .
+   [1 0 0 0 0 0 0 0 0])
+  (":border" .
+   [1 0 0 0 0 0 0])
+  ("deflayout" .
+   [2 0 0 0 0 0 0 0 0])
+  ("gamepanel" .
+   [4 0 0 0 0 0 0 0 0])
+  ("next-panel" .
+   [1 0 0 0 0 0 0 0 0 0])
+  ("game-panel" .
+   [1 0 0 0 0 0 0 0 0 0])
+  ("game-running" .
+   [3 0 0 0 0 0 0 0 0 0 0 0])
+  ("new-game" .
+   [1 0 0 0 0 0 0 0])
+  ("Dimension." .
+   [1 0 0 0 0 0 0 0 0 0])
+  ("Dimension" .
+   [1 0 0 0 0 0 0 0 0])
+  ("getPreferredSize" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("move-all-down" .
+   [0 0 0 0 0 0 0 0 1 0 0 0 0])
+  ("VK_SPACE" .
+   [1 0 0 0 0 0 0 0])
+  ("rotate-current" .
+   [0 0 0 0 0 0 0 0 1 0 0 0 0 0])
+  ("VK_UP" .
+   [1 0 0 0 0])
+  ("VK_DOWN" .
+   [1 0 0 0 0 0 0])
+  (":right" .
+   [1 0 0 0 0 0])
+  ("VK_RIGHT" .
+   [1 0 0 0 0 0 0 0])
+  (":left" .
+   [1 0 0 0 0])
+  ("move-to-side" .
+   [1 0 0 0 0 0 0 1 0 0 0 0])
+  ("VK_LEFT" .
+   [1 0 0 0 0 0 0])
+  ("keycode" .
+   [5 0 0 0 0 0 0])
+  ("paint-glass" .
+   [2 0 0 0 0 0 0 0 0 0 0])
+  ("paintComponent" .
+   [2 0 0 0 0 0 0 0 1 0 0 0 0 0])
+  ("KeyListener" .
+   [1 0 0 0 0 0 0 0 0 0 0])
+  ("JPanel" .
+   [3 0 0 0 0 0])
+  ("get-color" .
+   [0 0 0 0 0 0 0 1 0])
+  ("fill-point" .
+   [1 0 0 0 0 0 0 0 0 0])
+  ("Color" .
+   [3 0 0 0 0])
+  ("Color/grey" .
+   [1 0 0 0 0 0 0 0 0 0])
+  ("cell" .
+   [5 0 0 0])
+  ("border-size" .
+   [2 0 0 0 0 0 2 2 0 0 0])
+  (".fillRect" .
+   [4 0 0 0 0 0 0 0 0])
+  (".setColor" .
+   [2 0 0 0 0 0 0 0 0])
+  ("cell-size" .
+   [13 0 0 0 5 3 0 0 0])
+  ("color" .
+   [4 0 0 0 0])
+  ("doubler" .
+   [3 0 0 0 0 0 0])
+  ("ensures" .
+   [1 0 0 0 0 0 0])
+  (":ensure" .
+   [3 0 0 0 0 0 0])
+  (":require" .
+   [3 0 0 0 0 0 0 0])
+  ("contract" .
+   [3 0 0 0 0 0 0 0])
+  ("all-ensures" .
+   [2 0 0 0 0 0 0 0 0 0 0])
+  ("all-requires" .
+   [2 0 0 0 0 0 0 0 0 0 0 0])
+  ("requires" .
+   [3 0 0 0 0 0 0 0])
+  ("blah" .
+   [2 0 0 0])
+  ("clauses" .
+   [4 0 0 0 0 0 0])
+  ("params" .
+   [7 0 0 0 0 0])
+  ("forms" .
+   [3 0 0 0 0])
+  ("check" .
+   [2 0 0 0 0])
+  ("consequent" .
+   [1 0 0 0 0 0 0 0 0 0])
+  ("condition" .
+   [1 0 0 0 0 0 0 0 0])
+  ("pairs" .
+   [3 0 0 0 0])
+  ("ifs" .
+   [8 0 0])
+  ("conditions" .
+   [6 0 0 0 0 0 0 0 0 0])
+  ("partitioned-list" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("the-list" .
+   [2 0 0 0 0 0 0 0])
+  ("pen" .
+   [3 0 0])
+  ("bench" .
+   [3 0 0 0 0])
+  ("current" .
+   [3 0 0 0 0 0 0])
+  ("maxnum" .
+   [1 0 0 0 0 0])
+  ("def" .
+   [51 0 0])
+  ("fib" .
+   [5 0 0])
+  ("print" .
+   [3 0 0 0 0])
+  ("nil" .
+   [12 0 0])
+  ("return" .
+   [2 0 0 0 0 0])
+  ("recur" .
+   [13 0 0 0 0])
+  ("isprime" .
+   [14 0 0 0 0 0 0])
+  ("printall" .
+   [1 0 0 0 0 0 0 0])
+  ("true" .
+   [9 0 0 0])
+  ("prime" .
+   [2 0 0 0 0])
+  ("Integer/parseInt" .
+   [1 0 0 0 0 0 0 0 1 0 0 1 0 0 0 0])
+  ("prompt" .
+   [1 0 0 0 0 0])
+  ("false" .
+   [7 0 0 0 0])
+  ("times" .
+   [7 0 0 0 0])
+  ("cmds" .
+   [4 0 0 0])
+  ("bench-lazy" .
+   [1 0 0 0 0 0 0 0 0 0])
+  ("condd" .
+   [2 0 0 0 0])
+  ("apply-f" .
+   [2 0 0 0 0 0 0])
+  ("my-double" .
+   [1 0 0 0 0 0 0 0 0])
+  ("stick" .
+   [1 0 0 0 0])
+  ("square" .
+   [1 0 0 0 0 0])
+  ("tblock" .
+   [1 0 0 0 0 0])
+  ("sblock" .
+   [1 0 0 0 0 0])
+  ("zblock" .
+   [1 0 0 0 0 0])
+  ("lblock" .
+   [1 0 0 0 0 0])
+  ("jblock" .
+   [1 0 0 0 0 0])
+  ("create-vector" .
+   [3 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("glass-height" .
+   [2 0 0 0 0 0 0 0 0 0 0 0])
+  ("glass-width" .
+   [2 0 0 0 0 0 0 0 0 0 0])
+  ("empty-cell" .
+   [3 0 0 0 0 0 0 0 0 0])
+  ("figure" .
+   [1 0 0 0 0 0])
+  ("map-indexed" .
+   [2 0 0 0 0 0 0 0 0 1 0])
+  ("el" .
+   [9 0])
+  ("func" .
+   [3 0 0 0])
+  ("vect" .
+   [9 0 0 0])
+  ("matrix" .
+   [3 0 0 0 0 0])
+  ("mapmatrix" .
+   [5 0 0 0 0 0 0 0 0])
+  ("pick-cell" .
+   [2 0 0 0 0 0 0 0 0])
+  ("fig" .
+   [9 0 0])
+  ("figx" .
+   [6 0 0 0])
+  ("fsize" .
+   [3 0 0 0 0])
+  ("figy" .
+   [5 0 0 0])
+  ("glass" .
+   [14 0 0 0 0])
+  ("destroyed" .
+   [2 0 0 0 0 0 0 0 0])
+  ("clear-glass" .
+   [1 0 0 0 0 0 0 0 0 0 0])
+  ("moving-cell" .
+   [3 0 0 0 0 0 0 0 0 0 0])
+  ("filled-cell" .
+   [2 0 0 0 0 0 0 0 0 0 0])
+  ("glass-with-fig" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("value" .
+   [1 0 0 0 0])
+  ("count-cells" .
+   [1 0 0 0 0 0 0 0 0 0 0])
+  ("shiftx" .
+   [1 0 0 0 0 0])
+  ("shifty" .
+   [1 0 0 0 0 0])
+  ("apply-fig" .
+   [3 0 0 0 0 0 0 0 0])
+  ("newx" .
+   [2 0 0 0])
+  ("newy" .
+   [2 0 0 0])
+  ("legal?" .
+   [4 0 0 0 0 0])
+  ("newglass" .
+   [4 0 0 0 0 0 0 0])
+  ("direction" .
+   [3 0 0 0 0 0 0 0 0])
+  ("move" .
+   [4 0 0 0])
+  ("coords" .
+   [3 0 0 0 0 0])
+  ("atoms" .
+   [1 0 0 0 0])
+  ("defatoms" .
+   [1 0 0 0 0 0 0 0])
+  ("*glass*" .
+   [4 0 2 1 0 0 0])
+  ("*current-fig*" .
+   [1 0 0 2 5 0 0 0 0 0 0 0 0])
+  ("*fig-coords*" .
+   [2 0 0 1 6 0 0 0 0 0 0 0])
+  ("*score*" .
+   [3 0 0 0 0 0 0])
+  ("score-per-line" .
+   [0 0 0 0 0 1 0 0 0 0 0 0 0 0])
+  ("dir" .
+   [5 0 0])
+  ("newcoords" .
+   [7 0 0 0 0 0 0 0 0])
+  ("complete-glass" .
+   [1 0 0 0 0 0 0 0 1 0 0 1 0 0])
+  ("fix-figure" .
+   [2 0 0 0 0 0 0 0 0 0])
+  ("destroy-filled" .
+   [2 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("zero-coords" .
+   [2 0 0 0 0 0 0 0 0 0 0])
+  ("*next-fig*" .
+   [0 0 0 1 2 1 0 0 0 0])
+  ("figures" .
+   [3 0 0 0 0 0 0])
+  ("done-callback" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("d-count" .
+   [1 0 0 0 0 0 0])
+  ("move-down" .
+   [2 0 0 0 0 0 0 0 0])
+  (":down" .
+   [1 0 0 0 0])
+  ("rotate-figure" .
+   [1 0 0 0 0 0 0 0 1 0 0 0 0])
+  ("rotated" .
+   [1 0 0 0 0 0 1])
+  ("create-glass" .
+   [1 0 0 0 0 0 0 0 0 0 0 0])
+  ("rand-nth" .
+   [2 0 0 0 0 0 0 0])
+  ("is" .
+   [5 0])
+  (":java-socket" .
+   [3 0 0 0 0 0 0 0 0 0 0 0])
+  ("send-response" .
+   [2 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("response-code" .
+   [2 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("response-body" .
+   [5 0 0 0 0 1 0 0 0 0 0 0 0])
+  ("->>" .
+   [2 0 0])
+  ("this" .
+   [9 0 0 0])
+  ("close" .
+   [1 0 0 0 0])
+  ("InputStreamReader." .
+   [0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("OutputStreamWriter." .
+   [1 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("BufferedReader" .
+   [0 0 0 0 0 1 0 0 0 0 0 0 0 0])
+  ("server.connection.socket-types.mock-socket" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0])
+  ("server.core" .
+   [2 0 0 0 0 0 0 0 0 0 0])
+  ("server.request.parse" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 0 0])
+  ("pseudo-capture-regex" .
+   [0 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 1 0 0 0])
+  ("pseudopattern" .
+   [3 0 0 0 4 3 6 0 0 0 0 0 0])
+  ("proper-pattern" .
+   [1 0 0 0 0 0 1 0 1 1 0 0 0 0])
+  ("capture-names" .
+   [2 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("capture-names*" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("test-match-uri-against-pseudopattern" .
+   [0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("uri" .
+   [7 0 0])
+  ("match-uri-against-pseudopattern" .
+   [0 0 0 0 0 2 4 0 0 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("request-uri" .
+   [0 0 0 0 1 1 1 1 1 0 0])
+  ("uri-params" .
+   [2 0 0 0 0 1 0 0 0 0])
+  ("parse-k-v-pairs" .
+   [0 0 0 0 0 0 0 0 0 2 0 0 0 0 0])
+  ("test-match-uri-against-pseudopattern-1" .
+   [0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  (":a" .
+   [5 0])
+  ("capture-pairs" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("capture-regex-string" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0])
+  ("defrouter" .
+   [2 0 0 0 0 0 0 0 0])
+  ("GET" .
+   [6 0 0])
+  (":request-line" .
+   [4 0 0 0 0 0 0 0 0 1 0 0 0])
+  (":request-uri" .
+   [4 0 0 0 0 0 0 0 0 0 0 0])
+  ("serve-file" .
+   [1 0 0 0 0 0 0 0 0 0])
+  ("POST" .
+   [2 0 0 0])
+  ("filename" .
+   [2 0 0 0 0 0 0 0])
+  (":filename" .
+   [1 0 0 0 0 0 0 0 0])
+  (":data" .
+   [1 0 0 0 0])
+  ("write-file" .
+   [1 0 0 0 0 0 0 0 0 0])
+  ("data" .
+   [1 0 0 0])
+  ("echo" .
+   [6 0 0 0])
+  ("url-decode" .
+   [1 0 0 0 0 0 0 0 0 0])
+  ("integrated" .
+   [1 0 0 0 0 0 0 0 0 0])
+  ("integrated-router" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("ANY*" .
+   [2 0 0 0])
+  ("403" .
+   [1 0 0])
+  ("10" .
+   [1 0])
+  ("C-M-<left>" .
+   [1 0 0 0 0 0 0 0 0 0])
+  ("require" .
+   [10 0 0 0 0 0 0])
+  ("doremi" .
+   [1 0 0 0 0 0])
+  ("load-live-config-file" .
+   [0 0 0 0 0 0 0 0 0 2 0 0 0 0 0 0 0 0 0 0 0])
+  ("server.main" .
+   [1 0 0 0 0 0 0 0 0 0 0])
+  ("server.request.router" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("200" .
+   [7 0 0])
+  ("OK" .
+   [1 0])
+  ("server" .
+   [1 0 0 0 0 0])
+  ("java" .
+   [2 0 0 0])
+  ("io" .
+   [1 0])
+  ("File" .
+   [2 0 0 0])
+  ("util" .
+   [1 0 0 0])
+  ("MockFile" .
+   [2 0 0 0 0 0 0 0])
+  ("name" .
+   [7 0 0 0])
+  ("n" .
+   [2])
+  ("e" .
+   [1])
+  (".addFile" .
+   [1 0 0 0 0 0 0 0])
+  ("dir-list" .
+   [2 0 0 0 0 0 0 0])
+  ("files" .
+   [1 0 0 0 0])
+  ("toArray" .
+   [1 0 0 0 0 0 0])
+  ("server.app" .
+   [1 0 0 0 0 0 0 0 0 0])
+  ("router" .
+   [5 0 0 0 0 0])
+  ("run-server" .
+   [3 0 0 0 0 0 0 0 0 0])
+  ("scope" .
+   [6 0 0 0 0])
+  ("varname" .
+   [5 0 0 0 0 0 0])
+  ("js-var" .
+   [2 0 0 0 0 0])
+  ("symbols" .
+   [4 0 0 0 0 0 0])
+  ("symbols-atom" .
+   [2 0 0 0 0 0 0 0 0 0 0 0])
+  ("Thread/currentThread" .
+   [0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0])
+  (".getContextClassLoader" .
+   [0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  (".getResourceAsStream" .
+   [0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("get-config" .
+   [2 0 0 0 0 0 0 0 0 0])
+  ("resource" .
+   [4 0 0 0 0 0 0 0])
+  ("reader" .
+   [1 0 0 0 0 0])
+  ("config-defaults" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("action-name" .
+   [1 0 0 0 0 0 0 0 0 0 0])
+  ("do-action" .
+   [3 0 0 0 0 0 0 0 0])
+  ("parsed-action" .
+   [3 0 0 0 0 0 0 0 0 0 0 0 0])
+  (":message" .
+   [2 0 0 0 0 0 0 0])
+  ("message" .
+   [3 0 0 0 0 0 0])
+  ("subscribers" .
+   [4 0 0 0 0 0 0 0 0 0 0])
+  ("sock-writer" .
+   [2 0 0 0 0 0 0 0 0 0 0])
+  ("autoload" .
+   [2 0 0 0 0 0 0 0])
+  ("js2-mode-indentation-fix" .
+   [2 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("load" .
+   [1 0 0 0])
+  ("/ul" .
+   [1 0 0])
+  ("ul" .
+   [1 0])
+  ("windresize" .
+   [1 0 0 0 0 0 0 0 0 0])
+  ("setq" .
+   [1 0 0 0])
+  ("windresize-default-increment" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0])
+  ("in" .
+   [1 0])
+  ("include-js" .
+   [1 0 0 0 0 0 0 0 0 0])
+  ("pwd" .
+   [1 0 0])
+  ("*ns*" .
+   [2 0 0 0])
+  ("in-ns" .
+   [1 0 0 0 0])
+  ("ns" .
+   [1 0])
+  ("server.response.actions" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0])
+  ("tokenize" .
+   [1 0 0 0 0 0 0 0])
+  (":refer-clojure" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  (":exclude" .
+   [1 0 0 0 0 0 0 0])
+  ("set!" .
+   [1 0 0 0])
+  ("interpret" .
+   [1 0 0 0 0 0 0 0 0])
+  ("context" .
+   [2 0 0 0 0 0 0])
+  ("color-theme-solarized-dark" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("h3" .
+   [1 0])
+  ("Range" .
+   [1 0 0 0 0])
+  ("of" .
+   [1 0])
+  ("/h3" .
+   [1 0 0])
+  ("above." .
+   [1 0 0 0 0 0])
+  ("Missouri" .
+   [2 0 0 0 0 0 0 0])))

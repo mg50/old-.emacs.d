@@ -1,0 +1,13 @@
+(ns nonograms.core)
+
+(def empty-cell 0)
+(def full-cell 1)
+
+
+(defn calc-nonogram-line [line]
+  (->> line
+       (partition-by €ô¨¡œô¡Ò#(= % empty-cell))
+       (filter €ô¨¡œô¡Ò#(= (first %) full-cell))
+       (map count)))
+
+(defn )

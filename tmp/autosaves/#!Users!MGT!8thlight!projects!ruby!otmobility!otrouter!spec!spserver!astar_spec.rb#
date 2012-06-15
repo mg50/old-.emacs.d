@@ -1,0 +1,698 @@
+require_relative 'spec_helper'
+
+describe "astar" do
+  before(:each) do
+    @context = FFI::MemoryPointer.new(8)
+  end
+
+  def build_cost_function(cost=2.0, link_time=3)
+    Proc.new do |w, x, y, time, context|
+      if block_given?
+        cost_override, link_time_override = yield w, x, y, time, context
+      end
+
+      Astar::AstarCostAndTime.build(cost: cost_override || cost,
+                                    time: link_time_override || link_time)
+    end
+  end
+
+  def build_heuristic_function(heuristic_value=0.0)
+    Proc.new do |x, y, context|
+      heuristic_override = yield x, y, context if block_given?
+      heuristic_override || heuristic_value
+    end
+  end
+
+  def build_neighbors_function(neighbors=[])
+    Proc.new do |node, context|
+      neighbors = yield node, context if block_given?
+
+      neighbor = build_neighbor(neighbors.length)
+      neighbors.each_with_index do |node, index|
+        add_neighbor_info(neighbor, { node: node, link_id: 12, index: index })
+      end
+      neighbor.to_ptr
+    end
+  end
+
+  def build_neighbor(count)
+    neighbors_size = Astar::AstarNeighbors.size
+    neighbor_info_size = Astar::AstarNeighborInfo.size
+    neighbors_pointer = FFI::MemoryPointer.new(neighbors_size + (count * neighbor_info_size))
+    neighbors_pointer.autorelease = false
+    neighbor = Astar::AstarNeighbors.build({ count: count }, neighbors_pointer)
+    neighbor
+  end
+
+  def add_neighbor_info(neighbor, neighbor_info)
+    Astar::AstarNeighborInfo.build(
+      {node: neighbor_info[:node], link_id: neighbor_info[:link_id]},
+      neighbor.to_ptr + neighbor.offset_of(:neighbor_info) +
+        (neighbor_info[:index] * Astar::AstarNeighborInfo.size))
+  end
+
+  before do
+    @time = Time.now.to_i
+  end
+
+  it "calls the cost function correctly" do
+    verifying_cost_function = build_cost_function do |w, x, y, time, context|
+      context.should == @context
+      x.should == 0
+      y.should == 1
+      time.should == @time
+    end
+
+    Astar.astar(0, 1, verifying_cost_function, build_heuristic_function, build_neighbors_function, @time, @context)
+  end
+
+  it "calls the heuristic function correctly" do
+    verifying_heuristic_function = build_heuristic_function do |x, y, context|
+      context.should == @context
+      nil
+    end
+
+    Astar.astar(0, 1, build_cost_function, verifying_heuristic_function, build_neighbors_function, @time, @context)
+  end
+
+  it "calls the neighbors function correctly" do
+    verifying_neighbors_function = build_neighbors_function do |node, context|
+      context.should == @context
+      node.should == 0
+      [1]
+    end
+
+    Astar.astar(0, 1, build_cost_function, build_heuristic_function, verifying_neighbors_function, @time, @context)
+  end
+
+  it "does not call the cost function when neighbors are empty" do
+    uncallable_cost_function = build_cost_function do
+      fail "cost function should not have been called"
+    end
+
+    Astar.astar(0, 0, uncallable_cost_function, build_heuristic_function(0.0), build_neighbors_function([]), @time, @context)
+  end
+
+  it "solves for a single node and no links" do
+    result_pointer = Astar.astar(0, 0, build_cost_function(1.0, 2.0), build_heuristic_function(0.0), build_neighbors_function([]), @time, @context)
+    result = Astar::AstarResultListNode.new(result_pointer)
+
+    result[:node].should == 0
+    result[:link_id].should == 0
+    result[:cost].should be_within(0.01).of(0)
+    result[:next].should be_null
+  end
+
+  it "solves a single link path" do
+    # [0] -> [1]
+    result_pointer = Astar.astar(0, 1, build_cost_function(2.0, 3.0), build_heuristic_function(0.0), build_neighbors_function([1]), @time, @context)
+    result = Astar::AstarResultListNode.new(result_pointer)
+
+    result[:node].should == 0
+    result[:link_id].should == 12
+    result[:cost].should be_within(0.01).of(2.0)
+    result[:time].should be_within(0.01).of(3.0)
+
+    next_node = Astar::AstarResultListNode.new(result[:next])
+    next_node[:node].should == 1
+    next_node[:link_id].should == 0
+    next_node[:cost].should == 0
+    next_node[:next].should be_null
+  end
+
+  it "accumulates time and passes to cost function" do
+    # [0] -> [1] -> [2]
+    @time = Time.now.to_i
+    cost_function = build_cost_function do |w, x, y, time, context|
+      if x == 0
+        time.should == @time
+      elsif x == 1
+        time.should == @time + 3
+      end
+      [2.0, 3]
+    end
+
+    neighbors_function = build_neighbors_function do |node, context|
+      if node == 0
+        [1]
+      elsif node == 1
+        [2]
+      else
+        []
+      end
+    end
+
+    result_pointer = Astar.astar(0, 2, cost_function, build_heuristic_function(0.0), neighbors_function, @time, @context)
+    node = Astar::AstarResultListNode.new(result_pointer)
+
+    node[:node].should == 0
+    node[:cost].should == 2
+
+    node = Astar::AstarResultListNode.new(node[:next])
+    node[:node].should == 1
+    node[:cost].should == 2
+
+    node = Astar::AstarResultListNode.new(node[:next])
+    node[:node].should == 2
+    node[:cost].should == 0
+    node[:next].should be_null
+  end
+
+  it "solves the simplest nontrivial path" do
+    # [0] -> [1]
+    #  |(2)   |
+    #  V      V
+    # [2] -> [3]
+
+    cost_function = build_cost_function do |w, x, y, context|
+      cost = nil
+      cost = 1.0 if x == 0 && y == 1
+      cost = 2.0 if x == 0 && y == 2
+      cost = 1.0 if x == 1 && y == 3
+      cost = 1.0 if x == 2 && y == 3
+      fail "cost function called with unexpected arguments: x=#{x} y=#{y}" if cost.nil?
+
+      cost
+    end
+
+    neighbor_function = Proc.new do |node, context|
+      case node
+      when 0
+        neighbor = build_neighbor(2)
+        add_neighbor_info(neighbor, { node: 2, link_id: 2, index: 0 })
+        add_neighbor_info(neighbor, { node: 1, link_id: 1, index: 1 })
+      when 1
+        neighbor = build_neighbor(1)
+        add_neighbor_info(neighbor, { node: 3, link_id: 3, index: 0 })
+      when 2
+        neighbor = build_neighbor(1)
+        add_neighbor_info(neighbor, { node: 3, link_id: 4, index: 0 })
+      else
+        fail "neighbor function called with unexpected argument: x=#{x}"
+      end
+      neighbor.to_ptr
+    end
+
+    result = Astar::AstarResultListNode.new(
+      Astar.astar(0, 3, cost_function, build_heuristic_function(0.0), neighbor_function, @time, @context)
+    )
+
+    result[:node].should == 0
+    result[:link_id].should == 1
+    result[:cost].should == 1
+    result[:next].should_not be_null
+
+    next_node = Astar::AstarResultListNode.new(result[:next])
+    next_node[:node].should == 1
+    next_node[:link_id].should == 3
+    next_node[:cost].should == 1
+    next_node[:next].should_not be_null
+
+    next_node = Astar::AstarResultListNode.new(next_node[:next])
+    next_node[:node].should == 3
+    next_node[:link_id].should == 0
+    next_node[:cost].should == 0
+    next_node[:next].should be_null
+  end
+
+  it "solves the simplest nontrivial path with backloaded cost" do
+    # [0] -> [1]
+    #  |      |(2)
+    #  V      V
+    # [2] -> [3]
+
+    cost_function = build_cost_function do |w, x, y, context|
+      cost = nil
+      cost = 1.0 if x == 0 && y == 1
+      cost = 1.0 if x == 0 && y == 2
+      cost = 2.0 if x == 1 && y == 3
+      cost = 1.0 if x == 2 && y == 3
+      fail "cost function called with unexpected arguments: x=#{x} y=#{y}" if cost.nil?
+      cost
+    end
+
+    neighbor_function = Proc.new do |node, context|
+      case node
+      when 0
+        neighbor = build_neighbor(2)
+        add_neighbor_info(neighbor, { node: 1, link_id: 1, index: 0 })
+        add_neighbor_info(neighbor, { node: 2, link_id: 2, index: 1 })
+      when 1
+        neighbor = build_neighbor(1)
+        add_neighbor_info(neighbor, { node: 3, link_id: 3, index: 0 })
+      when 2
+        neighbor = build_neighbor(1)
+        add_neighbor_info(neighbor, { node: 3, link_id: 4, index: 0 })
+      else
+        fail "neighbor function called with unexpected argument: x=#{x}"
+      end
+      neighbor.to_ptr
+    end
+
+    result = Astar::AstarResultListNode.new(
+      Astar.astar(0, 3, cost_function, build_heuristic_function(0.0), neighbor_function, @time, @context)
+    )
+
+    result[:node].should == 0
+    #result[:link_id].should == 2
+    result[:cost].should == 1
+    result[:next].should_not be_null
+
+    next_node = Astar::AstarResultListNode.new(result[:next])
+    next_node[:node].should == 2
+    next_node[:link_id].should == 4
+    next_node[:cost].should == 1
+    next_node[:next].should_not be_null
+
+    next_node = Astar::AstarResultListNode.new(next_node[:next])
+    next_node[:node].should == 3
+    next_node[:link_id].should == 0
+    next_node[:cost].should == 0
+    next_node[:next].should be_null
+  end
+
+  it "solves long path" do
+    neighbor_function = Proc.new do |node, context|
+      neighbor = build_neighbor(1)
+      add_neighbor_info(neighbor, { node: node + 1, link_id: node + 1, index: 0 })
+      neighbor.to_ptr
+    end
+
+    cost_function = build_cost_function do |w, x, y, context|
+      cost = 1.0 if y - x == 1
+      fail "cost function called with unexpected arguments: x=#{x} y=#{y}" if cost.nil?
+      cost
+    end
+
+    result = Astar::AstarResultListNode.new(
+      Astar.astar(0, 999, cost_function, build_heuristic_function(0.0), neighbor_function, @time, @context)
+    )
+
+    count = 1 # result is the first one, so it should get counted
+    until result[:next].null?
+      count += 1
+      result = Astar::AstarResultListNode.new(result[:next])
+    end
+
+    count.should == 1000
+  end
+
+  it "solves bidirectional long path" do
+    neighbor_function = Proc.new do |node, context|
+      neighbor = build_neighbor(2)
+      add_neighbor_info(neighbor, { node: node - 1, link_id: node - 1, index: 0 })
+      add_neighbor_info(neighbor, { node: node + 1, link_id: node + 1, index: 1 })
+      neighbor.to_ptr
+    end
+
+    cost_function = build_cost_function do |w, x, y, context|
+      cost = 1.0 if (x - y).abs == 1
+      fail "cost function called with unexpected arguments: x=#{x} y=#{y}" if cost.nil?
+      cost
+    end
+
+    result = Astar::AstarResultListNode.new(
+      Astar.astar(0, 999, cost_function, build_heuristic_function(0.0), neighbor_function, @time, @context)
+    )
+
+    count = 1 # result is the first one, so it should get counted
+    until result[:next].null?
+      count += 1
+      result = Astar::AstarResultListNode.new(result[:next])
+    end
+
+    count.should == 1000
+  end
+
+  it "solves bidirectional skip long path" do
+    neighbor_function = Proc.new do |node, context|
+      neighbor = build_neighbor(4)
+      add_neighbor_info(neighbor, { node: node - 1, link_id: node - 1, index: 0 })
+      add_neighbor_info(neighbor, { node: node + 1, link_id: node + 1, index: 1 })
+      add_neighbor_info(neighbor, { node: node - 2, link_id: node - 2, index: 2 })
+      add_neighbor_info(neighbor, { node: node + 2, link_id: node + 2, index: 3 })
+      neighbor.to_ptr
+    end
+
+    cost_function = build_cost_function do |w, x, y, context|
+      cost = 0
+      cost = 1.0 if (x - y).abs == 1 || (x - y).abs == 2
+      fail "cost function called with unexpected arguments: x=#{x} y=#{y}" if cost.nil?
+      cost
+    end
+
+    result = Astar::AstarResultListNode.new(
+      Astar.astar(0, 999, cost_function, build_heuristic_function(0.0), neighbor_function, @time, @context)
+    )
+
+    count = 1 # result is the first one, so it should get counted
+    until result[:next].null?
+      result = Astar::AstarResultListNode.new(result[:next])
+      count += 1 unless result[:next].null?
+    end
+
+    count.should == 500
+  end
+
+  it "solves medium sized example" do
+    # [0] --> [1]
+    #  \\    // \\
+    #   vv vv    vv
+    #    [2]<----[3]--->[5]
+    #             |
+    #             v
+    #            [4]
+
+    neighbor_function = Proc.new do |node, context|
+      case node
+      when 0
+        neighbor = build_neighbor(2) # length==2
+        add_neighbor_info(neighbor, { node: 1, link_id: 1, index: 0 })
+        add_neighbor_info(neighbor, { node: 2, link_id: 2, index: 1 })
+      when 1
+        neighbor = build_neighbor(2)
+        add_neighbor_info(neighbor, { node: 2, link_id: 12, index: 0 })
+        add_neighbor_info(neighbor, { node: 3, link_id: 13, index: 1 })
+      when 2
+        neighbor = build_neighbor(0)
+      when 3
+        neighbor = build_neighbor(3)
+        add_neighbor_info(neighbor, { node: 2, link_id: 32, index: 0 })
+        add_neighbor_info(neighbor, { node: 4, link_id: 34, index: 1 })
+        add_neighbor_info(neighbor, { node: 5, link_id: 35, index: 2 })
+      when 4
+        neighbor = build_neighbor(0)
+      else
+        fail "neighbors function called with unexpected argument: node=#{node}"
+      end
+
+      neighbor.to_ptr
+    end
+
+    cost_function = build_cost_function do |w, x, y, context|
+      cost = nil
+      cost = 1.0 if x == 0 && y == 1 || x == 0 && y == 2 ||
+                    x == 1 && y == 2 || x == 1 && y == 3 ||
+                    x == 3 && y == 2 || x == 3 && y == 4 || x == 3 && y == 5
+      fail "cost function called with unexpected arguments: x=#{x} y=#{y}" if cost.nil?
+      cost
+    end
+
+    result = Astar::AstarResultListNode.new(
+      Astar.astar(0, 5, cost_function, build_heuristic_function(0.0), neighbor_function, @time, @context)
+    )
+
+    result[:node].should == 0
+    result[:link_id].should == 1
+    result[:cost].should == 1
+    result[:next].should_not be_null
+
+    result = Astar::AstarResultListNode.new(result[:next])
+    result[:node].should == 1
+    result[:link_id].should == 13
+    result[:cost].should == 1
+    result[:next].should_not be_null
+
+    result = Astar::AstarResultListNode.new(result[:next])
+    result[:node].should == 3
+    result[:link_id].should == 35
+    result[:cost].should == 1
+    result[:next].should_not be_null
+
+    result = Astar::AstarResultListNode.new(result[:next])
+    result[:node].should == 5
+    result[:link_id].should == 0
+    result[:cost].should == 0
+    result[:next].should be_null
+  end
+
+  it "uses a priority queue" do
+    # [0] -> [1]
+    #  |(99)  |
+    #  V      V
+    # [2] -> [3]
+    neighbor_function = Proc.new do |node, context|
+      case node
+      when 0
+        neighbor = build_neighbor(2)
+        add_neighbor_info(neighbor, { node: 2, link_id: 2, index: 0 })
+        add_neighbor_info(neighbor, { node: 1, link_id: 1, index: 1 })
+      when 1
+        neighbor = build_neighbor(1)
+        add_neighbor_info(neighbor, { node: 3, link_id: 3, index: 0 })
+      when 2
+        fail "Node 2 was examined before finding shortest path"
+      else
+        fail "neighbors function called with unexpected argument: node=#{node}"
+      end
+
+      neighbor.to_ptr
+    end
+
+    cost_function = build_cost_function do |w, x, y, context|
+      cost = 99 if x == 0 && y == 2
+      cost = 1 if x == 0 && y == 1
+      cost = 1 if x == 1 && y == 3
+      fail "cost function called with unexpected arguments: x=#{x} y=#{y}" if cost.nil?
+      cost
+    end
+
+    result = Astar::AstarResultListNode.new(
+      Astar.astar(0, 3, cost_function, build_heuristic_function(0.0), neighbor_function, @time, @context)
+    )
+
+    result[:node].should == 0
+    #result[:link_id].should == 1
+    result[:cost].should == 1
+    result[:next].should_not be_null
+
+    result = Astar::AstarResultListNode.new(result[:next])
+    result[:node].should == 1
+    result[:link_id].should == 3
+    result[:cost].should == 1
+    result[:next].should_not be_null
+
+    result = Astar::AstarResultListNode.new(result[:next])
+    result[:node].should == 3
+    result[:link_id].should == 0
+    result[:cost].should == 0
+    result[:next].should be_null
+  end
+
+  it "solves with path dependence (link to link test)" do
+    # [0] -> [1]
+    #  |      |
+    #  v      V
+    # [2] -> [3] -> [4]
+    #
+    # 2-3-4 has a reduced cost compared to 1-3-4. This might
+    # represent a turn restriction on 1-3-4, or the idea that 2-3
+    # and 3-4 are segments of the same road.
+    neighbor_function = Proc.new do |node, context|
+      case node
+      when 0
+        neighbor = build_neighbor(2)
+        add_neighbor_info(neighbor, { node: 1, link_id: 1, index: 0 })
+        add_neighbor_info(neighbor, { node: 2, link_id: 2, index: 1 })
+      when 1
+        neighbor = build_neighbor(1)
+        add_neighbor_info(neighbor, { node: 3, link_id: 3, index: 0 })
+      when 2
+        neighbor = build_neighbor(1)
+        add_neighbor_info(neighbor, { node: 3, link_id: 4, index: 0 })
+      when 3
+        neighbor = build_neighbor(1)
+        add_neighbor_info(neighbor, { node: 4, link_id: 5, index: 0 })
+      else
+        fail "neighbors function called with unexpected argument: node=#{node}"
+      end
+
+      neighbor.to_ptr
+    end
+
+    cost_function = build_cost_function do |w, x, y, context|
+      cost = 1 if x == 0 && y == 1 ||
+                  x == 0 && y == 2 ||
+                  x == 1 && y == 3 ||
+                  x == 2 && y == 3 ||
+                  w == 2 && x == 3 && y == 4
+      cost = 2 if w == 1 && x == 3 && y == 4
+      fail "cost function called with unexpected arguments: x=#{x} y=#{y}" if cost.nil?
+      cost
+    end
+
+    result = Astar::AstarResultListNode.new(
+      Astar.astar(0, 4, cost_function, build_heuristic_function(0.0), neighbor_function, @time, @context)
+    )
+
+    result[:node].should == 0
+    result[:link_id].should == 2
+    result[:cost].should == 1
+    result[:next].should_not be_null
+
+    result = Astar::AstarResultListNode.new(result[:next])
+    result[:node].should == 2
+    result[:link_id].should == 4
+    result[:cost].should == 1
+    result[:next].should_not be_null
+
+    result = Astar::AstarResultListNode.new(result[:next])
+    result[:node].should == 3
+    result[:link_id].should == 5
+    result[:cost].should == 1
+    result[:next].should_not be_null
+
+    result = Astar::AstarResultListNode.new(result[:next])
+    result[:node].should == 4
+    result[:link_id].should == 0
+    result[:cost].should == 0
+    result[:next].should be_null
+  end
+
+  it "basic heuristic test" do
+    #   [0] -> [1] -> [2]
+    # (1)| (10)   (10) ^
+    #    v             |
+    #   [3] -> [4] ----
+    #      (1)    (100)
+
+    # The shortest path from 0 to 2 is 0-1-2, but 0-3 initially
+    # looks more promising. By using a heuristic, we help guide the
+    # A* algorithm to know that the 0-1-2 path is more promising.
+
+    # This test verifies that even though 0-3-4-2 looks like a
+    # promising path, the heuristic prunes off that branch due to
+    # the lower bound on its cost, and 4's neighbors are never
+    # explored.
+
+    # We use the actual shortest-path distances to the goal node as
+    # our heuristic, for simplicity.
+    neighbor_function = Proc.new do |node, context|
+      case node
+      when 0
+        neighbor = build_neighbor(2)
+        add_neighbor_info(neighbor, { node: 1, link_id: 1, index: 0 })
+        add_neighbor_info(neighbor, { node: 3, link_id: 3, index: 1 })
+      when 1
+        neighbor = build_neighbor(1)
+        add_neighbor_info(neighbor, { node: 2, link_id: 2, index: 0 })
+      when 3
+        neighbor = build_neighbor(1)
+        add_neighbor_info(neighbor, { node: 4, link_id: 4, index: 0 })
+      when 4
+        fail "4 was supposed to be pruned from the search"
+      else
+        fail "neighbors function called with unexpected argument: node=#{node}"
+      end
+
+      neighbor.to_ptr
+    end
+
+    cost_function = build_cost_function do |w, x, y, context|
+      cost = 10 if x == 0 && y == 1 ||
+                   x == 1 && y == 2
+      cost = 1 if x == 0 && y == 3 ||
+                  x == 3 && y == 4
+      cost = 100 if x == 4 && y == 2
+
+      fail "cost function called with unexpected arguments: x=#{x} y=#{y}" if cost.nil?
+      cost
+    end
+
+    heuristic_function = build_heuristic_function do |x, y, context|
+      case x
+      when 0
+        20
+      when 1
+        10
+      when 2
+        0
+      when 3
+        101
+      when 4
+        100
+      else
+        fail "heurisitic function called with unexpected arguments: x=#{x}"
+      end
+    end
+
+    result = Astar::AstarResultListNode.new(
+      Astar.astar(0, 2, cost_function, heuristic_function, neighbor_function, @time, @context)
+    )
+
+    result[:node].should == 0
+    #result[:link_id].should == 1
+    result[:cost].should == 10
+    result[:next].should_not be_null
+
+    result = Astar::AstarResultListNode.new(result[:next])
+    result[:node].should == 1
+    #result[:link_id].should == 3
+    result[:cost].should == 10
+    result[:next].should_not be_null
+
+    result = Astar::AstarResultListNode.new(result[:next])
+    result[:node].should == 2
+    result[:link_id].should == 0
+    result[:cost].should == 0
+    result[:next].should be_null
+  end
+
+  it "solves dijkstra failure 1 from randomized tests" do
+    neighbor_function = Proc.new do |node, context|
+      case node
+      when 1
+        neighbor = build_neighbor(1)
+        add_neighbor_info(neighbor, { node: 2, link_id: 2, index: 0 })
+      when 2
+        neighbor = build_neighbor(2)
+        add_neighbor_info(neighbor, { node: 1, link_id: 1, index: 0 })
+        add_neighbor_info(neighbor, { node: 3, link_id: 3, index: 1 })
+      when 3
+        neighbor = build_neighbor(2)
+        add_neighbor_info(neighbor, { node: 2, link_id: 2, index: 0 })
+        add_neighbor_info(neighbor, { node: 4, link_id: 4, index: 1 })
+      when 4
+        neighbor = build_neighbor(2)
+        add_neighbor_info(neighbor, { node: 1, link_id: 1, index: 0 })
+        add_neighbor_info(neighbor, { node: 3, link_id: 3, index: 1 })
+      else
+        fail "neighbors function called with unexpected argument: node=#{node}"
+      end
+
+      neighbor.to_ptr
+    end
+
+    cost_function = build_cost_function do |w, x, y, context|
+      cost = 39.32 if x == 1 && y == 2 ||
+                      x == 2 && y == 1
+      cost = 17.80 if x == 2 && y == 3 ||
+                      x == 3 && y == 2
+      cost = 24.04 if x == 3 && y == 4 ||
+                      x == 4 && y == 3
+      cost = 16.76 if x == 4 && y == 1
+      fail "cost function called with unexpected arguments: x=#{x} y=#{y}" if cost.nil?
+      cost
+    end
+
+    result = Astar::AstarResultListNode.new(
+      Astar.astar(3, 1, cost_function, build_heuristic_function, neighbor_function, @time, @context)
+    )
+
+    result[:node].should == 3
+    #result[:link_id].should == 34
+    result[:cost].should == 24.04
+    result[:next].should_not be_null
+
+    result = Astar::AstarResultListNode.new(result[:next])
+    result[:node].should == 4
+    #result[:link_id].should == 41
+    result[:cost].should == 16.76
+
+    result = Astar::AstarResultListNode.new(result[:next])
+    result[:node].should == 1
+    result[:link_id].should == 0
+    result[:cost].should == 0
+    result[:next].should be_null
+  end
+end

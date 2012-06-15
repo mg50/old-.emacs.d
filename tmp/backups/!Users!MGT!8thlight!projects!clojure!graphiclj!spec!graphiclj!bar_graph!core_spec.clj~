@@ -1,0 +1,19 @@
+(ns graphiclj.bar-graph.core-spec
+  (:use 
+    speclj.core
+    graphiclj.bar-graph.core)
+  (:import
+    (javax.swing JFrame JPanel)
+    (java.awt Graphics2D)))
+
+(describe "Frame creation"
+  (it "should make a java JFrame object"
+    (should= JFrame (class (create-jframe))))
+
+  (it "should add a content pane to the frame"
+    (should= JPanel (-> (create-jframe) .getContentPane class))))
+
+(describe "Graphics2D from Frame"
+  (it "should give back the graphics 2d of the passed frame"
+    (should= Graphics2D (-> (create-jframe) graphics class))))
+

@@ -1,0 +1,11 @@
+(ns server.connection.socket-handler-test
+  (:use [server.connection.socket-handler]
+        [server.connection.socket-types.mock-socket]
+        [server.core])
+
+(deftest test-parse-socket-request-1
+  (let [sock (Mock-Socket. (str "GET / HTTP/1.1" crlf))
+        handler (Socket-Handler. sock)]
+    (is (= {:request-line {:method :GET, :request-uri "/", :http-version "HTTP/1.1"}
+            :headers nil}
+           (.parse-request handler)))))

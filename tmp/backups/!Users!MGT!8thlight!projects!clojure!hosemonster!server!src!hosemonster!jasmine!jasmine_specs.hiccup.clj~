@@ -1,0 +1,21 @@
+
+[:link {:rel "stylesheet" :href "/stylesheets/spec/jasmine.css" :type "text/css"}]
+(render-partial "work_orders/js_includes")
+
+[:script {:src "/javascript/spec/jasmine.js"}]
+[:script {:src "/javascript/spec/jasmine-html.js"}]
+[:script {:src "/javascript/spec/jasmine-jquery.js"}]
+[:script {:src "/javascript/spec/json.js"}]
+
+[:script {:src "/javascript/spec/models/flowdevice_spec.js"}]
+[:script {:src "/javascript/spec/models/stream_spec.js"}]
+[:script {:src "/javascript/spec/models/testpoint_spec.js"}]
+
+[:script {:src "/javascript/spec/views/stream_edit_spec.js"}]
+[:script {:src "/javascript/spec/views/testpoint_display_spec.js"}]
+[:script {:src "/javascript/spec/views/flowdevicesdialog_spec.js"}]
+[:script {:src "/javascript/spec/views/testpoint_edit_spec.js"}]
+
+[:script {:src "/javascript/spec/spec-runner.js"}]
+
+[:div#view-container]

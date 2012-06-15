@@ -1,0 +1,54 @@
+describe('Hosemonster.Views.StreamEdit', function() {
+    beforeEach(function() {
+        this.model = new Hosemonster.Models.Stream();
+        this.view = new Hosemonster.Views.StreamEdit({model: this.model});
+        this.view.render();
+    })
+
+    it("removes a stream and marks for deletion", function() {
+        $("#view-container").append(this.view.$el);
+        this.view.removeStream();
+
+        expect(this.model.toDestroy).toBe(true);
+        expect($("#view-container")).toBeEmpty();
+    })
+
+    it("displays the default flow device name", function() {
+        debugger
+        expect(this.view.$el.find('flow-device-label').html()).toBe('-select flow device-');
+    })
+
+    it("displays the flow device name", function() {
+        this.model.get('flow-device').set('name', 'test');
+        this.view.render();
+        expect(this.view.$el.find('flow-device-label').html()).toBe('test');
+    })
+
+    it("removes stream on click", function() {
+        spyOn(this.view, 'removeStream').andCallFake(function() {});
+        this.view.$el.find('.delete').trigger('click');
+        expect(this.view.removeStream).toHaveBeenCalled();
+    })
+
+    it("reads its attributes properly", function() {
+        this.view.$el.find('[name=nozzle-pressure]').val('3');
+        this.view.$el.find('[name=flow-device-key]').val("key1");
+        this.view.$el.find('.flow-device-label').html('label')
+
+        this.view.readAttributes();
+        expect(this.model.get('flow-device').get('key')).toBe('key1')
+        expect(this.model.get('flow-device').get('name')).toBe('label')
+        expect(this.model.get('nozzle-pressure')).toBe('3');
+    });
+
+    it("updates its display from selecting a flow device", function() {
+        loadFixtures("flow_devices_dialog.html");
+        var dialogView = new Hosemonster.Views.FlowDevicesDialog();
+        spyOn(dialogView, 'open').andCallFake(function() {});
+        this.view.openSelectFlowDeviceDialog(dialogView);
+        dialogView.$el.find('tr').eq(1).trigger('click');
+
+        expect(this.view.$el.find('[name=flow-device-key]').val()).toBe('key2');
+        expect(this.view.$el.find('.flow-device-label').html()).toBe('device 2');
+    })
+})

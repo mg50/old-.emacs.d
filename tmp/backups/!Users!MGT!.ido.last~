@@ -1,0 +1,390 @@
+
+;; ----- ido-last-directory-list -----
+(
+ ("/Users/MGT/8thlight/clients/enova/identity.netcredit/app/" . "models/")
+ ("/Users/MGT/8thlight/clients/enova/identity.netcredit/" . "app/")
+ ("/Users/MGT/8thlight/clients/enova/portfolio.netcredit/app/presenters/" . "contract/")
+ ("/Users/MGT/8thlight/clients/enova/account_home/app/views/" . "loan_offers/")
+ ("/Users/MGT/8thlight/clients/enova/account_home/app/" . "views/")
+ ("/Users/MGT/8thlight/clients/enova/account_home/" . "app/")
+ ("/Users/MGT/8thlight/clients/enova/portfolio.netcredit/app/controllers/" . "v1/")
+ ("/Users/MGT/8thlight/clients/enova/portfolio.netcredit/app/views/contract_templates/" . "installment/")
+ ("/Users/MGT/8thlight/clients/enova/portfolio.netcredit/app/views/" . "contract_templates/")
+ ("/Users/MGT/8thlight/clients/enova/portfolio.netcredit/app/" . "models/")
+ ("/Users/MGT/8thlight/clients/enova/portfolio.netcredit/" . "features/")
+ ("/Users/MGT/8thlight/clients/enova/acquisition.netcredit/app/views/" . "apply/")
+ ("/Users/MGT/8thlight/clients/enova/acquisition.netcredit/app/" . "views/")
+ ("/Users/MGT/8thlight/clients/enova/acquisition.netcredit/" . "app/")
+ ("/Users/MGT/8thlight/clients/enova/portfolio/app/views/contract_templates/" . "installment/")
+ ("/Users/MGT/8thlight/clients/enova/portfolio/app/views/" . "contract_templates/")
+ ("/Users/MGT/8thlight/clients/enova/portfolio/app/" . "views/")
+ ("/Users/MGT/8thlight/clients/enova/portfolio/" . "app/")
+ ("/Users/MGT/8thlight/clients/enova/" . "portfolio.netcredit/")
+ ("/Users/MGT/8thlight/clients/" . "enova/")
+ ("/Users/MGT/misc/" . "solarized/")
+ ("/Users/MGT/8thlight/projects/ruby/otmobility/otrouter/client/lib/" . "ontime/")
+ ("/Users/MGT/8thlight/projects/ruby/otmobility/otrouter/client/" . "views/")
+ ("/Users/MGT/8thlight/projects/ruby/otmobility/otrouter/spec/" . "spserver/")
+ ("/Users/MGT/8thlight/projects/ruby/otmobility/otrouter/" . "spec/")
+ ("/Users/MGT/8thlight/projects/ruby/otmobility/" . "otrouter/")
+ ("/Users/MGT/clojure/" . "Clojure-Tic-Tac-Toe/")
+ ("/Users/MGT/8thlight/projects/clojure/hosemonster/server/public/javascript/spec/" . "models/")
+ ("/Users/MGT/8thlight/projects/clojure/hosemonster/spec/" . "hosemonster/")
+ ("/Users/MGT/8thlight/projects/clojure/hosemonster/client/resources/" . "work_order/")
+ ("/Users/MGT/8thlight/projects/clojure/hosemonster/client/target/" . "stale/")
+ ("/Users/MGT/8thlight/projects/clojure/hosemonster/server/public/javascript/" . "views/")
+ ("/Users/MGT/8thlight/projects/clojure/hosemonster/server/public/" . "javascript/")
+ ("/Users/MGT/8thlight/projects/clojure/hosemonster/server/spec/hosemonster/" . "work_orders/")
+ ("/Users/MGT/8thlight/projects/clojure/hosemonster/server/spec/" . "hosemonster/")
+ ("/Users/MGT/8thlight/projects/clojure/hosemonster/client/src/hosemonster/" . "crud/")
+ ("/Users/MGT/8thlight/projects/clojure/hosemonster/client/src/" . "hosemonster/")
+ ("/Users/MGT/8thlight/projects/clojure/hosemonster/client/" . "src/")
+ ("/Users/MGT/8thlight/projects/clojure/hosemonster/server/src/hosemonster/" . "work_orders/")
+ ("/Users/MGT/8thlight/projects/clojure/hosemonster/server/src/" . "hosemonster/")
+ ("/Users/MGT/8thlight/projects/clojure/hosemonster/server/" . "src/")
+ ("/Users/MGT/8thlight/projects/clojure/hosemonster/" . "server/")
+ ("/Users/MGT/8thlight/projects/factor/" . "ttt/")
+ ("/Users/MGT/8thlight/projects/factor/ttt/ttt/strategy/" . "ai/")
+ ("/Users/MGT/8thlight/projects/factor/ttt/ttt/ui/" . "console/")
+ ("/Users/MGT/8thlight/projects/factor/ttt/ttt/" . "ui/")
+ ("/Users/MGT/8thlight/projects/factor/ttt/" . "ttt/")
+ ("/Users/MGT/clojure/lisp/src/" . "lisp/")
+ ("/Users/MGT/clojure/lisp/" . "src/")
+ ("/Users/MGT/8thlight/projects/ruby/artisan_api/spec/" . "artisan/")
+ ("/Users/MGT/8thlight/projects/ruby/artisan_api/lib/" . "artisan/")
+ ("/Users/MGT/8thlight/projects/ruby/artisan_api/" . "lib/")
+ ("/Users/MGT/8thlight/projects/ruby/artisan/lib/" . "artisan/")
+ ("/Users/MGT/8thlight/projects/ruby/artisan/" . "db/")
+ ("../../../app/views/" . "projects/")
+ ("/Users/MGT/8thlight/projects/ruby/abacus/features/" . "projects/")
+ ("/Users/MGT/8thlight/projects/ruby/abacus/db/" . "migrate/")
+ ("/Users/MGT/8thlight/projects/ruby/abacus/config/" . "environments/")
+ ("/Users/MGT/8thlight/projects/ruby/" . "otmobility/")
+ ("/Users/MGT/8thlight/projects/ruby/abacus/spec/javascripts/" . "views/")
+ ("/Users/MGT/8thlight/projects/ruby/abacus/spec/" . "javascripts/")
+ ("/Users/MGT/8thlight/projects/ruby/abacus/app/views/" . "projects/")
+ ("/Users/MGT/8thlight/projects/ruby/abacus/app/assets/javascripts/" . "views/")
+ ("/Users/MGT/8thlight/projects/ruby/abacus/app/assets/" . "javascripts/")
+ ("/Users/MGT/8thlight/projects/ruby/abacus/app/" . "views/")
+ ("/Users/MGT/8thlight/projects/ruby/abacus/lib/project_note/" . "memory/")
+ ("/Users/MGT/8thlight/projects/ruby/abacus/lib/" . "project/")
+ ("/Users/MGT/8thlight/projects/ruby/abacus/" . "spec/")
+ ("/Users/MGT/clojure/chat/test/console_chat/" . "test/")
+ ("/Users/MGT/clojure/chat/src/" . "console_chat/")
+ ("/Users/MGT/clojure/chat/test/" . "console_chat/")
+ ("/Users/MGT/clojure/chat/" . "src/")
+ ("/Users/MGT/8thlight/projects/clojure/clojurekoans/src/clojurekoans/" . "view/")
+ ("/Users/MGT/8thlight/projects/clojure/clojurekoans/src/" . "clojurekoans/")
+ ("/Users/MGT/8thlight/projects/clojure/clojurekoans/public/" . "stylesheets/")
+ ("/Users/MGT/8thlight/projects/clojure/clojurekoans/spec/" . "clojurekoans/")
+ ("/Users/MGT/8thlight/projects/clojure/clojurekoans/" . "src/")
+ ("~/.lein/" . "bin/")
+ ("/Users/MGT/8thlight/projects/clojure/cob_server/cob_spec/FitNesseRoot/HttpSuite/" . "FileContents/")
+ ("/Users/MGT/8thlight/projects/clojure/cob_server/cob_spec/FitNesseRoot/" . "FitNesse/")
+ ("/Users/MGT/8thlight/projects/clojure/cob_server/cob_spec/" . "fixtures/")
+ ("/Users/MGT/clojure/repl/src/" . "repl/")
+ ("/Users/MGT/clojure/repl/" . "src/")
+ ("/Users/MGT/8thlight/projects/clojure/cob_server/test/" . "cob_server/")
+ ("/Users/MGT/8thlight/projects/clojure/server/classes/server/" . "request/")
+ ("/Users/MGT/8thlight/projects/clojure/server/classes/" . "server/")
+ ("/Users/MGT/8thlight/projects/clojure/cob_server/src/server/" . "response/")
+ ("/Users/MGT/8thlight/projects/clojure/cob_server/src/src/" . "server/")
+ ("/Users/MGT/8thlight/projects/clojure/cob_server/src/" . "cob_server/")
+ ("/Users/MGT/8thlight/projects/clojure/cob_server/" . "resources/")
+ ("/Users/MGT/xhbtr/xhbtr_core1/xhbtr_core/app/controllers/" . "admin/")
+ ("/Users/MGT/xhbtr/xhbtr_core1/xhbtr_core/app/" . "controllers/")
+ ("/Users/MGT/xhbtr/xhbtr_core1/xhbtr_core/" . "config/")
+ ("/Users/MGT/8thlight/projects/clojure/Clojure-Cob-Spec/src/" . "cob_spec/")
+ ("/Users/MGT/8thlight/projects/clojure/Clojure-Cob-Spec/" . "src/")
+ ("/Users/MGT/.emacs.d/lib/" . "javascript/")
+ ("/Users/MGT/.emacs.d/" . "live-config/")
+ ("/Users/MGT/8thlight/projects/clojure/server/cob_spec/FitNesseRoot/HttpSuite/" . "FourOhFour/")
+ ("/Users/MGT/8thlight/projects/clojure/server/cob_spec/FitNesseRoot/" . "SimultaneousRequests/")
+ ("/Users/MGT/8thlight/projects/clojure/server/cob_spec/" . "FitNesseRoot/")
+ ("./src/" . "server/")
+ ("./" . "src/")
+ ("/Users/MGT/8thlight/projects/clojure/server/test/server/" . "response/")
+ ("/Users/MGT/8thlight/projects/clojure/server/src/server/connection/" . "socket_types/")
+ ("/Users/MGT/8thlight/projects/" . "clojure/")
+ ("/Users/MGT/8thlight/" . "clients/")
+ ("/Users/MGT/" . ".emacs.d/")
+ ("/Users/MGT/8thlight/projects/clojure/server/src/" . "server/")
+ ("/Users/MGT/8thlight/projects/clojure/server/test/" . "server/")
+ ("/Users/MGT/8thlight/projects/clojure/server/" . "src/")
+ ("/Users/MGT/8thlight/projects/clojure/" . "hosemonster/")
+ ("/Users/MGT/8thlight/projects/clojure/server/src/server/" . "response/")
+)
+
+;; ----- ido-work-directory-list -----
+(
+ "/Users/MGT/.emacs.d/live-config/"
+ "/Users/MGT/.emacs.d/"
+ "/Users/MGT/8thlight/clients/enova/portfolio.netcredit/features/"
+ "/Users/MGT/8thlight/clients/enova/identity.netcredit/app/models/"
+ "/Users/MGT/8thlight/clients/enova/portfolio.netcredit/app/models/"
+ "/Users/MGT/8thlight/clients/enova/portfolio.netcredit/app/presenters/contract/"
+ "/Users/MGT/8thlight/clients/enova/portfolio.netcredit/app/views/contract_templates/installment/"
+ "/Users/MGT/8thlight/clients/enova/account_home/app/views/loan_offers/"
+ "/Users/MGT/8thlight/clients/enova/account_home/app/controllers/"
+ "/Users/MGT/8thlight/clients/enova/account_home/config/"
+ "/Users/MGT/8thlight/clients/enova/portfolio.netcredit/config/"
+ "/Users/MGT/8thlight/clients/enova/portfolio.netcredit/app/controllers/v1/"
+ "/Users/MGT/8thlight/clients/enova/portfolio.netcredit/app/controllers/"
+ "/Users/MGT/8thlight/clients/enova/portfolio.netcredit/app/views/contract_templates/"
+ "/Users/MGT/8thlight/clients/enova/portfolio/app/views/contract_templates/installment/"
+ "/Users/MGT/8thlight/clients/enova/portfolio/app/views/contract_templates/"
+ "/Users/MGT/8thlight/clients/enova/portfolio/app/models/"
+ "/Users/MGT/8thlight/clients/enova/portfolio/"
+ "/Users/MGT/8thlight/projects/clojure/hosemonster/server/src/hosemonster/work_orders/"
+ "/Users/MGT/.emacs.d/config/"
+ "/Users/MGT/8thlight/projects/ruby/otmobility/otrouter/spec/spserver/"
+ "/Users/MGT/misc/solarized/"
+ "/Users/MGT/.emacs.d/lib/"
+ "/Users/MGT/8thlight/projects/clojure/hosemonster/server/src/hosemonster/util/"
+ "/Users/MGT/8thlight/projects/ruby/otmobility/otrouter/src/"
+ "/Users/MGT/8thlight/projects/ruby/otmobility/otrouter/spec/end_to_end/"
+ "/Users/MGT/8thlight/projects/ruby/otmobility/otrouter/spec/"
+ "/Users/MGT/8thlight/projects/clojure/hosemonster/server/src/hosemonster/"
+ "/Users/MGT/8thlight/projects/clojure/hosemonster/server/spec/hosemonster/"
+ "/Users/MGT/8thlight/projects/clojure/hosemonster/client/"
+ "/Users/MGT/8thlight/projects/clojure/hosemonster/client/src/hosemonster/crud/"
+ "/Users/MGT/clojure/Clojure-Tic-Tac-Toe/"
+ "/Users/MGT/"
+ "/Users/MGT/8thlight/projects/clojure/hosemonster/server/src/hosemonster/test_points/"
+ "/Users/MGT/8thlight/projects/clojure/hosemonster/server/src/hosemonster/flow_devices/"
+ "/Users/MGT/8thlight/projects/clojure/hosemonster/server/public/javascript/views/"
+ "/Users/MGT/8thlight/projects/clojure/hosemonster/server/public/javascript/models/"
+ "/Users/MGT/8thlight/projects/clojure/hosemonster/server/public/javascript/templates/"
+ "/Users/MGT/8thlight/projects/clojure/hosemonster/server/spec/hosemonster/work_orders/"
+ "/Users/MGT/8thlight/projects/clojure/hosemonster/server/public/javascript/"
+ "/Users/MGT/8thlight/projects/clojure/hosemonster/server/public/javascript/spec/views/"
+ "/Users/MGT/8thlight/projects/clojure/hosemonster/server/public/javascript/collections/"
+ "/Users/MGT/8thlight/projects/clojure/hosemonster/server/public/javascript/spec/fixtures/"
+ "/Users/MGT/8thlight/projects/clojure/hosemonster/server/public/javascript/spec/models/"
+ "/Users/MGT/8thlight/projects/clojure/hosemonster/server/src/hosemonster/jasmine/"
+ "/Users/MGT/8thlight/projects/clojure/hosemonster/"
+ "/Users/MGT/8thlight/projects/clojure/hosemonster/server/spec/hosemonster/javascripts/"
+ "/Users/MGT/8thlight/projects/clojure/hosemonster/server/spec/hosemonster/fire_pumps/"
+ "/Users/MGT/8thlight/projects/clojure/hosemonster/server/public/stylesheets/"
+ "/Users/MGT/8thlight/projects/clojure/hosemonster/server/"
+)
+
+;; ----- ido-work-file-list -----
+(
+ "live.el"
+ "init.el"
+ "accounting.feature"
+ "account.rb"
+ "account_summary.rb"
+ "installment_presenter.rb"
+ "VA.html.erb"
+ "contract.html.haml"
+ "loan_offers_controller.rb"
+ "loan_applications_controller.rb"
+)
+
+;; ----- ido-dir-file-cache -----
+(
+ ("/Users/MGT/" (20443 17361) "yi/" "xhbtr/" "visor.scpt" "visor copy.scpt" "VirtualBox VMs/" "test.rb" "test.java" "test.hs" "test.clj" "Test.class" "Terminal Saved Output.txt" "Sites/" "ruby/" "Public/" "Pictures/" "php package test/" "p18.clj" "old work/" "nt.sh" "node2/" "node-v0.4.8.tar.gz" "node-v0.4.8/" "nbproject/" "Music/" "Movies/" "misc/" "local/" "Library/" "lib/" "leksah.lkshw" "leksah.lkshs" "larghissimo1/" "java/" "irc.log.Window3" "irc.log.Window1" "index.php" "include/" "hello" "heat.settings" "heat.log.lck" "heat.log" "haskelltest/" "haskell/" "f/" "enclojure/" "echo" "Dropbox/" "Downloads/" "Documents/" "doc/" "Desktop/" "derek/" "clojure/" "C/" "books/" "blah2.txt" "blah.txt" "blah.jpg" "Applications/" "AnagramGame/" "a/" "8thlight/" ".ypp_42" ".Xcode/" ".Xauthority" ".wine/" ".viminfo" ".vegas/" ".Trash/" ".test.rb.swp" ".test.rb.swo" ".test.java.swp" ".test.java.swo" ".swp" ".subversion_IDEA/" ".subversion/" ".ssh/" ".sqlite_history" ".smex-items" ".slime-history.eld" ".sh_history" ".rvm/" ".rnd" ".psql_history" ".pry_history" ".profile.macports-saved_2011-07-11_at_10:20:21" ".profile.macports-saved_2011-07-11_at_10:03:19" ".profile.macports-saved_2011-07-11_at_09:55:23" ".profile" ".pow/" ".npm/" ".netbeans-registration/" ".netbeans/" ".nbprofiler/" ".mysql_history" ".macports/" ".m2old/" ".m2/" ".local/" ".lesshst" ".leksah-0.10/" ".lein/" ".jline-reply.history" ".jline-clojure.main.history" ".jin/" ".irssi/" ".irb_history" ".irb-history" ".ievms/" ".ido.last" ".heroku/" ".gitconfig" ".ghc/" ".gem/" ".gdb_history" ".fuel_history" ".freeciv-server_history" ".freeciv/" ".fontconfig/" ".erlang.cookie" ".emacs.d/" ".DS_Store" ".dropbox/" ".dbvis/" ".dbshell" ".cups/" ".config/" ".CFUserTextEncoding" ".cabal/" ".bash_profile" ".bash_history" ".#p18.clj" "#nt.sh#" "#.bash-profile#" "../" "./")
+
+ ("/Users/MGT/8thlight/projects/clojure/hosemonster/server/spec/hosemonster/fire_pumps/" (20423 58136) "fire_pumps_controller_spec.clj" "fire_pump_spec.clj" "../" "./")
+
+ ("/Users/MGT/8thlight/projects/clojure/hosemonster/" (20428 59215) "ui/" "stale/" "spec/" "server/" "Rakefile" "client/" ".gitignore" ".git/" ".DS_Store" "../" "./")
+
+ ("/Users/MGT/.emacs.d/config/" (20441 62760) "core.el" "bindings.el" "../" "./")
+
+ ("/Users/MGT/8thlight/clients/enova/portfolio.netcredit/config/" (20440 61577) "unicorn.rb" "schedule.yml" "routes.rb" "resque.yml" "newrelic.yml" "locales/" "initializers/" "environments/" "environment.rb" "deploy.yml" "database.yml" "cucumber.yml" "boot.rb" "application.rb" "../" "./")
+
+ ("/Users/MGT/8thlight/clients/enova/portfolio.netcredit/app/presenters/contract/" (20440 61577) "installment_presenter.rb" "base_presenter.rb" "../" "./")
+
+ ("/Users/MGT/.emacs.d/live-config/" (20442 14568) "yasnippet-conf.el" "windresize-conf.el" "util-fns.el" "undo-tree-conf.el" "smex-conf.el" "slime-conf.el" "ruby-conf.el" "ring+-conf.el" "README.md" "paredit-conf.el" "live.el~" "live.el" "lisps-conf.el" "javascript-conf.el" "ido-conf.el" "hooks.el" "highlight-flash-conf.el" "go-conf.el" "fuel-conf.el" "durendal-conf.el" "doremi-conf.el" "dirtree-conf.el" "cosmetic.el" "clojure-conf.el" "built-in.el" "auto-complete-conf.el" ".DS_Store" "../" "./")
+
+ ("/Users/MGT/Applications/" (20322 16408) "Spotify.app/" "../" "./")
+
+ ("/Users/MGT/.emacs.d/lib/" (20442 14515) "yasnippet/" "windresize.el" "undo-tree/" "textmate.el" "smooth-scrolling.el" "smex/" "slime/" "ruby/" "ring+.el" "rainbow-parens.el" "rainbow-delimiters.el" "paredit.el" "mwe-log-commands.el" "javascript/" "highlight.el" "haml-mode.el" "go-mode.el" "fuel/" "feature-mode.el" "eval-sexp-fu.el" "espresso.el" "durendal/" "doremi/" "dirtree.el" "dirtree/" "dircolors.el" "color-theme-solarized/" "color-theme/" "clojure-mode/" "blackbored.el" "auto-complete/" "align-cljlet/" "ac-slime/" ".DS_Store" "../" "./")
+
+ ("/Users/MGT/8thlight/clients/enova/portfolio.netcredit/features/" (20439 33187) "support/" "step_definitions/" "notice_of_adverse_action.feature" "lib/" "automated_fraud_checks.feature" "api/" "accounting_daily.feature" "accounting.feature" "../" "./")
+
+ ("/Users/MGT/8thlight/clients/enova/identity.netcredit/app/models/" (20441 61760) "sherlock_converter.rb" "schedule_type.rb" "schedule_frequency.rb" "schedule_finder.rb" "schedule.rb" "routing_number.rb" "region.rb" "postal_code.rb" "position.rb" "phone_number_type.rb" "phone_number_history.rb" "phone_number.rb" "person_finder.rb" "person.rb" "password_reset.rb" "opt_out.rb" "marital_status.rb" "language.rb" "job_category.rb" "iovation_report_error.rb" "iovation_report.rb" "income_type.rb" "income_history.rb" "government_identifier_type.rb" "government_identifier.rb" "employment_type.rb" "employment_history.rb" "email_search.rb" "email_domain.rb" "email_address_history.rb" "email_address.rb" "credit_report_value.rb" "credit_report_type.rb" "credit_report_sieve.rb" "credit_report_field_type.rb" "credit_report_field.rb" "credit_report_fetch.rb" "credit_report_error.rb" "credit_report.rb" "country.rb" "company.rb" "city.rb" "brand.rb" "bank_stat.rb" "bank_account_type.rb" "bank_account_history.rb" "bank_account.rb" "aggregate_report.rb" "address_type.rb" "address_history.rb" "address.rb" "account_updater.rb" "account_search_result.rb" "account_search.rb" "account_fuzzy_search.rb" "account_creator.rb" "account.rb" ".gitkeep" "../" "./")
+
+ ("/Users/MGT/8thlight/clients/enova/identity.netcredit/app/" (20439 36276) "views/" "submissions/" "presenters/" "models/" "middlewares/" "mailers/" "historians/" "helpers/" "credit_report_parsers/" "controllers/" "../" "./")
+
+ ("/Users/MGT/8thlight/clients/enova/identity.netcredit/" (20439 43965) "vendor/" "tmp/" "spec/" "script/" "README.md" "Rakefile" "public/" "log/" "lib/" "Guardfile" "Gemfile.lock" "Gemfile" "features/" "etc/" "doc/" "db/" "config.ru" "config/" "bin/" "app/" ".simplecov" ".rvmrc" ".rspec" ".rbenv-version" ".gitignore" ".git/" "../" "./")
+
+ ("/Users/MGT/8thlight/clients/enova/portfolio.netcredit/app/models/" (20439 33769) "tier.rb" "specified_installments_decision_input_compiler.rb" "scheduled_payment.rb" "rule_set_type.rb" "rule_set.rb" "repayment_method_change.rb" "repayment_method.rb" "region.rb" "product.rb" "postal_notification.rb" "payroll_frequency.rb" "payment_status.rb" "payment.rb" "net_fee_factor.rb" "mef_input_aggregator.rb" "loan_status.rb" "loan_state_transition.rb" "loan_purpose.rb" "loan_offer.rb" "loan_history_summary.rb" "loan_application_status.rb" "loan_application_state_transition.rb" "loan_application_search.rb" "loan_application_processor.rb" "loan_application_credit_report.rb" "loan_application.rb" "loan_agreement.rb" "loan.rb" "interest_rate.rb" "interest_multiplier.rb" "fraud_tag.rb" "equation_result_reason.rb" "equation_result.rb" "equation.rb" "email_stat.rb" "eligibility_discerner.rb" "decision_maker.rb" "decision_input_compiler.rb" "decision.rb" "country.rb" "contract_template.rb" "contract_signature.rb" "contract.rb" "break_even_month.rb" "brand.rb" "bank_stat.rb" "bank_account_manager.rb" "account_summary.rb" ".gitkeep" "../" "./")
+
+ ("/Users/MGT/8thlight/clients/enova/portfolio.netcredit/" (20440 61710) "vendor/" "tmp/" "test/" "spec/" "script/" "README.md" "Rakefile" "public/" "Procfile" "log/" "lib/" "Guardfile" "Gemfile.lock" "Gemfile" "features/" "etc/" "doc/" "db/" "coverage/" "config.ru" "config/" "app/" ".simplecov" ".rvmrc" ".rspec" ".rbenv-version" ".gitignore" ".git/" "../" "./")
+
+ ("/Users/MGT/8thlight/clients/enova/portfolio.netcredit/app/views/contract_templates/installment/" (20440 64267) "WI.html.erb" "VA.html.erb" "MO.html.erb" "MI.html.erb" "IL.html.erb" "../" "./")
+
+ ("/Users/MGT/8thlight/clients/enova/portal.netcredit/" (20439 47163) "vendor/" "tmp/" "spec/" "script/" "README.md" "Rakefile" "public/" "log/" "lib/" "Guardfile" "Gemfile.lock" "Gemfile" "features/" "etc/" "doc/" "db/" "config.ru" "config/" "app/" ".simplecov" ".rvmrc" ".rspec" ".gitignore" ".git/" "../" "./")
+
+ ("/Users/MGT/8thlight/clients/enova/portfolio.netcredit/app/presenters/" (20439 33186) "payment_history.rb" "loan_presenter.rb" "contract/" "../" "./")
+
+ ("/Users/MGT/8thlight/clients/enova/account_home/app/views/loan_offers/" (20440 43586) "show.html.haml" "risk_based_pricing.html.haml" "contract.html.haml" "_risk_based_pricing_notification.html.erb" "../" "./")
+
+ ("/Users/MGT/.emacs.d/" (20440 42759) "tmp/" "swank/" "README.md" "overtone-live-coding-emacs-8cca69d/" "live-config/" "lib/" "init.el" "games/" "etc/" "config/" "auto-save-list/" ".emacs.d" ".DS_Store" "../" "./")
+
+ ("/Users/MGT/8thlight/clients/enova/account_home/app/views/" (20439 49747) "shared/" "personal_info/" "login_update_mailer/" "loans/" "loan_offers/" "layouts/" "home/" "help/" "employment_info/" "bank_info/" "account/" "../" "./")
+
+ ("/Users/MGT/8thlight/clients/enova/account_home/app/controllers/" (20440 41955) "sessions_controller.rb" "personal_info_controller.rb" "loans_controller.rb" "loan_offers_controller.rb" "loan_applications_controller.rb" "help_controller.rb" "employment_info_controller.rb" "bank_info_controller.rb" "application_controller.rb" "account_controller.rb" "../" "./")
+
+ ("/Users/MGT/8thlight/clients/enova/account_home/app/" (20439 49747) "views/" "models/" "mailers/" "helpers/" "decorators/" "controllers/" "assets/" "../" "./")
+
+ ("/Users/MGT/8thlight/clients/enova/account_home/config/" (20439 49747) "unicorn.rb" "routes.rb" "newrelic.yml" "locales/" "initializers/" "example_database.yml" "environments/" "environment.rb" "deploy.yml" "cucumber.yml" "boot.rb" "application.rb" "../" "./")
+
+ ("/Users/MGT/8thlight/clients/enova/portfolio.netcredit/app/controllers/v1/" (20439 33186) "scheduled_payments_controller.rb" "rules_controller.rb" "products_controller.rb" "payments_controller.rb" "loans_controller.rb" "loan_offers_controller.rb" "loan_history_summaries_controller.rb" "loan_histories_controller.rb" "loan_applications_controller.rb" "loan_agreements_controller.rb" "contracts_controller.rb" "account_summary_controller.rb" "../" "./")
+
+ ("/Users/MGT/8thlight/clients/enova/portfolio.netcredit/app/controllers/" (20439 33367) "v1/" "status_controller.rb" "application_controller.rb" "../" "./")
+
+ ("/Users/MGT/8thlight/projects/factor/ttt/ttt/core/" (20413 4527) "core.factor" "core-tests.factor" "../" "./")
+
+ ("/Users/MGT/8thlight/projects/factor/ttt/ttt/strategy/ai/" (20413 28321) "ai.factor" "ai-tests.factor" "../" "./")
+
+ ("/Users/MGT/8thlight/projects/factor/ttt/ttt/ui/console/" (20413 16064) "console.factor" "console-tests.factor" "../" "./")
+
+ ("/Users/MGT/8thlight/projects/clojure/hosemonster/client/src/hosemonster/" (20422 8477) "util.clj" "ui.clj" "setup/" "report/" "remote.clj" "pdf_generator.clj" "Log.java" "log.clj" "hybrid_datastore.clj" "graphing/" "env.clj" "crud/" "core.clj" "client.clj" "../" "./")
+
+ ("/Users/MGT/8thlight/clients/enova/portfolio.netcredit/app/views/contract_templates/" (20439 33186) "installment/" "contract_signature.erb" "../" "./")
+
+ ("/Users/MGT/8thlight/clients/enova/portfolio.netcredit/app/views/" (20439 33186) "v1/" "noaa_templates/" "layouts/" "email_templates/" "contract_templates/" "../" "./")
+
+ ("/Users/MGT/8thlight/clients/enova/portfolio.netcredit/app/" (20439 33186) "workers/" "views/" "presenters/" "models/" "mailers/" "controllers/" "accountants/" "../" "./")
+
+ ("/Users/MGT/8thlight/clients/enova/acquisition.netcredit/app/views/apply/" (20439 39289) "step2.html.haml" "step1.html.haml" "_app_step_summary.html.haml" "_app_step_indicator.html.haml" "../" "./")
+
+ ("/Users/MGT/8thlight/clients/enova/acquisition.netcredit/app/views/" (20439 39289) "site/" "signin/" "shared/" "ppc/" "password_resets/" "layouts/" "email_templates/" "blog/" "apply/" "../" "./")
+
+ ("/Users/MGT/8thlight/clients/enova/acquisition.netcredit/app/" (20439 39289) "views/" "transformers/" "models/" "mailers/" "helpers/" "controllers/" "assets/" "../" "./")
+
+ ("/Users/MGT/8thlight/clients/enova/acquisition.netcredit/" (20439 42360) "vendor/" "tmp/" "spec/" "script/" "README.md" "Rakefile" "public/" "log/" "lib/" "Guardfile" "Gemfile.lock" "Gemfile" "features/" "etc/" "doc/" "db/" "config.ru" "config/" "blah" "bin/" "app/" "acquisition" ".simplecov" ".rvmrc" ".rspec" ".rbenv-version" ".rails_footnotes" ".powrc" ".gitignore" ".git/" "../" "./")
+
+ ("/Users/MGT/8thlight/clients/enova/account_home/" (20439 50870) "vendor/" "tmp/" "spec/" "script/" "README" "Rakefile" "public/" "log/" "lib/" "Guardfile" "Gemfile.lock" "Gemfile" "features/" "etc/" "doc/" "config.ru" "config/" "app/" ".simplecov" ".rvmrc" ".rspec" ".rbenv-version" ".gitignore" ".git/" "../" "./")
+
+ ("/Users/MGT/8thlight/clients/enova/" (20439 50087) "postal_service_mailer/" "postal_service.netcredit/" "portfolio.netcredit/" "portal.netcredit/" "pgs.netcredit/" "moriarty.netcredit/" "mef.netcredit/" "identity_client/" "identity.netcredit/" "acquisition.netcredit/" "account_home/" "../" "./")
+
+ ("/Users/MGT/.pow/identity.netcredit/log/" (20439 47992) "development.log" ".gitkeep" "../" "./")
+
+ ("/Users/MGT/8thlight/projects/factor/ttt/ttt/" (20413 2609) "ui/" "ttt.factor" "tools/" "strategy/" "player/" "game/" "core/" "../" "./")
+
+ ("/Users/MGT/8thlight/projects/factor/ttt/ttt/game/" (20413 3480) "game.factor" "game-tests.factor" "../" "./")
+
+ ("/Users/MGT/8thlight/projects/clojure/hosemonster/server/src/hosemonster/util/" (20434 28778) "view_helpers.clj" "not_found.hiccup" "model.clj" "layout.hiccup" "dashboard_helper.clj" "controller.clj" "_flash_banners.hiccup" "_dashboard.hiccup.clj" ".#_dashboard.hiccup.clj" "../" "./")
+
+ ("/Users/MGT/8thlight/projects/clojure/hosemonster/server/src/hosemonster/work_orders/" (20439 28982) "work_orders_controller.clj" "work_order.clj" "view.hiccup.clj" "form.hiccup.clj" "_js_includes.hiccup.clj" "_flow_devices.hiccup.clj" "../" "./")
+
+ ("/Users/MGT/8thlight/clients/enova/portfolio/app/views/contract_templates/installment/" (20439 33186) "WI.html.erb" "VA.html.erb" "MI.html.erb" "IL.html.erb" "../" "./")
+
+ ("/Users/MGT/8thlight/clients/enova/portfolio/app/views/contract_templates/" (20439 33186) "installment/" "contract_signature.erb" "../" "./")
+
+ ("/Users/MGT/8thlight/clients/enova/portfolio/app/views/" (20439 33186) "v1/" "noaa_templates/" "layouts/" "email_templates/" "contract_templates/" "../" "./")
+
+ ("/Users/MGT/8thlight/clients/enova/portfolio/app/models/" (20439 33769) "tier.rb" "specified_installments_decision_input_compiler.rb" "scheduled_payment.rb" "rule_set_type.rb" "rule_set.rb" "repayment_method_change.rb" "repayment_method.rb" "region.rb" "product.rb" "postal_notification.rb" "payroll_frequency.rb" "payment_status.rb" "payment.rb" "net_fee_factor.rb" "mef_input_aggregator.rb" "loan_status.rb" "loan_state_transition.rb" "loan_purpose.rb" "loan_offer.rb" "loan_history_summary.rb" "loan_application_status.rb" "loan_application_state_transition.rb" "loan_application_search.rb" "loan_application_processor.rb" "loan_application_credit_report.rb" "loan_application.rb" "loan_agreement.rb" "loan.rb" "interest_rate.rb" "interest_multiplier.rb" "fraud_tag.rb" "equation_result_reason.rb" "equation_result.rb" "equation.rb" "email_stat.rb" "eligibility_discerner.rb" "decision_maker.rb" "decision_input_compiler.rb" "decision.rb" "country.rb" "contract_template.rb" "contract_signature.rb" "contract.rb" "break_even_month.rb" "brand.rb" "bank_stat.rb" "bank_account_manager.rb" "account_summary.rb" ".gitkeep" "../" "./")
+
+ ("/Users/MGT/8thlight/clients/enova/portfolio/app/" (20439 33186) "workers/" "views/" "presenters/" "models/" "mailers/" "controllers/" "accountants/" "../" "./")
+
+ ("/Users/MGT/8thlight/clients/enova/portfolio/" (20439 33442) "vendor/" "test/" "spec/" "script/" "README.md" "Rakefile" "public/" "Procfile" "log/" "lib/" "Guardfile" "Gemfile.lock" "Gemfile" "features/" "etc/" "doc/" "db/" "config.ru" "config/" "app/" ".simplecov" ".rvmrc" ".rspec" ".rbenv-version" ".gitignore" ".git/" "../" "./")
+
+ ("/Users/MGT/8thlight/clients/" (20439 33175) "enova/" "../" "./")
+
+ ("/Users/MGT/8thlight/" (20439 33170) "projects/" "lib/" "katas/" "clients/" ".DS_Store" "../" "./")
+
+ ("/Users/MGT/8thlight/projects/ruby/otmobility/otrouter/spec/spserver/" (20434 30329) "spserver_spec.rb" "spec_helper.rb" "heuristic_spec.rb" "cost_spec.rb" "astar_spec.rb" "../" "./")
+
+ ("/Users/MGT/misc/solarized/" (20439 28260) "xresources-colors-solarized/" "visualstudio-colors-solarized/" "vim-colors-solarized/" "utils/" "textwrangler-bbedit-colors-solarized/" "textmate-colors-solarized/" "seestyle-colors-solarized/" "README.md" "putty-colors-solarized/" "osx-terminal.app-colors-solarized/" "netbeans-colors-solarized/" "mutt-colors-solarized/" "LICENSE" "iterm2-colors-solarized/" "intellij-colors-solarized/" "img/" "gimp-palette-solarized/" "files/" "emacs-colors-solarized/" "DEVELOPERS.mkd" "CHANGELOG.mkd" "apple-colorpalette-solarized/" "adobe-swatches-solarized/" ".git/" "../" "./")
+
+ ("/Users/MGT/misc/" (20439 28224) "solarized/" "../" "./")
+
+ ("/Users/" (20364 62233) "Shared/" "MGT/" "MG/" "markgrant/" "Home/" "contemporaryartdaily/" ".localized" ".DS_Store" "../" "./")
+
+ ("/Users/MGT/.emacs.d/tmp/" (20433 14579) "places" "backups/" "autosaves/" "ac-comphist.dat" "../" "./")
+
+ ("/Users/MGT/8thlight/projects/ruby/otmobility/otrouter/src/" (20434 24079) "spserver.h" "spserver.c" "spserver" "Makefile" "ll_processor.h" "ll_processor.c" "link_data_parser.h" "link_data_parser.c" "libspserver_cost.dylib" "libotrouter.dylib" "libotrouter.0.1.dylib" "libht.dylib" "ht.h" "ht.c" "cost.h" "cost.c" "CMakeLists.txt" "CMakeFiles/" "CMakeCache.txt" "cmake_install.cmake" "binary-heap.h" "binary-heap.c" "astar.h" "astar.c" "amqp_util.h" "amqp_util.c" ".#link_data_parser.c" "../" "./")
+
+ ("/Users/MGT/8thlight/projects/ruby/otmobility/otrouter/" (20434 19328) "vendor/" "temp" "st-nik/" "src/" "sql/" "spec/" "shp/" "README.md" "Rakefile" "Makefile" "Gemfile.lock" "Gemfile" "FindICU.cmake" "debug-rspec" "config/" "CMakeLists.txt" "CMakeFiles/" "CMakeCache.txt" "cmake_install.cmake" "client/" ".rvmrc" ".rspec" ".gitmodules" ".gitignore" ".git/" "../" "./")
+
+ ("/Users/MGT/8thlight/projects/ruby/otmobility/otrouter/spec/end_to_end/" (20432 61443) "spec_helper.rb" "simple_graph_spec.rb" "../" "./")
+
+ ("/Users/MGT/8thlight/projects/ruby/otmobility/otrouter/client/views/" (20431 31634) "layout.haml" "index.haml" "../" "./")
+
+ ("/Users/MGT/8thlight/projects/ruby/otmobility/otrouter/client/lib/ontime/" (20431 31634) "models.rb" "directions.rb" "../" "./")
+
+ ("/Users/MGT/8thlight/projects/ruby/otmobility/otrouter/client/lib/" (20431 31634) "ontime/" "dm-geo.rb" "../" "./")
+
+ ("/Users/MGT/8thlight/projects/ruby/otmobility/otrouter/client/" (20431 31634) "views/" "public/" "poc_server.rb" "lib/" "Gemfile.lock" "Gemfile" "config.ru" "client.rb" "../" "./")
+
+ ("/Users/MGT/8thlight/projects/ruby/otmobility/otrouter/shp/" (20431 31634) "shp_loader2.rb" "shp_loader.rb" "README" "../" "./")
+
+ ("/Users/MGT/8thlight/projects/ruby/otmobility/otrouter/st-nik/" (20431 31634) "st_nik.py" "README.md" "config/" "../" "./")
+
+ ("/Users/MGT/8thlight/projects/ruby/otmobility/otrouter/spec/" (20431 31634) "spserver/" "spec_helper.rb" "hacks/" "end_to_end/" "../" "./")
+
+ ("/Users/MGT/8thlight/projects/ruby/otmobility/otrouter/vendor/" (20431 31634) "rabbitmq-codegen/" "rabbitmq-c/" "../" "./")
+
+ ("/Users/MGT/8thlight/projects/clojure/clojurekoans/public/stylesheets/" (20382 9513) "style.css" "Optima.ttc" "optima-webfont.woff" "optima-webfont.ttf" "optima-webfont.eot" "iestyle.css" "clojurekoans.css" "../" "./")
+
+ ("/Users/MGT/8thlight/projects/clojure/clojurekoans/src/clojurekoans/view/" (20397 30821) "view_helpers.clj" "not_found.hiccup.clj" "layout.hiccup.clj" "index.hiccup.clj" "../" "./")
+
+ ("/Users/MGT/8thlight/projects/go/go-koans/" (20388 17151) "setup_koans_test.go" "README.md" "about_variadic_functions.go" "about_types.go" "about_structs.go" "about_strings.go" "about_slices.go" "about_pointers.go" "about_panics.go" "about_maps.go" "about_interfaces.go" "about_files.go" "about_enumeration.go" "about_control_flow.go" "about_concurrency.go" "about_common_interfaces.go" "about_channels.go" "about_basics.go" "about_arrays.go" "about_anonymous_functions.go" "about_allocation.go" ".git/" "../" "./")
+
+ ("/Users/MGT/clojure/lisp/" (20397 35918) "test/" "target/" "src/" "README" "project.clj" "lib/" ".lein-plugins/" ".lein-deps-sum" ".gitignore" "../" "./")
+
+ ("/Users/MGT/clojure/lisp/src/lisp/" (20397 52044) "tokenizer.clj" "parser.clj" "evaluator.clj" "env.clj" "core.clj" "../" "./")
+
+ ("/Users/MGT/8thlight/projects/clojure/hosemonster/server/src/hosemonster/accounts/" (20428 51095) "view.hiccup" "index.hiccup" "form.hiccup" "accounts_controller.clj" "account.clj" "../" "./")
+
+ ("/Users/MGT/8thlight/projects/clojure/hosemonster/server/src/hosemonster/admin/" (20428 51095) "util.clj" "index.hiccup" "admin_controller.clj" "_header.hiccup" "../" "./")
+
+ ("/Users/MGT/8thlight/projects/clojure/hosemonster/server/src/hosemonster/customers/" (20432 58979) "view.hiccup" "index.hiccup" "form.hiccup" "customers_controller.clj" "customer.clj" "../" "./")
+
+ ("/Users/MGT/8thlight/projects/clojure/hosemonster/server/src/hosemonster/users/" (20432 58979) "users_controller.clj" "user.clj" "form.hiccup" "../" "./")
+
+ ("/Users/MGT/8thlight/projects/clojure/hosemonster/server/src/hosemonster/job_sites/" (20432 58979) "view.hiccup.clj" "job_sites_controller.clj" "job_site.clj" "form.hiccup.clj" "../" "./")
+
+ ("/Users/MGT/8thlight/projects/clojure/hosemonster/server/" (20432 59260) "WEB-INF/" "src/" "spec/" "public/" "project.clj" "lib/" "config/" ".lein-deps-sum" ".DS_Store" "../" "./")
+
+ ("/Users/MGT/8thlight/projects/clojure/hosemonster/server/public/stylesheets/" (20432 58979) "spec/" "reset.css" "jquery-ui.css" "hosemonster.css" ".DS_Store" "../" "./")
+
+ ("/Users/MGT/8thlight/projects/clojure/hosemonster/server/src/hosemonster/flow_devices/" (20432 58979) "index.hiccup" "form.hiccup" "flow_devices_controller.clj" "flow_device.clj" "_header.hiccup" "../" "./")
+
+ ("/Users/MGT/8thlight/projects/clojure/hosemonster/client/" (20432 59174) "target/" "src/" "spec/" "resources/" "README" "project.clj" "pom.xml" "old/" "misc/" "lib/" "hosemonster-client-1.0.0.jar" "classes/" ".lein-failures" ".lein-deps-sum" ".DS_Store" "../" "./")
+
+ ("/Users/MGT/8thlight/projects/clojure/hosemonster/client/src/hosemonster/crud/" (20432 59076) "real_crud.clj" "crud_interactor.clj" "../" "./")
+
+ ("/Users/MGT/8thlight/projects/clojure/hosemonster/server/src/hosemonster/" (20432 58979) "work_orders/" "web_ui.clj" "util/" "users/" "token.clj" "test_points/" "sessions/" "server_setup.clj" "server_client.clj" "not_found.clj" "login_ui.clj" "login.clj" "job_sites/" "jasmine/" "flow_devices/" "fire_pumps/" "customers/" "api/" "admin/" "accounts/" "../" "./")
+
+ ("/Users/MGT/8thlight/projects/clojure/hosemonster/server/spec/hosemonster/test_points/" (20428 59215) "test_point_spec.clj" "stream_spec.clj" "form.hiccup" "../" "./")
+
+ ("/Users/MGT/8thlight/projects/clojure/hosemonster/server/spec/hosemonster/javascripts/" (20428 59215) "jasmine_runner.clj" "../" "./")
+
+ ("/Users/MGT/8thlight/projects/clojure/hosemonster/server/spec/hosemonster/" (20429 839) "work_orders/" "web_ui_spec.clj" "util/" "users/" "token_spec.clj" "test_points/" "spec_helpers.clj" "sessions/" "server_setup_spec.clj" "server_client_spec.clj" "not_found_spec.clj" "mock_login_ui.clj" "login_spec.clj" "job_sites/" "javascripts/" "flow_devices/" "fire_pumps/" "customers/" "api/" "admin/" "accounts/" ".DS_Store" "../" "./")
+
+ ("/Users/MGT/8thlight/projects/clojure/hosemonster/server/src/hosemonster/jasmine/" (20429 1138) "jasmine_specs.hiccup.clj" "jasmine_controller.clj" "../" "./")
+
+ ("/Users/MGT/8thlight/projects/clojure/hosemonster/server/public/javascript/spec/models/" (20428 59215) "testpoint_spec.js" "stream_spec.js" "jasmine.js" "flowdevice_spec.js" "../" "./")
+
+ ("/Users/MGT/8thlight/projects/clojure/hosemonster/server/public/javascript/spec/fixtures/" (20428 59215) "flow_devices_dialog.html" "../" "./")
+
+ ("/Users/MGT/8thlight/projects/clojure/hosemonster/server/public/javascript/collections/" (20428 59215) "testpoints.js" "streams.js" "../" "./")
+
+ ("/Users/MGT/8thlight/projects/clojure/hosemonster/server/public/javascript/spec/views/" (20428 59215) "testpoint_edit_spec.js" "testpoint_display_spec.js" "stream_edit_spec.js" "stream_display_spec.js" "flowdevicesdialog_spec.js" "../" "./")
+
+ ("/Users/MGT/8thlight/projects/clojure/hosemonster/server/public/javascript/" (20428 59215) "views/" "underscore.js" "testpoints.js" "templates/" "spec/" "namespace.js" "mustache.js" "models/" "jquery.js" "jquery-ui.js" "hosemonster.js" "collections/" "backbone.js" "backbone-relational.js" ".DS_Store" "../" "./")
+
+ ("/Users/MGT/8thlight/projects/clojure/hosemonster/server/spec/hosemonster/work_orders/" (20429 1288) "work_orders_controller_spec.clj" "work_order_spec.clj" "../" "./")
+
+ ("/Users/MGT/8thlight/projects/clojure/hosemonster/server/public/javascript/templates/" (20428 59215) "testpoint_edit.html" "testpoint_display.html" "stream_edit.html" "stream_display.html" "../" "./")
+
+ ("/Users/MGT/8thlight/projects/clojure/hosemonster/server/public/javascript/models/" (20428 59215) "testpoint.js" "stream.js" "flowdevice.js" "../" "./")
+
+ ("/Users/MGT/8thlight/projects/clojure/hosemonster/server/public/javascript/views/" (20428 59215) "testpoint_list.js" "testpoint_edit.js" "testpoint_display.js" "stream_edit.js" "stream_display.js" "flowdevicesdialog.js" "base.js" "../" "./")
+
+ ("/Users/MGT/8thlight/projects/clojure/hosemonster/server/src/hosemonster/test_points/" (20428 59215) "test_points_controller.clj" "test_point.clj" "stream.clj" "../" "./")
+
+ ("/Users/MGT/clojure/Clojure-Tic-Tac-Toe/" (20431 3374) "tictactoe-2.0.0-SNAPSHOT.jar" "tictactoe-2.0.0-SNAPSHOT-standalone.jar" "test/" "src/" "README" "project.clj" "lib/" "classes/" "bin/" ".settings/" ".project" ".lein-failures" ".lein-deps-sum" ".gitignore" ".git/" ".DS_Store" ".classpath" "../" "./")
+
+ ("/Users/MGT/8thlight/projects/ruby/otmobility/" (20431 31628) "otrouter_old/" "otrouter/" "geocoder/" "../" "./")
+)
+
+;; ----- ido-unc-hosts-cache -----
+t

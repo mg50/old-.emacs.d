@@ -1,0 +1,29 @@
+require 'contact/contact_dbadapter'
+require 'contact/contact_interactor'
+
+class ContactsController < ApplicationController
+  before_filter :admin_required
+  before_filter :set_interactor
+
+  def create
+    attrs = params[:contact]
+    callback = lambda { |client|
+      render :json => client.to_json
+    }
+    @interactor.create(attrs, callback)
+  end
+
+  def update
+    id = params[:id].to_i
+    attributes = params[:contact]
+    callback = lambda { |contact|
+      render json: contact.to_json
+    }
+    @interactor.update(id, attributes, callback)
+  end
+
+
+  def set_interactor
+    @interactor = Interactor::Contact.new
+  end
+end

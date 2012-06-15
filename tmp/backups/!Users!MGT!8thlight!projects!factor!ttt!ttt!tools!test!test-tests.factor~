@@ -1,0 +1,2 @@
+USING: kernel ttt.tools.test tools.test ;
+IN: ttt.tools.test-tests

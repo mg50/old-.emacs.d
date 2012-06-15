@@ -1,0 +1,6 @@
+USING: ttt.player ;
+IN: ttt.player.human
+
+TUPLE: human < player
+
+M: prompt-move (

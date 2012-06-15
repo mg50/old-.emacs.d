@@ -1,0 +1,151 @@
+(ns hosemonster.web-ui
+  (:use
+    [hyperion.core :only [find-by-key find-by-kind]]
+    [joodo.views :only [render-template]]
+    [ring.util.response :only [redirect-after-post file-response response]]
+    [chee.string :only [snake-case spear-case title-case]]
+    [hosemonster.ui]
+    [hosemonster.util.controller :only [errors->sentences]]
+    [hosemonster.not-found :only [not-found]]
+    [clojure.contrib.json :only [json-str]])
+  (:require
+    [clojure.string :as str]))
+
+(defn plural-kind [kind]
+  (str kind "s"))
+
+(def kind-to-color
+  {"customer" "drawer-level-1-color"
+  "job-site" "drawer-level-2-color"
+  "fire-pump" "drawer-level-3-color"
+  "work-order" "drawer-level-4-color"})
+
+(defn format-kind-for-view [kind]
+  (-> kind snake-case plural-kind))
+
+(defmulti dashboard-data-for :kind)
+
+(defmethod dashboard-data-for "job-site" [saved-job-site]
+  (let [customer (find-by-key (:customer-key saved-job-site))
+        job-sites (find-by-kind "job-site" :filters [[:= :customer-key (:key customer)]])
+        fire-pumps (find-by-kind "fire-pump" :filters [[:= :job-site-key (:key saved-job-site)]])]
+    {:customer customer
+    :job-sites job-sites
+    :fire-pumps fire-pumps
+    :expanded-job-site saved-job-site
+    :class-for-model-link (fn [model] (if (= (:key model) (:key saved-job-site))
+                                        "active-model"
+                                        (str "link-container " (kind-to-color (:kind model)))))
+    :is-expanded (fn [model]
+    (= (:key model) (:key saved-job-site)))}))
+
+
+(defmethod dashboard-data-for "fire-pump" [saved-fire-pump]
+  (let [work-orders (find-by-kind "work-order" :filters [[:= :fire-pump-key (:key saved-fire-pump)]])
+        job-site (find-by-key (:job-site-key saved-fire-pump))
+        fire-pumps (find-by-kind "fire-pump" :filters [[:= :job-site-key (:key job-site)]])
+        customer (find-by-key (:customer-key job-site))
+        job-sites (find-by-kind "job-site" :filters [[:= :customer-key (:key customer)]])
+        work-orders (find-by-kind "work-order" :filters [[:= :fire-pump-key (:key saved-fire-pump)]])]
+    {:customer customer
+    :job-sites job-sites
+    :work-orders work-orders
+    :fire-pumps fire-pumps
+    :expanded-job-site job-site
+    :expanded-fire-pump saved-fire-pump
+    :class-for-model-link (fn [model] (if (= (:key model) (:key saved-fire-pump))
+                                        "active-model"
+                                        (str "link-container " (kind-to-color (:kind model)))))
+    :is-expanded (fn [model]
+    (contains? #{(:key saved-fire-pump) (:key job-site)} (:key model)))}))
+
+(defmethod dashboard-data-for "work-order" [saved-work-order]
+  (let [fire-pump (find-by-key (:fire-pump-key saved-work-order))
+        work-orders (find-by-kind "work-order" :filters [[:= :fire-pump-key (:key fire-pump)]])
+        job-site (find-by-key (:job-site-key fire-pump))
+        fire-pumps (find-by-kind "fire-pump" :filters [[:= :job-site-key (:key job-site)]])
+        customer (find-by-key (:customer-key job-site))
+        job-sites (find-by-kind "job-site" :filters [[:= :customer-key (:key customer)]])]
+    {:customer customer
+    :job-sites job-sites
+    :fire-pumps fire-pumps
+    :expanded-job-site job-site
+    :work-orders work-orders
+    :expanded-fire-pump fire-pump
+    :class-for-model-link (fn [model] (if (= (:key model) (:key saved-work-order))
+                                        "active-model"
+                                        (str "link-container " (kind-to-color (:kind model)))))
+    :is-expanded (fn [model]
+    (contains? #{(:key fire-pump) (:key job-site) (:key saved-work-order)} (:key model)))}))
+
+(defmethod dashboard-data-for "customer" [saved-customer]
+  (let [job-sites (find-by-kind "job-site" :filters [[:= :customer-key (:key saved-customer)]])]
+    {:customer saved-customer
+    :job-sites job-sites
+    :class-for-model-link (fn [model] (if (= (:key model) (:key saved-customer))
+                                        "active-model"
+                                        (str "link-container " (kind-to-color (:kind model)))))
+    :is-expanded (fn [model] (= (:key model) (:key saved-customer)))}))
+
+
+(defmethod dashboard-data-for "test-point" [saved-customer])
+
+
+(defn render-model [{:keys [kind errors] :as model}]
+  (let [flash {:errors (errors->sentences errors)}
+        template (str (format-kind-for-view kind) "/view")
+        kind-key (keyword kind)
+        dashboard-data (dashboard-data-for model)]
+    (render-template template kind-key model :flash flash :dashboard-data dashboard-data)))
+
+(defn format-kind-for-url [kind]
+  (-> kind spear-case plural-kind))
+
+(defn format-kind-for-human [kind]
+  (title-case kind))
+
+(defn model-view-url [{:keys [kind] :as model}]
+  (format "/%s/%s" (format-kind-for-url kind) (:key model)))
+
+(defn redirect-to-model [model message]
+  {:status  303
+   :headers {"Location" (model-view-url model)}
+   :body    ""
+   :flash {:successes [message]}})
+
+(defn errors->human [{:keys [errors] :as model}]
+  (if (not (empty? errors))
+    (let [readable-errors (reduce #(assoc %1 (key %2) (str/join ", " (val %2))) {} errors)]
+      (assoc model :errors readable-errors))
+    model))
+
+(defn render-edit-model [{:keys [kind] :as model}]
+  (let [template (str (format-kind-for-view kind) "/form")
+        kind-key (keyword kind)
+        dashboard-data (dashboard-data-for model)
+        model (errors->human model)]
+    (render-template template kind-key model :dashboard-data dashboard-data)))
+
+(defn jsonify-test-point [test-point]
+  (let [streams (:streams test-point)
+        streams (map (fn [stream]
+                       (dissoc stream :updated-at :created-at))
+                     streams)]
+    (json-str (assoc (dissoc test-point :updated-at :created-at) :streams streams))))
+
+(deftype WebUI []
+  HosemonsterUI
+  (save-succeeded [this model] (if (= "test-point" (:kind model))
+                                 (response (jsonify-test-point model))
+                                 (redirect-to-model model (format "The %s was successfully saved." (format-kind-for-human (:kind model))))))
+  (display-model [this model] (render-model model))
+  (display-edit [this model] (render-edit-model model))
+  (model-not-found [this] (not-found))
+  (display-customers [this customers]
+    (render-template "customers/index" :customers customers))
+  (display-validation-errors [this model] (render-edit-model model))
+  (display-report [this report-file]
+    (file-response report-file)))
+
+(defn new-web-ui []
+  (WebUI.))

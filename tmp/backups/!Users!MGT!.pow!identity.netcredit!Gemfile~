@@ -1,0 +1,124 @@
+source 'http://rubygems.org'
+source 'http://gems.enova.com'
+
+gem 'rails', '~> 3.2.3'
+
+gem 'pg', '~> 0.13.0'
+gem 'foreigner'
+gem 'whiskey_disk'
+gem 'unicorn'
+
+# Production Logging
+gem 'SyslogLogger', :require => 'syslog_logger'
+
+# Memcache client
+gem 'dalli', '1.1.2'
+
+# Exception notification
+gem 'airbrake', '3.0.4'
+
+# Configuration
+gem 'figgy'
+
+# Hash transformation
+gem 'tranny'
+
+# Lookup Tables
+gem "lookup_by", "0.0.4"
+
+# Encryption
+gem 'bcrypt-ruby'
+
+# JSON Templating
+gem 'rabl'
+
+# Validation
+gem 'spectator-validates_email', require: 'validates_email'
+
+# Multiple row insert support
+gem 'activerecord-import'
+
+# Internal Services / Gems
+gem 'date_schedules', '0.5.0'
+gem 'date_schedules_adjustment', '0.4.1'
+gem 'blob_client', git: 'git://git.cashnetusa.com/gems/blob_client.git'
+
+gem "newrelic_rpm"
+
+developing_locally = false
+if developing_locally
+  gem 'sherlock', path: '../sherlock'
+  gem 'gverify', '>= 1.9.1', path: '../gverify'
+  gem 'clarity', '>= 2.0.0', path: '../clarity'
+  gem 'transunion', path: '../transunion'
+  gem 'teletrack', path: '../teletrack'
+  gem 'iovation', path: '../iovation'
+  gem 'veritrac', path: '../veritrac'
+  gem 'superone', path: '../superone'
+  gem 'datax', path: '../datax'
+  gem 'lexis_nexis', path: '../lexis_nexis'
+
+  gem 'netcredit_junk_drawer', path: '../netcredit_junk_drawer', require: 'netcredit/junk_drawer'
+
+  group :development, :test do
+    gem 'identity_client', path: '../identity_client', require: 'identity'
+    gem 'surrogate', path: '../surrogate'
+    gem 'cukapi', path: '../cukapi', require: false
+  end
+else
+  gem 'sherlock', git: 'git://git.cashnetusa.com/gems/sherlock.git'
+  gem 'gverify', '>= 1.9.1', git: 'git://git.cashnetusa.com/gems/gverify.git'
+  gem 'clarity', '>= 2.0.0', git: 'git://git.cashnetusa.com/gems/clarity.git'
+  gem 'transunion', git: 'git://git.cashnetusa.com/gems/transunion.git'
+  gem 'teletrack', '>= 2.0.0', git: 'git://git.cashnetusa.com/gems/teletrack.git'
+  gem 'iovation', git: 'git://git.cashnetusa.com/gems/iovation.git'
+  gem 'veritrac', git: 'git://git.cashnetusa.com/gems/veritrac.git'
+  gem 'superone', git: 'git://git.cashnetusa.com/gems/superone.git'
+  gem 'datax', git: 'git://git.cashnetusa.com/gems/datax.git'
+  gem 'lexis_nexis', git: 'git://git.cashnetusa.com/gems/lexis_nexis.git'
+  gem 'netcredit_junk_drawer', git: 'git://git.cashnetusa.com/netcredit/netcredit_junk_drawer.git', require: 'netcredit/junk_drawer'
+
+  group :development, :test do
+    gem 'identity_client', git: 'git://git.cashnetusa.com/netcredit/identity_client.git'
+    gem 'surrogate', git: 'git://git.cashnetusa.com/gems/surrogate.git'
+    gem 'cukapi', git: 'git://git.cashnetusa.com/gems/cukapi.git', require: false, branch: 'json_spec'
+  end
+end
+
+group :test do
+  gem 'database_cleaner', '0.6.7'
+
+  gem 'cucumber-rails',     '1.1.1', require: false
+  gem 'pickle',             '0.4.10', git: 'https://github.com/companygardener/pickle.git'
+
+  gem 'launchy',          '2.0.5'
+
+  gem 'guard-bundler',    '0.1.3'
+  gem 'guard-rspec',      '0.5.0'
+  gem 'guard-cucumber',   '0.7.3'
+
+  gem "spork",            "> 0.9.0.rc"
+  gem 'guard-spork',      '0.3.1'
+
+  gem 'rb-fsevent',       '0.9.0'
+  gem 'growl',            '1.0.3'
+
+  gem 'simplecov',        '0.5.4', require: false
+  gem 'simplecov-rcov',   '0.2.3', require: false
+
+  gem 'webmock'
+  gem 'json_spec'
+  gem 'valid_attribute'
+end
+
+group :development, :test do
+  gem 'rspec-rails',        '~> 2.8.0'
+  gem 'factory_girl_rails', '1.3.0'
+  gem 'capybara',           '1.1.1'
+
+  gem 'timecop',            '0.3.5'
+  gem 'pry',                '0.9.6.2'
+  gem 'pry-remote'
+
+  gem 'faker'
+end

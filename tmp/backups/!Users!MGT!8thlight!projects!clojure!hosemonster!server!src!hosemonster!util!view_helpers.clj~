@@ -1,0 +1,26 @@
+(ns hosemonster.util.view-helpers
+  "Put helper functions for views in this namespace."
+  (:use
+    [joodo.views :only (render-partial *view-context*)]
+    [joodo.middleware.request :only (*request*)]
+    [hiccup.page-helpers]
+    [hiccup.form-helpers]
+    [clojure.contrib.json :only [json-str]]))
+
+
+(defn render-backbone-template [name]
+  (slurp (str "public/javascript/templates/" name ".html")))
+
+
+(defn recursively-remove-dates [hash]
+  (let [hash* (dissoc hash :created-at :updated-at)]
+    (reduce (fn [h [k v]]
+              (merge h {k (if (associative? v)
+                            (recursively-remove-dates v)
+                            v)}))
+            {}
+            hash*)))
+
+
+(defn jsonify-model [model]
+  (json-str (recursively-remove-dates model)))

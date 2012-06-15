@@ -1,0 +1,56 @@
+require 'project/project_dbadapter'
+require 'project/project_interactor'
+
+class ProjectsController < ApplicationController
+
+  before_filter :set_interactor
+  before_filter :admin_required
+
+  def index
+    status = params[:status]
+    callback = lambda { |all|
+      respond_to do |format|
+        format.html { render :action => "index", :locals => {:all => all} }
+        format.json { render :json => all.to_json(:include => [:client, :project_note])
+      }
+      end
+    }
+
+    if status
+      @interactor.find_all_by_status(status, callback)
+    else
+      @interactor.find_all(callback)
+    end
+  end
+
+  def create
+    attributes = params[:project]
+    callback = lambda { |project|
+      render :json => project.to_json
+    }
+    @interactor.create(attributes, callback)
+  end
+
+  def show
+    id = params[:id].to_i
+    callback = lambda { |project|
+      render :json => project.to_json(:include => [:client, :project_note])
+    }
+    @interactor.find(id, callback)
+  end
+
+  def update
+    id = params[:id].to_i
+    attributes = params[:project]
+    callback = lambda { |project|
+      render :json => project.to_json(:include => [:client, :project_note])
+    }
+    @interactor.update(id, attributes, callback)
+  end
+
+  private
+
+  def set_interactor
+    @interactor = Interactor::Project.new
+  end
+end

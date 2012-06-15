@@ -1,0 +1,96 @@
+require 'postal_service_mailer/mock'
+
+class LoanMailer < PostalServiceMailer
+  class Mock < LoanMailer
+    include ::PostalServiceMailer::Mock
+
+    def initialize(template_path = Rails.root.join('app', 'views', 'email_templates'),
+                   logger = nil,
+                   courier_class = PostalService::Shipment)
+      super
+    end
+  end
+
+  # An even more aggressive mock, which never renders.
+  # This can be used for the bulk of tests which are unconcerned with
+  # the details of the emails being sent.
+  class NilMock < Mock
+    def loan_funded(*args); end
+    def revoke_ach_authorization(*args); end
+    def revoke_rcc_authorization(*args); end
+    def reinstate_ach_authorization(*args); end
+    def reinstate_rcc_authorization(*args); end
+  end
+
+  include ActionView::Helpers::NumberHelper
+
+  def loan_funded(account, loan)
+    locals = {
+      first_name:     account.first_name,
+      account_id:     account.id,
+      loan_principal: number_to_currency(loan.amount),
+      funding_date:   format_date(loan.disbursement_date)
+    }
+
+    shipment = shipment_attributes(account, 'Congratulations! Your NetCredit Personal Loan has Been Funded!', 'loan_funded', locals)
+    ship shipment
+  end
+
+  def revoke_ach_authorization(account, loan)
+    locals = {
+      first_name:  account.first_name,
+      account_id:  account.id,
+      sign_in_url: AppConfig.urls.sign_in
+    }
+
+    shipment = shipment_attributes(account, 'Confirmation of Revoked ACH Authorization', 'revoke_ach_authorization', locals)
+    ship shipment
+  end
+
+  def reinstate_ach_authorization(account, loan)
+    locals = {
+      first_name:  account.first_name,
+      account_id:  account.id,
+      sign_in_url: AppConfig.urls.sign_in,
+      loan_number: loan.loan_number
+    }
+
+    shipment = shipment_attributes(account, 'Confirmation of ACH Enrollment', 'reinstate_ach_authorization', locals)
+    ship shipment
+  end
+
+  def revoke_rcc_authorization(account, loan)
+    locals = {
+      first_name:  account.first_name,
+      account_id:  account.id,
+      sign_in_url: AppConfig.urls.sign_in
+    }
+
+    shipment = shipment_attributes(account, 'Confirmation of Revoked RCC Authorization', 'revoke_rcc_authorization', locals)
+    ship shipment
+  end
+
+  def reinstate_rcc_authorization(account, loan)
+    locals = {
+      first_name:  account.first_name,
+      account_id:  account.id,
+      sign_in_url: AppConfig.urls.sign_in,
+      loan_number: loan.loan_number
+    }
+
+    shipment = shipment_attributes(account, 'Confirmation of RCC Enrollment', 'reinstate_rcc_authorization', locals)
+    ship shipment
+  end
+
+  protected
+
+  def shipment_attributes(account, subject, template, locals)
+    super(account.login, account.id, subject, template, locals)
+  end
+
+  # @param [#strftime] date
+  # @return [String] The date given, formatted as "May 4, 1886"
+  def format_date(date)
+    date.strftime '%b %e, %Y'
+  end
+end

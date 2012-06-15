@@ -1,0 +1,3 @@
+<script type="text/x-mustache-template" name="contact">
+  <a href="#">{{name}}</a>
+</script>

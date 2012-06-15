@@ -1,0 +1,63 @@
+]class PhoneBook
+  extend ActiveModel::Naming
+  extend ActiveModel::Translation
+  include ActiveModel::Conversion
+  include ActiveModel::Validations
+
+  VALID_PHONE_PATTERN = /\A\d{10}\z/
+
+  attr_accessor :main_number, :main_mobile,
+                :secondary_number, :secondary_mobile
+
+  def initialize(attrs = {})
+    self.main_number = attrs[:main_number]
+    self.main_mobile = attrs[:main_mobile]
+    self.secondary_number = attrs[:secondary_number]
+    self.secondary_mobile = attrs[:secondary_mobile]
+  end
+
+  validates :main_number, :presence => true, :format => { :with => VALID_PHONE_PATTERN }
+  validates :secondary_number, :format => { :with => VALID_PHONE_PATTERN, :allow_blank => true, :allow_nil => true }
+
+  def persisted?
+    false
+  end
+
+  def main_number=(number)
+    @main_number = normalize_number(number)
+  end
+
+  def secondary_number=(number)
+    @secondary_number = normalize_number(number)
+  end
+
+  def main_mobile=(value)
+    @main_mobile = to_bool(value)
+  end
+
+  def secondary_mobile=(value)
+    @secondary_mobile = to_bool(value)
+  end
+
+  def ==(other)
+    self.class == other.class &&
+    self.main_number == other.main_number &&
+    self.main_mobile == other.main_mobile &&
+    self.secondary_number == other.secondary_number &&
+    self.secondary_mobile == other.secondary_mobile
+  end
+
+private
+
+  def normalize_number(number)
+    number && number.gsub(/[. ()-]/, '')
+  end
+
+  def to_bool(value)
+    case value
+    when "1" then true
+    when "0" then false
+    else value
+    end
+  end
+end

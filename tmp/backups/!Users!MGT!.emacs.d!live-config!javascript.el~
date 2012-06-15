@@ -1,0 +1,3 @@
+(add-live-lib-path "javascript")
+(autoload 'javascript-mode "javascript-mode" "Major mode for JavaScript files" t)
+(add-to-list 'auto-mode-alist '("\\.js$" . javascript-mode))

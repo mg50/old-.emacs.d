@@ -1,0 +1,52 @@
+<script type="text/x-mustache-template" name="testpoint_edit">
+
+    <input class="key" value="{{key}}" type="hidden" /
+    <input class="cid" value="{{cid}}" type="hidden" />
+    <tr>
+      <td>
+        <input name="speed" value="{{speed}}" type="text" />
+      </td>
+      <td>
+        <input name="discharge-pressure" value="{{discharge-pressure}}" type="text" />
+      </td>
+      <td>
+        <input name="suction-pressure" value="{{suction-pressure}}" type="text" />
+      </td>
+
+      <td>
+        <div>
+          <input name="volts1" value="{{volts1}}" type="text"/>
+        </div>
+        <div>
+          <input name="volts2" value="{{volts3}}" type="text"/>
+        </div>
+        <div>
+          <input name="volts3" value="{{volts3}}" type="text"/>
+        </div>
+      </td>
+
+      <td>
+        <div>
+          <input name="amps1" value="{{amps1}}" type="text" />
+        </div>
+        <div>
+          <input name="amps2" value="{{amps2}}" type="text" />
+        </div>
+        <div>
+          <input name="amps3" value="{{amps3}}" type="text" />
+        </div>
+      </td>
+
+      <td>
+        <ul class="streams-container"></ul>
+        <a href="#" class="add-stream">
+          <img src="/images/add-button-small.png" />
+          Add Stream
+        </a>
+      </td>
+      <td>
+        <a href="#" class="save">Save</a>
+      </td>
+    <tr>
+
+</script>

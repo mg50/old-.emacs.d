@@ -1,0 +1,52 @@
+require 'project/project_active_record'
+
+class MockProjectInteractor
+  def initialize(projects = [])
+    @projects = projects
+  end
+
+  def create(attributes, callback)
+    callback.call AR::Project.new(attributes)
+  end
+
+  def find(id, callback)
+    project = find_by_id(id)
+    callback.call(project)
+    # what do do here when we fail find a record with that id?
+  end
+
+  def find_all(callback)
+    callback.call(@projects)
+  end
+
+  def find_all_by_status(status, callback)
+    matches = []
+    @projects.each { |project|
+      matches.push(project) if project.status == status
+    }
+    callback.call(matches)
+  end
+
+  def update(id, attributes, callback)
+    project = AR::Project.new(attributes);
+    project.id = id
+    callback.call(project)
+  end
+
+  def update_ordinals(ids)
+    ordinal = 0
+    ids.each { |id|
+      project = find_by_id(id)
+      project.ordinal = ordinal
+      ordinal += 1
+    }
+  end
+
+  private
+
+  def find_by_id(id)
+    @projects.each { |project|
+      return project if project.id == id.to_i
+    }
+  end
+end

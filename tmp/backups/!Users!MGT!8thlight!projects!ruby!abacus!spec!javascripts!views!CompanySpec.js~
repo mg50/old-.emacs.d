@@ -1,0 +1,52 @@
+describe("Abacus.Views.Company", function() {
+  beforeEach(function() {
+    Abacus.Models.Project.prototype.getCompanyList = function() {
+      return [{id: 5, name: 'IBM'}];
+    };
+    loadFixtures('_company.html', '_project.html');
+    this.company = new Abacus.Models.Company({
+      id: 5, 
+      name: 'IBM',
+      projects: [{
+        name: 'p1',
+        id: 1
+      },
+      {
+        name: 'p2',
+        id: 2
+      }]
+    });
+    this.view = new Abacus.Views.Company({model: this.company});
+  });
+
+  describe("events", function() {
+    it("shows details on click", function() {
+      this.ShowDetailsStub = sinon.stub(this.view, 'showDetails');
+      this.view.render();
+
+      this.view.$('a.company').trigger('click');
+      expect(this.ShowDetailsStub).toHaveBeenCalled();
+    });
+    
+    it("creates a project creation view on click", function() {
+      sinon.spy(this.view, 'showProjectCreateDialog');
+      sinon.spy(Abacus.Views, 'ProjectCreate');
+      sinon.spy(Abacus.Views.ProjectCreate.prototype, 'render');
+      this.view.render();
+
+      this.view.$('a.create-project').trigger('click');
+      expect(this.view.showProjectCreateDialog).toHaveBeenCalled();
+      expect(Abacus.Views.ProjectCreate).toHaveBeenCalledWith(new Abacus.Models.Project());
+      expect(Abacus.Views.ProjectCreate.prototype.render).toHaveBeenCalled();
+    });
+  });
+
+  describe("rendering", function() {
+    it("renders the related projects along with the company", function() {
+      sinon.spy(this.view, 'childViews');
+      this.view.render(); 
+      expect(this.view.childViews).toHaveBeenCalled();
+      expect(this.view.$('.projects li').length).toBe(2);
+    });
+  });
+});

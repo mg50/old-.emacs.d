@@ -1,0 +1,37 @@
+
+namespace('Hosemonster.Views', {
+    FlowDevicesDialog: Hosemonster.Views.Base.extend({
+        el: $("#modal").get(0),
+        initialize: function() {
+            this.$el.dialog({
+                modal: true,
+                autoOpen: false
+            });
+
+            if(this.el !== $("#modal").get(0)) this.$el.append($("#modal"))
+        },
+
+        events: {
+            'click .flow-device': 'selectFlowDevice'
+        },
+
+        open: function() {
+            this.$el.dialog('open');
+        },
+
+        close: function() {
+            this.$el.dialog('close')
+        },
+
+        callbackForDeviceSelect: function(key, name) {},
+
+        selectFlowDevice: function(ev) {
+            var tr = $(ev.target).closest('tr');
+            var key = $("[name=key]", tr).val();
+            var name = $(".name", tr).html();
+
+            this.close();
+            return this.callbackForDeviceSelect(key, name);
+        }
+    })
+})

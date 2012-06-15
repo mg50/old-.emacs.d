@@ -1,0 +1,27 @@
+
+namespace('Hosemonster.Views', {
+    Base: Backbone.View.extend({
+        render: function() {
+            var tpl = $('script["text/x-mustache-template"][name=' + this.template + ']').html();
+            var html = Mustache.render(tpl, this.model.toJSON);
+            this.$el.html(html);
+            this.renderChildViews();
+        },
+
+        renderChildViews: function() {
+        },
+
+        switchToView: function(viewClass, opts) {
+            opts = opts || {};
+            opts.model = this.model;
+            var newView = new viewClass(opts);
+            newView.render();
+            this.$el.before(newView.$el);
+            this.cleanup();
+            this.remove();
+        },
+
+        cleanup: function() {
+        }
+    })
+});

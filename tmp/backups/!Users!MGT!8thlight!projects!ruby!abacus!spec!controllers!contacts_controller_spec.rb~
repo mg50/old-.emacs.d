@@ -1,0 +1,45 @@
+require 'spec_helper'
+require 'contact/contact_active_record'
+require 'client/client_active_record'
+#require 'mocks/mock_contact_interactor'
+
+describe ContactsController do
+  before(:each) do
+    controller_setup
+
+    @client = AR::Client.create name: "Test Client"
+    @params = {:name => "Darek P", :email => "darek@gmail.com", :client_id => @client.id}
+    @contact = AR::Contact.create(@params)
+  end
+
+
+  describe "#create" do
+    it "creates a contact with the given params" do
+      post :create, contact: @params
+
+      response.body.should be_json_eql(@contact.to_json)
+    end
+
+    it "associates a contact with a client" do
+      post :create, contact: @params
+      AR::Client.find(@client.id).contacts.first.name.should == "Darek P"
+    end
+  end
+
+  describe "#update" do
+    it "updates a contact with the given params and returns contact as JSON" do
+      params = {:id => @contact.id, :name => "Test contact"}
+      post :update, :id => @contact.id, :contact => params, :format => 'json'
+
+      parsed_body = JSON.parse(response.body)
+      parsed_body['id'].should eq(@contact.id)
+      parsed_body['name'].should eq('Test contact')
+    end
+  end
+
+  describe "#destroy" do
+    post :destroy, id: @contact.id
+
+    response.body.should be_json_eql({success: true}.to_json);
+  end
+end

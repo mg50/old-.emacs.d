@@ -1,0 +1,28 @@
+[:script {:src "/javascript/jquery.js"}]
+[:script {:src "/javascript/jquery-ui.js"}]
+[:script {:src "/javascript/namespace.js"}]
+[:script {:src "/javascript/underscore.js"}]
+[:script {:src "/javascript/backbone.js"}]
+[:script {:src "/javascript/backbone-relational.js"}]
+[:script {:src "/javascript/mustache.js"}]
+
+[:script {:src "/javascript/views/base.js"}]
+
+(render-backbone-template "stream_display")
+(render-backbone-template "stream_edit")
+[:script {:src "/javascript/models/stream.js"}]
+[:script {:src "/javascript/collections/streams.js"}]
+[:script {:src "/javascript/views/stream_edit.js"}]
+[:script {:src "/javascript/views/stream_display.js"}]
+
+[:script {:src "/javascript/models/testpoint.js"}]
+[:script {:src "/javascript/collections/testpoints.js"}]
+[:script {:src "/javascript/views/testpoint_display.js"}]
+[:script {:src "/javascript/views/testpoint_list.js"}]
+[:script {:src "/javascript/views/testpoint_edit.js"}]
+(render-backbone-template "testpoint_display")
+(render-backbone-template "testpoint_edit")
+
+[:script {:src "/javascript/views/flowdevicesdialog.js"}]
+
+[:script {:src "/javascript/testpoints.js"}]

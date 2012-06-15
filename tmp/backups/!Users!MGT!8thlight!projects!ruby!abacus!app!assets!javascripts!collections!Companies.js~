@@ -1,0 +1,15 @@
+namespace("Abacus.Collections", {
+  Companies: Backbone.Collection.extend({
+    model: Abacus.Models.Company,
+
+    url: '/companies',
+
+    comparator: function(company) {
+      return company.get('name');
+    },
+
+    fetch: function(options) {
+      return Backbone.Collection.prototype.fetch.call(this, options);
+    }
+  })
+});

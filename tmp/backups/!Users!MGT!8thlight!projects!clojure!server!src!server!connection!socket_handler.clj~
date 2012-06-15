@@ -1,0 +1,28 @@
+(ns server.connection.socket-handler
+  (:use [server.response :only [make-response]])
+  (:require [server.request :as request])
+  (:import (java.io InputStreamReader BufferedReader OutputStreamWriter BufferedWriter)))
+
+(defrecord Socket-Handler :socket
+  Request-Handler
+  (parse-request [this]
+    (request/parse-request (->> (:socket this)
+                                .getInputStream
+                                InputStreamReader.
+                                BufferedReader.
+                                line-seq)))
+
+  Response-Sender
+  (send-response [this response-code response-body]
+    (let [resp-string (response/make-response response-code response-body)]
+      (doto (->> (:socket this)
+                 .getOutputStream
+                 OutputStreamWriter.
+                 BufferedWriter.)
+        .write
+        .flush
+        .close)))
+
+  Connection
+  (close [this]
+    (.close (:socket this))))

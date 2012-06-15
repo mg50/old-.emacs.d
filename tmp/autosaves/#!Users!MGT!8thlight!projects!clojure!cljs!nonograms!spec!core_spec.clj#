@@ -1,0 +1,4 @@
+(ns nonograms.core-spec
+  (:use nonograms.core speclj.core))
+
+(describe)
