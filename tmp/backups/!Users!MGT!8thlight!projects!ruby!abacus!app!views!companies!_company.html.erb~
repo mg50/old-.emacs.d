@@ -1,5 +1,0 @@
-<script type="text/x-mustache-template" name="company">
-  <a class="company" href="#">{{name}}</a>
-  <a class="add-project" href="#">+</a>
-  <ul class="projects"></ul>
-</script>

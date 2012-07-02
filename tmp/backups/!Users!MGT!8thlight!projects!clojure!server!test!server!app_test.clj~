@@ -1,7 +1,0 @@
-(ns server.app-test
-  (:use clojuretest server.app))
-
-(deftest test-parse-options 1
-  (let [opts {"-p" 3000 "-h" "./"}]
-    (is (= (parse-options opts)
-           {"port" 3000, "webroot" "./"}))))

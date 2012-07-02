@@ -1,8 +1,0 @@
-<script type="text/x-mustache-template" name="project">
-<<<<<<< HEAD
-  <a class="project label" href="#">{{name}}</a>
-  <a class="delete">X</a>
-=======
-  <a class="project" href="#/client/{{client_id}}/project/{{id}}">{{name}}</a>
->>>>>>> 529ed347a31dbe7151e345cb39e4cdf8295a2e91
-</script>

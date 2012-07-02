@@ -1,7 +1,0 @@
-USING: kernel ttt.strategy ;
-IN: ttt.strategy.human
-
-TUPLE: human-strategy < strategy ;
-
-M: human-strategy get-next-move ( board ui strategy -- )
-    drop dup "Please enter your next move:" swap print-message

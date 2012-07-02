@@ -1,3 +1,0 @@
-FACTOR_PATH=/usr/lib/factor/
-
-${FACTOR_PATH}factor

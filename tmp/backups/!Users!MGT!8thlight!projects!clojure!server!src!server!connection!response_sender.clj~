@@ -1,5 +1,0 @@
-(ns server.connection.response-sender)
-
-
-(defprotocol Response-Sender
-  (send-response []))

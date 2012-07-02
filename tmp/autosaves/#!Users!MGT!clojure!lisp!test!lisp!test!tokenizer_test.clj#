@@ -1,4 +1,0 @@
-(ns lisp.tokenizer-test
-  (:use lisp.tokenizer clojure.test))
-
-

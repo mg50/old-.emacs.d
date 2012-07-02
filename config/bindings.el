@@ -1,15 +1,38 @@
 ;; Place personal bindings here
 
 (define-key function-key-map "\e[1;2A" [S-up])
+(define-key input-decode-map "\e[1;2A" [S-up])
+
+(defadvice terminal-init-xterm (after map-S-up-escape-sequence activate)
+  (define-key input-decode-map "\e[1;2A" [S-up]))
 
 (global-set-key (kbd "C-x C-_") 'comment-or-uncomment-region)
 (global-set-key (kbd "C-x C-m") 'windresize)
 (global-set-key (kbd "M-RET") 'cua-set-rectangle-mark)
+(global-set-key (kbd "C-c g") 'magit-status)
+
+
+(global-set-key (kbd "<C-S-up>")     'buf-move-up)
+(global-set-key (kbd "<C-S-down>")   'buf-move-down)
+(global-set-key (kbd "<C-S-left>")   'buf-move-left)
+(global-set-key (kbd "<C-S-right>")  'buf-move-right)
+
+
+(defun swap-buffers-in-windows ()
+  "Put the buffer from the selected window in next window, and vice versa"
+  (interactive)
+  (let* ((this (selected-window))
+         (other (next-window))
+         (this-buffer (window-buffer this))
+         (other-buffer (window-buffer other)))
+    (set-window-buffer other this-buffer)
+    (set-window-buffer this other-buffer)))
+(global-set-key (kbd "M-s M-s")  'swap-buffers-in-windows)
+
 
 (defun hello ()
   "Hello World and you can call it via M-x hello."
   (interactive)
-
   (message "Hello World!"))
 
 

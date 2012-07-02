@@ -1,2 +1,0 @@
-USING: ttt.player ;
-IN: ttt.player.human

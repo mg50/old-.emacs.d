@@ -1,9 +1,0 @@
-function focusOnFirstField()
-{
-    $('input').first().focus();
-}
-
-function showFlashBanners()
-{
-    $('div.flash-banner').fadeIn("slow");
-}

@@ -1,5 +1,0 @@
-
-webroot = ./
-numagents = 10
-logfile = ./server.log
-port = 3000

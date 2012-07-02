@@ -1,4 +1,0 @@
-(ns server.action.echo)
-
-(defn echo [request]
-  [200 ])

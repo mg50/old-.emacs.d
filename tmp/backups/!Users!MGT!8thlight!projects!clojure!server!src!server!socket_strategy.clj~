@@ -1,9 +1,0 @@
-(ns server.connection.socket-strategy)
-
-(def Request-Cycle-Runner
-  (proxy [Runnable] [sock act-on-request-fn]
-    (run []
-      (let [request (parse-request sock)
-            [status-code response] (act-on-request-fn request)]
-        (send-response [status-code response])
-        (close sock)))))

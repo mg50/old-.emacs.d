@@ -1,8 +1,0 @@
-
-
-<script type="text/x-mustache-template" name="stream_display">
-    <input type="hidden" name="key" value="{{key}}" />
-    <input type="hidden" name="flow-device-key" value="{{flow-device-key}}" />
-    <span class="nozzle-pressure">{{nozzle-pressure}}</span>
-    <span class="flow-device-label">{{flowDeviceLabel}}</span>
-</script>

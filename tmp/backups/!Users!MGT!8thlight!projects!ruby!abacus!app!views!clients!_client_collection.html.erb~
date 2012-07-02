@@ -1,4 +1,0 @@
-<script type="text/x-mustache-template" name="client">
-  <span class="t_clients_name">{{name}}</span> <a class="client" href="#/client/{{id}}"> <span class="t_clients_details">(Details) </a></span>
-  <ul class="projects"></ul>
-</script>

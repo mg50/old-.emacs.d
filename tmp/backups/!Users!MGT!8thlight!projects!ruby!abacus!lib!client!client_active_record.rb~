@@ -1,9 +1,0 @@
-require 'active_record'
-
-module AR
-  class Client < ActiveRecord::Base
-    model_name = Client
-    has_many :projects
-    has_many :contacts
-  end
-end

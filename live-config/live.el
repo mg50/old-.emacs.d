@@ -28,6 +28,7 @@
 ;(require 'textmate)
 ;(require 'textmate)
 
+
 (load-live-config-file "util-fns.el")
 (load-live-config-file "built-in.el")
 (load-live-config-file "paredit-conf.el")
@@ -49,9 +50,16 @@
 (load-live-config-file "windresize-conf.el")
 (load-live-config-file "go-conf.el")
 (load-live-config-file "dirtree-conf.el")
+;(load-live-config-file "icicles-conf.el")
+
+(add-live-lib-path "rinari")
+(require 'rinari)
+
+(load-live-config-file "magit-conf.el")
 
 (add-live-lib-path "color-theme-solarized")
 (require 'color-theme-solarized)
 
 (require 'haml-mode)
+(require 'buffer-move)
 ;(require 'feature-mode)

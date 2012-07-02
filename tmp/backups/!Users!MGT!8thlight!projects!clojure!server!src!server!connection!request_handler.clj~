@@ -1,4 +1,0 @@
-(ns server.connection.request-handler)
-
-(defprotocol Request-Handler
-  (parse-request []))

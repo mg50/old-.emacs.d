@@ -1,4 +1,0 @@
-var TestPoints = Backbone.Collection.extend({
-    model: Models.TestPoint,
-    url: '/test_points'
-});

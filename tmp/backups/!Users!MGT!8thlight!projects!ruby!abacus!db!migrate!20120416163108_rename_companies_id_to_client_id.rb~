@@ -1,4 +1,0 @@
-class RenameCompaniesIdToClientsId < ActiveRecord::Migration
-  def change
-    rename_column :contacts, :companies_id, :client_id
-end

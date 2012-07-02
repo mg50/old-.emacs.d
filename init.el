@@ -36,22 +36,23 @@
 (when (fboundp 'windmove-default-keybindings)
   (windmove-default-keybindings))
 (custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(gud-gdb-command-name "gdb --annotate=1")
  '(js2-auto-indent-p t)
  '(js2-bounce-indent-p t)
  '(js2-enter-indents-newline t)
  '(js2-indent-on-enter-key nil)
  '(js2-mirror-mode t)
- '(large-file-warning-threshold nil))
+ '(large-file-warning-threshold nil)
+ '(ruby-electric-expand-delimiters-list nil))
 (custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(ediff-even-diff-A ((((class color) (background dark)) (:background "dark green"))))
  '(ediff-even-diff-B ((((class color) (background dark)) (:background "dark red"))))
  '(ediff-odd-diff-A ((((class color) (background dark)) (:background "dark green"))))
@@ -61,3 +62,4 @@
 
 
 (load-file "/usr/lib/factor/misc/fuel/fu.el")
+(put 'dired-find-alternate-file 'disabled nil)

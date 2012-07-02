@@ -1,6 +1,0 @@
-USING: ttt.strategy ;
-IN: ttt.strategy.human
-
-TUPLE: human < strategy ;
-
-M: make-move (player board) ;

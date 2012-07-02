@@ -1,5 +1,0 @@
-(ns console-chat.parse-test
-    (:use clojure.test console-chat.parse))
-
-(deftest test-parse-1
-  (let [msg "SEND\nhello\n"]))

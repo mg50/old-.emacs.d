@@ -1,9 +1,0 @@
-(ns server.connection.socket-types.mock-socket
-  (:import (java.net Socket)
-           (java.io ByteArrayInputStream)))
-
-(def Mock-Socket
-  (proxy [Socket] [input]
-    (getInputStream [this]
-      (ByteArrayInputStream. (.getBytes input)))
-    (close [this])))

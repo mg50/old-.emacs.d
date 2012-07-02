@@ -1,8 +1,0 @@
-(ns js.scope)
-
-(derecord Scope parent symbols function)
-
-(defn scope [])
-
-(defn execute-scope [scope]
-  ((:function scope) scope))

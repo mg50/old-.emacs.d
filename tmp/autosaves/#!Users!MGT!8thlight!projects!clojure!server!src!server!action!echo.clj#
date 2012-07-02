@@ -1,5 +1,0 @@
-(ns server.action.echo)
-
-(defn echo [message]
-  [200 message])
-

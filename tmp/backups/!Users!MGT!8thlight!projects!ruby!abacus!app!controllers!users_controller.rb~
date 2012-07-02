@@ -1,5 +1,0 @@
-
-class UsersController < ActionController::Base
-  def display_user_list
-  end
-end
