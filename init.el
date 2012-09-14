@@ -40,6 +40,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(autopair-global-mode t)
+ '(coffee-tab-width 2)
  '(gud-gdb-command-name "gdb --annotate=1")
  '(js2-auto-indent-p t)
  '(js2-bounce-indent-p t)
@@ -61,5 +63,5 @@
  '(mumamo-background-chunk-submode1 ((((class color) (background dark)) (:background "black")))))
 
 
-(load-file "/usr/lib/factor/misc/fuel/fu.el")
+;(load-file "/usr/lib/factor/misc/fuel/fu.el")
 (put 'dired-find-alternate-file 'disabled nil)

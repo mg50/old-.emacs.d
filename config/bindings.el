@@ -17,6 +17,12 @@
 (global-set-key (kbd "<C-S-left>")   'buf-move-left)
 (global-set-key (kbd "<C-S-right>")  'buf-move-right)
 
+(global-set-key (kbd "ESC <right>") 'fm-right-frame)
+(global-set-key (kbd "ESC <down>") 'fm-down-frame)
+(global-set-key (kbd "ESC <up>") 'fm-up-frame)
+(global-set-key (kbd "ESC <left>") 'fm-left-frame)
+
+(global-set-key (kbd "C-c w") 'whitespace-cleanup)
 
 (defun swap-buffers-in-windows ()
   "Put the buffer from the selected window in next window, and vice versa"
@@ -55,10 +61,17 @@
   (backward-delete-char 1)
   (move-end-of-line 1))
 
-(global-set-key (kbd "\C-f") 'indent-line-and-newline-up)
-(global-set-key (kbd "\C-b") 'indent-line-and-newline-down)
+(global-set-key (kbd "\C-b") 'indent-line-and-newline-up)
+(global-set-key (kbd "\C-f") 'indent-line-and-newline-down)
 
 (defun revert-buffer-no-confirm ()
     "Revert buffer without confirmation."
     (interactive) (revert-buffer t t))
 (global-set-key (kbd "\C-c \C-r") 'revert-buffer-no-confirm)
+
+
+(defun kill-whole-line-save-point ()
+  "asdf"
+  (interactive)
+  (save-excursion
+    (kill-whole-line)))

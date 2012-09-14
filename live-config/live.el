@@ -25,6 +25,8 @@
 (require 'rainbow-parens)
 (require 'rainbow-delimiters)
 (require 'mwe-log-commands)
+(require 'framemove)
+(require 'coffee-mode)
 ;(require 'textmate)
 ;(require 'textmate)
 
@@ -51,15 +53,19 @@
 (load-live-config-file "go-conf.el")
 (load-live-config-file "dirtree-conf.el")
 ;(load-live-config-file "icicles-conf.el")
+(load-live-config-file "haskell-conf.el")
+(load-live-config-file "scss-conf.el")
+(load-live-config-file "whole-line-or-region-conf.el")
 
 (add-live-lib-path "rinari")
 (require 'rinari)
 
 (load-live-config-file "magit-conf.el")
 
-(add-live-lib-path "color-theme-solarized")
-(require 'color-theme-solarized)
+;(add-live-lib-path "color-theme-solarized")
+;(require 'color-theme-solarized)
 
 (require 'haml-mode)
 (require 'buffer-move)
-;(require 'feature-mode)
+(require 'feature-mode)
+(require 'autopair)
