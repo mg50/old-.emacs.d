@@ -13,3 +13,4 @@
 
 (add-hook 'c-mode-hook (lambda () (local-set-key "\r" 'newline-and-indent)))
 (setq visible-bell nil)
+ (setq ring-bell-function 'ignore)

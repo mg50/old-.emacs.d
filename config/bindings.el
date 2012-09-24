@@ -3,6 +3,9 @@
 (define-key function-key-map "\e[1;2A" [S-up])
 (define-key input-decode-map "\e[1;2A" [S-up])
 
+
+(global-set-key (kbd "<home>") 'mark-sexp) ; I bound C-M-SPC to "home", a.k.a. ^[ [1;2H, on iTerm to make this work
+
 (defadvice terminal-init-xterm (after map-S-up-escape-sequence activate)
   (define-key input-decode-map "\e[1;2A" [S-up]))
 
@@ -23,6 +26,11 @@
 (global-set-key (kbd "ESC <left>") 'fm-left-frame)
 
 (global-set-key (kbd "C-c w") 'whitespace-cleanup)
+
+(global-set-key (kbd "M-s M-b") 'sr-speedbar-toggle)
+
+(global-set-key (kbd "M--") 'undo-tree-undo)
+(global-set-key (kbd "M-=") 'undo-tree-redo)
 
 (defun swap-buffers-in-windows ()
   "Put the buffer from the selected window in next window, and vice versa"
@@ -75,3 +83,9 @@
   (interactive)
   (save-excursion
     (kill-whole-line)))
+
+(defun mark-sexp-and-exchange-point ()
+  "asdfasf"
+  (interactive)
+  (mark-sexp)
+  (exchange-point-and-mark t))

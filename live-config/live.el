@@ -29,7 +29,7 @@
 (require 'coffee-mode)
 ;(require 'textmate)
 ;(require 'textmate)
-
+(require 'transpose-frame)
 
 (load-live-config-file "util-fns.el")
 (load-live-config-file "built-in.el")
@@ -57,6 +57,7 @@
 (load-live-config-file "scss-conf.el")
 (load-live-config-file "whole-line-or-region-conf.el")
 
+
 (add-live-lib-path "rinari")
 (require 'rinari)
 
@@ -69,3 +70,9 @@
 (require 'buffer-move)
 (require 'feature-mode)
 (require 'autopair)
+(require 'lusty-explorer)
+
+;(load-live-config-file "sr-speedbar-conf.el")  -- not working for some reason
+(require 'sr-speedbar)
+(custom-set-variables
+ '(speedbar-show-unknown-files t))

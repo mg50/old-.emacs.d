@@ -50,7 +50,7 @@
      (font-lock-regexp-grouping-backslash ((t (:foreground "#E9C062"))))
      (font-lock-regexp-grouping-construct ((t (:foreground "red"))))
      (font-lock-string-face ((t (:foreground "#61CE3C"))))
-     (font-lock-type-face ((t (:foreground "dark red"))))
+     (font-lock-type-face ((t (:foreground "tomato"))))
      (font-lock-variable-name-face ((t (:foreground "#FF6400"))))
      (font-lock-warning-face ((t (:bold t :foreground "Pink"))))
 
@@ -117,8 +117,8 @@
  ;;ediff
  '(ediff-even-diff-A ((((class color) (background dark)) (:background "dark green"))))
  '(ediff-odd-diff-A ((((class color) (background dark)) (:background "dark green"))))
- '(ediff-odd-diff-B ((((class color) (background dark)) (:background "dark red"))))
- '(ediff-even-diff-B ((((class color) (background dark)) (:background "dark red"))))
+ '(ediff-odd-diff-B ((((class color) (background dark)) (:background "tomato"))))
+ '(ediff-even-diff-B ((((class color) (background dark)) (:background "tomato"))))
 ; '(ediff-current-diff-B ((((class color)) (:background "white"))))
 ; '(ediff-even-diff-A ((((class color)) nil)))
 ; '(ediff-even-diff-B ((((class color)) nil)))
