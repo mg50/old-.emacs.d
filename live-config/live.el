@@ -56,7 +56,7 @@
 (load-live-config-file "haskell-conf.el")
 (load-live-config-file "scss-conf.el")
 (load-live-config-file "whole-line-or-region-conf.el")
-
+(load-live-config-file "auto-indent-conf.el")
 
 (add-live-lib-path "rinari")
 (require 'rinari)
