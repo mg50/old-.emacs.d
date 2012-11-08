@@ -4,7 +4,8 @@
 
 ;; use blackbored colour theme
 (load-file (concat dotfiles-lib-dir "blackbored.el"))
-(color-theme-blackbored)
+(load-file (concat dotfiles-lib-dir "color-theme-almost-monokai.el"))
+(color-theme-almost-monokai)
 
 
 ;;Or load external files such as this bindings file:

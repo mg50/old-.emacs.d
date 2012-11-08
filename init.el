@@ -43,6 +43,7 @@
  '(auto-indent-next-pair-timer-interval (quote ((default 0.0005))))
  '(autopair-global-mode t)
  '(coffee-tab-width 2)
+ '(css-indent-offset 2)
  '(gud-gdb-command-name "gdb --annotate=1")
  '(js2-auto-indent-p t)
  '(js2-bounce-indent-p t)

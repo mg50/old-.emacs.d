@@ -14,16 +14,17 @@
 (global-set-key (kbd "C-c g") 'magit-status)
 
 (global-set-key (kbd "C-y") 'auto-indent-yank)
+(global-set-key (kbd "C-M-y") 'yank)
 
 (global-set-key (kbd "<C-S-up>")     'buf-move-up)
 (global-set-key (kbd "<C-S-down>")   'buf-move-down)
 (global-set-key (kbd "<C-S-left>")   'buf-move-left)
 (global-set-key (kbd "<C-S-right>")  'buf-move-right)
 
-(global-set-key (kbd "ESC <right>") 'fm-right-frame)
+(global-set-key (kbd "ESC <right>") 'next-buffer)
 (global-set-key (kbd "ESC <down>") 'fm-down-frame)
 (global-set-key (kbd "ESC <up>") 'fm-up-frame)
-(global-set-key (kbd "ESC <left>") 'fm-left-frame)
+(global-set-key (kbd "ESC <left>") 'previous-buffer)
 
 (global-set-key (kbd "C-c w") 'whitespace-cleanup)
 
@@ -76,6 +77,18 @@
 
 (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
 (define-key global-map (kbd "C-x SPC") 'ace-jump-mode-pop-mark)
+
+(define-key global-map (kbd "C-c C-k") 'kill-this-buffer)
+
+
+
+(define-key global-map (kbd "C-c C-t") 'ansi-term)
+(add-hook 'term-mode-hook (lambda ()
+                            (define-key term-raw-map (kbd "M-v") 'cua-scroll-down)
+                            (define-key term-raw-map (kbd "C-v") 'cua-scroll-up)
+                            (define-key term-raw-map (kbd "M-x") 'smex)
+                            (define-key term-raw-map (kbd "C-z") 'suspend-frame)))
+
 
 (defun revert-buffer-no-confirm ()
     "Revert buffer without confirmation."
