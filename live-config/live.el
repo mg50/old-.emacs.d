@@ -73,6 +73,7 @@
 (require 'autopair)
 (require 'lusty-explorer)
 (require 'find-file-in-project)
+(require 'rainbow-mode)
 
 ;(load-live-config-file "sr-speedbar-conf.el")  -- not working for some reason
 (require 'sr-speedbar)
