@@ -3,7 +3,6 @@
 (define-key function-key-map "\e[1;2A" [S-up])
 (define-key input-decode-map "\e[1;2A" [S-up])
 
-
 (global-set-key (kbd "<home>") 'mark-sexp) ; I bound C-M-SPC to "home", a.k.a. ^[ [1;2H, on iTerm to make this work
 
 (defadvice terminal-init-xterm (after map-S-up-escape-sequence activate)
@@ -14,6 +13,7 @@
 (global-set-key (kbd "M-RET") 'cua-set-rectangle-mark)
 (global-set-key (kbd "C-c g") 'magit-status)
 
+(global-set-key (kbd "C-y") 'auto-indent-yank)
 
 (global-set-key (kbd "<C-S-up>")     'buf-move-up)
 (global-set-key (kbd "<C-S-down>")   'buf-move-down)
@@ -71,6 +71,11 @@
 
 (global-set-key (kbd "\C-b") 'indent-line-and-newline-up)
 (global-set-key (kbd "\C-f") 'indent-line-and-newline-down)
+
+(global-set-key (kbd "\C-x f") 'find-file-in-project)
+
+(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+(define-key global-map (kbd "C-x SPC") 'ace-jump-mode-pop-mark)
 
 (defun revert-buffer-no-confirm ()
     "Revert buffer without confirmation."

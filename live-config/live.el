@@ -57,6 +57,7 @@
 (load-live-config-file "scss-conf.el")
 (load-live-config-file "whole-line-or-region-conf.el")
 (load-live-config-file "auto-indent-conf.el")
+(load-live-config-file "ace-jump-conf.el")
 
 (add-live-lib-path "rinari")
 (require 'rinari)
@@ -71,6 +72,7 @@
 (require 'feature-mode)
 (require 'autopair)
 (require 'lusty-explorer)
+(require 'find-file-in-project)
 
 ;(load-live-config-file "sr-speedbar-conf.el")  -- not working for some reason
 (require 'sr-speedbar)

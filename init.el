@@ -40,6 +40,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(auto-indent-next-pair-timer-interval (quote ((default 0.0005))))
  '(autopair-global-mode t)
  '(coffee-tab-width 2)
  '(gud-gdb-command-name "gdb --annotate=1")
@@ -67,3 +68,5 @@
 
 ;(load-file "/usr/lib/factor/misc/fuel/fu.el")
 (put 'dired-find-alternate-file 'disabled nil)
+(put 'narrow-to-region 'disabled nil)
+(put 'narrow-to-page 'disabled nil)

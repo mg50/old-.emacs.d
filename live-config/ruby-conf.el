@@ -13,6 +13,7 @@
 (autoload 'ruby-electric "ruby-electric" "Ruby electric mode" t)
 (add-hook 'ruby-mode-hook (lambda () (ruby-electric-mode t)))
 (add-hook 'ruby-mode-hook (lambda () (local-set-key "\r" 'ruby-reindent-then-newline-and-indent)))
+(add-hook 'ruby-mode-hook (lambda () (setq show-trailing-whitespace nil)))
 (defun my-ruby-reindent-then-newline-and-indent (arg)
   "blah blah blah"
   (interactive "P")
